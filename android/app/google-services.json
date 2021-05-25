@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "458745810103",
+    "firebase_url": "https://aview-9a1ad-default-rtdb.firebaseio.com",
+    "project_id": "aview-9a1ad",
+    "storage_bucket": "aview-9a1ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:458745810103:android:71ea80891b183b937c9132",
+        "android_client_info": {
+          "package_name": "saramahran.com.aview2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "458745810103-lki775v499i8o8qnh21iir4kjsr6k0ac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhTylo-QJiwIHJkjDRrvL9K-Urwymw0qs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "458745810103-lki775v499i8o8qnh21iir4kjsr6k0ac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
