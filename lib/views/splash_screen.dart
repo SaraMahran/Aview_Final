@@ -32,7 +32,7 @@ class _SplashScreenState extends State<SplashScreen>
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'ChelaOne',
-              color: Colors.orange[800],
+              color: Colors.deepOrange,
               fontSize: 30,
             ),
           ),

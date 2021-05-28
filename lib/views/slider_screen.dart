@@ -1,4 +1,5 @@
 import 'package:aview2/components/items/slider_item.dart';
+import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
 import 'package:aview2/views/routing_constants.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,11 @@ class SliderScreen extends StatelessWidget {
                                   GestureDetector(
                                     onTap: value.getIndex !=
                                             sliderItemList.length - 1
-                                        ? () {
+                                        ? () async {
+                                            await Provider.of<ReviewProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .RetriveReviews();
                                             value.controller.animateToPage(
                                                 value.getIndex + 1,
                                                 duration:

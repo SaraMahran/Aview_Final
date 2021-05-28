@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:aview2/helper/helper_method.dart';
 import 'package:aview2/helper/helper_style.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool isPasswordVisible = true;
-  final databaseReference = FirebaseFirestore.instance;
+  //final databaseReference = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +26,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.only(top: 60),
                   child: Image.asset(
                     'assets/images/Aview_Final_Logo_Cropped.png',
-                    scale: 1.4,
+                    scale: 1.7,
                   ),
                 ),
                 SizedBox(
-                    // height: MediaQuery.of(context).size.height * .2,
-                    ),
+                  height: MediaQuery.of(context).size.height * .02,
+                ),
                 TextField(
                   keyboardType: TextInputType.emailAddress,
                   decoration:
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'OR Login With',
+                    'Or Login With',
                     style: TextStyle(color: kOrangeColor, fontSize: 20),
                   ),
                 ),
