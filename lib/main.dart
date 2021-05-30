@@ -1,6 +1,5 @@
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
-import 'package:aview2/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'views/router.dart' as route;
@@ -33,9 +32,14 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
       ],
       child: MaterialApp(
+        theme: ThemeData(
+          primarySwatch: Colors.orange,
+          accentColor: Colors.green,
+          backgroundColor: Colors.yellow,
+          primaryColor: Colors.deepOrange,
+        ),
         debugShowCheckedModeBanner: false,
-        title: 'NamedRouting',
-        home: SplashScreen(),
+        title: 'Aview',
         onGenerateRoute: route.generateRoute,
         initialRoute: SplashScreenRoute,
       ),

@@ -28,6 +28,11 @@ dependencies:
   provider:
   firebase_core: ^1.2.0
   cloud_firestore: ^2.2.0
+  firebase_analytics: ^5.0.6
+  image_picker:
+  lottie: ^1.0.1
+  fancy_bottom_navigation: ^0.3.2
+
 
 
 dev_dependencies:
@@ -47,7 +52,8 @@ flutter:
 
   assets:
     - assets/images/
-    #- images/a_dot_ham.jpeg
+    - assets/23228-orange-juice.json
+    - assets/35115-women-arms-workout.json
 
 
   fonts:
