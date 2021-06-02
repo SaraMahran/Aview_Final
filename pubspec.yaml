@@ -66,3 +66,7 @@ flutter:
     - family: Crimson
       fonts:
         - asset: fonts/CrimsonText-Regular.ttf
+
+    - family: Pattaya
+      fonts:
+       - asset: fonts/Pattaya-Regular.ttf

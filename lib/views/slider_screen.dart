@@ -45,9 +45,10 @@ class SliderScreen extends StatelessWidget {
     return Consumer<SliderProvider>(
       builder: (context, SliderProvider value, child) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.deepOrangeAccent,
           body: Container(
-            color: Color(0xffffb389),
+            // color: Color(0xffffb389),
+            color: Colors.white,
             child: Stack(
               children: [
                 PageView(
