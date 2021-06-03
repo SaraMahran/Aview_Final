@@ -1,4 +1,4 @@
-# aview2
+# Aview
 
 A new Flutter application.
 
