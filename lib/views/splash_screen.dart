@@ -16,7 +16,6 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontFamily: 'ChelaOne',
-              color: Colors.orange[800],
+              color: Colors.deepOrange,
               fontSize: 30,
             ),
           ),

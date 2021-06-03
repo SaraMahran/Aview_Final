@@ -6,6 +6,7 @@ import 'login_screen.dart';
 import 'routing_constants.dart';
 import 'splash_screen.dart';
 import 'slider_screen.dart';
+import 'home_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -13,10 +14,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SplashScreen());
     case SliderScreenRoute:
       return MaterialPageRoute(builder: (context) => SliderScreen());
-    //case SignUpScreenRoute:
-    //return MaterialPageRoute(builder: (context) => SignUpScreen());
+    case SignUpScreenRoute:
+      return MaterialPageRoute(builder: (context) => SignUpScreen());
     case LoginScreenRoute:
       return MaterialPageRoute(builder: (context) => LoginScreen());
+    case HomeScreenRoute:
+      return MaterialPageRoute(builder: (context) => HomeScreen());
+    case HomeDetailsScreenRoute:
+      return MaterialPageRoute(builder: (context) => CategoryScreen());
 
     default:
       return MaterialPageRoute(builder: (context) => SplashScreen());

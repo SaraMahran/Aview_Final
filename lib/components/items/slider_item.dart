@@ -80,8 +80,9 @@ class SliderItemState extends State<SliderItem> with TickerProviderStateMixin {
             child: Image.asset(
               widget.image ?? '',
               height: MediaQuery.of(context).size.height * .5,
-              width: MediaQuery.of(context).size.width * .8,
+              width: MediaQuery.of(context).size.width * 1,
               fit: BoxFit.contain,
+              scale: 2.0,
             ),
           ),
         ),
@@ -101,11 +102,14 @@ class SliderItemState extends State<SliderItem> with TickerProviderStateMixin {
         SlideTransition(
           position: _offsetAnimationOfDescription,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(23, 20, 10, 30),
+            padding: const EdgeInsets.fromLTRB(50, 20, 50, 30),
             child: Text(
               widget.description ?? '',
               style: TextStyle(
-                  fontFamily: 'Crimson', fontSize: 15.0, color: Colors.white),
+                  fontFamily: 'Crimson',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                  color: Colors.purple[700]),
             ),
           ),
         ),

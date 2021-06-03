@@ -1,8 +1,12 @@
+import 'package:aview2/ui/widgets/custom_appBar.dart';
+import 'package:aview2/ui/widgets/custom_shape_login_header.dart';
+import 'package:aview2/ui/widgets/login_and_signup_header.dart';
+import 'package:aview2/ui/widgets/signup_button.dart';
+import 'package:aview2/ui/widgets/social_media_row.dart';
+import 'package:aview2/ui/widgets/textFormField.dart';
+import 'package:aview2/views/routing_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:aview2/helper/helper_method.dart';
-import 'package:aview2/helper/helper_style.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:aview2/ui/widgets/responsive_ui.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -10,119 +14,91 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  bool isPasswordVisible = true;
-  final databaseReference = FirebaseFirestore.instance;
+  bool checkBoxValue = false;
+  double? _height;
+  double? _width;
+  double? _pixelRatio;
+  bool? _large;
+  bool? _medium;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordControl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+    _height = MediaQuery.of(context).size.height;
+    _width = MediaQuery.of(context).size.width;
+    _pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    _large = ResponsiveWidget.isScreenLarge(_width!, _pixelRatio!);
+    _medium = ResponsiveWidget.isScreenMedium(_width!, _pixelRatio!);
+
+    return Material(
+      child: Scaffold(
+        body: Container(
+          height: _height,
+          width: _width,
+          margin: EdgeInsets.only(bottom: 5),
+          child: SingleChildScrollView(
             child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 60),
-                  child: Image.asset(
-                    'assets/images/Aview_Final_Logo_Cropped.png',
-                    scale: 1.4,
+              children: <Widget>[
+                Opacity(
+                    opacity: 0.88,
+                    child: CustomAppBar(
+                      haveArrowButton: false,
+                    )),
+                LoginAndSignUpHeader(),
+                Container(
+                  margin: EdgeInsets.only(
+                      left: _width! / 12.0,
+                      right: _width! / 12.0,
+                      top: _height! / 20.0),
+                  child: Form(
+                    child: Column(
+                      children: <Widget>[
+                        CustomTextField(
+                          keyboardType: TextInputType.emailAddress,
+                          icon: Icons.email,
+                          hint: "Email ",
+                          textEditingController: emailController,
+                        ),
+                        // SizedBox(height: _height! / 60.0),
+                        // phoneTextFormField(),
+                        SizedBox(height: _height! / 60.0),
+                        CustomTextField(
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                          icon: Icons.lock,
+                          hint: "Password",
+                          textEditingController: passwordControl,
+                        ),
+                      ],
+                    ),
                   ),
+                ),
+                SizedBox(height: 20),
+                DefaultButton(
+                  buttonTitle: 'Login',
+                  onTap: () => Navigator.pushNamed(context, HomeScreenRoute),
                 ),
                 SizedBox(
-                    // height: MediaQuery.of(context).size.height * .2,
-                    ),
-                TextField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration:
-                      kUnderlineDecorationTF.copyWith(hintText: 'Email'),
+                  height: _height! / 35,
                 ),
-                TextField(
-                  obscureText: isPasswordVisible,
-                  decoration: kUnderlineDecorationTF.copyWith(
-                    hintText: 'Password',
-                    suffixIcon: IconButton(
-                      icon: isPasswordVisible
-                          ? Icon(Icons.visibility_off, color: kOrangeColor)
-                          : Icon(Icons.visibility, color: kOrangeColor),
-                      onPressed: () {
-                        setState(() {
-                          isPasswordVisible = !isPasswordVisible;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                GestureDetector(
-                  // onTap: () {
-                  //   kShowSnackBar(context, 'Login Pressed');
-                  //   Navigator.pushNamed(context, );
-                  // },
-                  child: Container(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(color: Colors.white, fontSize: 30),
-                        ),
-                      ),
-                    ),
-                    width: kWidth(context) * .8,
-                    decoration: BoxDecoration(
-                      color: kOrangeColor,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    kShowSnackBar(context, 'Forget Password Pressed');
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Forget Password',
-                      style: TextStyle(color: kOrangeColor, fontSize: 20),
-                    ),
-                  ),
+                DefaultButton(
+                  buttonTitle: 'SignUp',
+                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10),
                   child: Text(
-                    'OR Login With',
-                    style: TextStyle(color: kOrangeColor, fontSize: 20),
+                    "Login using social media",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
                   ),
                 ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        kShowSnackBar(context, 'google pressed');
-                      },
-                      child: Image.asset('assets/images/google_logo.png'),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        kShowSnackBar(context, 'facebook pressed');
-                      },
-                      child: Image.asset('assets/images/facebook_logo.png'),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        kShowSnackBar(context, 'phone pressed');
-                      },
-                      child: Image.asset('assets/images/phone_logo.png'),
-                    ),
-                  ],
-                ),
+                SocialMediaIconsRow(), //signInTextRow(),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
