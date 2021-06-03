@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
                 Provider.of<HomeProvider>(context)
                     .setTitle(homeModelList[index].title);
                 // Navigator.pushNamed(context, HomeDetailsScreenRoute);
-                // print(Provider.of<HomeProvider>(context).getTitle);
+                //print(Provider.of<HomeProvider>(context).getTitle);
               },
               title: homeModelList[index].title,
               imagePath: homeModelList[index].imagePath,
