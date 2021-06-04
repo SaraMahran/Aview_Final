@@ -1,4 +1,4 @@
-import 'package:aview2/views/routing_constants.dart';
+import 'package:aview2/utils/routing_constants.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:aview2/components/items/slider_item.dart';
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
-import 'package:aview2/views/routing_constants.dart';
+import 'package:aview2/utils/routing_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
