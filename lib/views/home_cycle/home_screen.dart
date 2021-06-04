@@ -1,10 +1,11 @@
-import 'package:aview2/ui/widgets/login_and_signup_header.dart';
+import 'package:aview2/components/widgets/login_and_signup_header.dart';
+import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/view_models/providers/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:aview2/components/items/home_item.dart';
 import 'package:aview2/models/home_model.dart';
 
-import 'routing_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey(); // Create a key
@@ -151,33 +152,6 @@ class HomeScreen extends StatelessWidget {
               imagePath: homeModelList[index].imagePath,
             );
           }),
-    );
-  }
-}
-
-class HomeProvider extends ChangeNotifier {
-  late final String _title;
-
-  String get getTitle => _title;
-
-  void setTitle(String title) {
-    this._title = title;
-    notifyListeners();
-  }
-}
-
-class CategoryScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Center(
-          child: Text(
-            Provider.of<HomeProvider>(context, listen: false).getTitle,
-            style: TextStyle(fontSize: 30),
-          ),
-        ),
-      ),
     );
   }
 }
