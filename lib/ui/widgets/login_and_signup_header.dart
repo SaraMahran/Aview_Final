@@ -27,7 +27,7 @@ class LoginAndSignUpHeader extends StatelessWidget {
           child: ClipPath(
             clipper: CustomShapeClipper2(),
             child: Container(
-              height: _height / 10,
+              height: _height / 6,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [Colors.deepOrange, Color(0xffffb389)],

@@ -108,8 +108,8 @@ class SliderItemState extends State<SliderItem> with TickerProviderStateMixin {
               style: TextStyle(
                   fontFamily: 'Crimson',
                   fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
-                  color: Colors.purple[700]),
+                  fontSize: 18.0,
+                  color: Colors.purple[400]),
             ),
           ),
         ),

@@ -153,9 +153,10 @@ class SliderScreen extends StatelessWidget {
                                         : Text(
                                             'Get Started',
                                             style: TextStyle(
+                                                fontWeight: FontWeight.bold,
                                                 fontFamily: 'Lobster',
                                                 color: Colors.deepOrange,
-                                                fontSize: 25),
+                                                fontSize: 30),
                                           ),
                                   ),
                                 ],

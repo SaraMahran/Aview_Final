@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
         title: Text(
           'Home',
           style: TextStyle(
-            color: Colors.deepOrange,
+            color: Colors.orange[800],
           ),
         ),
         leadingWidth: 70,
@@ -37,52 +37,94 @@ class HomeScreen extends StatelessWidget {
           children: [
             LoginAndSignUpHeader(),
             SizedBox(height: 70),
-            ListTile(
-              onTap: () => print('setting tapped'),
-              leading: Image.asset('assets/images/facebook_logo.png'),
-              title: Text(
-                'Setting',
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
+              child: ListTile(
+                onTap: () => print('Settings tapped'),
+                leading: Icon(
+                  Icons.settings,
+                  size: 30,
+                  color: Colors.deepOrange,
+                ),
+                title: Text(
+                  'Settings',
+                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                ),
               ),
             ),
-            ListTile(
-              onTap: () => print('Help tapped'),
-              leading: Image.asset('assets/images/facebook_logo.png'),
-              title: Text(
-                'Help',
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
+              child: ListTile(
+                onTap: () => print('Help tapped'),
+                leading: Icon(
+                  Icons.help_outlined,
+                  color: Colors.deepOrange,
+                  size: 30,
+                ),
+                title: Text(
+                  'Help',
+                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                ),
               ),
             ),
-            ListTile(
-              onTap: () => print('Share tapped'),
-              leading: Image.asset('assets/images/facebook_logo.png'),
-              title: Text(
-                'Share',
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
+              child: ListTile(
+                onTap: () => print('Share tapped'),
+                leading: Icon(
+                  Icons.share,
+                  color: Colors.deepOrange,
+                  size: 30,
+                ),
+                title: Text(
+                  'Share',
+                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                ),
               ),
             ),
-            ListTile(
-              onTap: () => print('AboutUs tapped'),
-              leading: Image.asset('assets/images/facebook_logo.png'),
-              title: Text(
-                'AboutUs',
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
+              child: ListTile(
+                onTap: () => print('About Us tapped'),
+                leading: Icon(
+                  Icons.assignment_late_outlined,
+                  color: Colors.deepOrange,
+                  size: 30,
+                ),
+                title: Text(
+                  'About Us',
+                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                ),
               ),
             ),
-            ListTile(
-              onTap: () => print('FQA tapped'),
-              leading: Image.asset('assets/images/facebook_logo.png'),
-              title: Text(
-                'FQA',
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
+              child: ListTile(
+                onTap: () => print('FQA tapped'),
+                leading: Icon(
+                  Icons.question_answer_outlined,
+                  color: Colors.deepOrange,
+                  size: 30,
+                ),
+                title: Text(
+                  'FQA',
+                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                ),
               ),
             ),
-            ListTile(
-              onTap: () => print('LogOut tapped'),
-              leading: Image.asset('assets/images/facebook_logo.png'),
-              title: Text(
-                'LogOut',
-                style: TextStyle(fontSize: 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
+              child: ListTile(
+                onTap: () => print('Log Out tapped'),
+                leading: Icon(
+                  Icons.logout,
+                  color: Colors.deepOrange,
+                  size: 30,
+                ),
+                title: Text(
+                  'Log Out',
+                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                ),
               ),
             ),
           ],
@@ -99,10 +141,11 @@ class HomeScreen extends StatelessWidget {
             return HomeItem(
               onTap: () {
                 // TODO: lama b3ml set ll data with provider thrown exception check it
-                Provider.of<HomeProvider>(context)
+                Provider.of<HomeProvider>(context, listen: false)
                     .setTitle(homeModelList[index].title);
-                // Navigator.pushNamed(context, HomeDetailsScreenRoute);
-                // print(Provider.of<HomeProvider>(context).getTitle);
+                Navigator.pushNamed(context, HomeDetailsScreenRoute);
+                print(
+                    Provider.of<HomeProvider>(context, listen: false).getTitle);
               },
               title: homeModelList[index].title,
               imagePath: homeModelList[index].imagePath,
@@ -126,11 +169,13 @@ class HomeProvider extends ChangeNotifier {
 class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text(
-          'Provider.of<HomeProvider>(context).getTitle.toString()',
-          style: TextStyle(fontSize: 30),
+    return Scaffold(
+      body: Container(
+        child: Center(
+          child: Text(
+            Provider.of<HomeProvider>(context, listen: false).getTitle,
+            style: TextStyle(fontSize: 30),
+          ),
         ),
       ),
     );

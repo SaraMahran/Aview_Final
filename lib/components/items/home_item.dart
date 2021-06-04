@@ -26,7 +26,7 @@ class HomeItem extends StatelessWidget {
               Align(
                 alignment: Alignment.center,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(30.0, 30.0, 20.0, 50.0),
+                  padding: const EdgeInsets.fromLTRB(30.0, 30.0, 20.0, 60.0),
                   child: Image.asset(imagePath),
                 ),
               ),
@@ -44,7 +44,7 @@ class HomeItem extends StatelessWidget {
                       title,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 25,
+                          fontSize: 23,
                           fontFamily: 'Pattaya'),
                     ),
                   ),
