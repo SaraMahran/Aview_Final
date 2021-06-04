@@ -4,5 +4,6 @@ const String SignUpScreenRoute = "SignupScreenRoute";
 const String LoginScreenRoute = "LoginScreenRoute";
 const String HomeScreenRoute = "HomeScreenRoute";
 const String HomeDetailsScreenRoute = "HomeDetailsScreenRoute";
+const String SettingsScreenRoute = "SettingsScreenRoute";
 const String NewPlacesScreenRoute = "NewPlacesScreenRoute";
 const String TrendingPlacesScreenRoute = "TrendingPlacesScreenRoute";
