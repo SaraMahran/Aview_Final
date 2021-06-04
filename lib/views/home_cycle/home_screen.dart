@@ -13,6 +13,18 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: drawerKey,
       appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: ()=>Navigator.pushNamed(context, ProfileScreenRoute),
+            child: Padding(
+              padding:  EdgeInsets.symmetric(horizontal: 10),
+              child: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Icon(Icons.person_outline, color: Colors.white),
+              ),
+            ),
+          ),
+        ],
         backgroundColor: Colors.white,
         centerTitle: true,
         shadowColor: Colors.transparent,
@@ -55,7 +67,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('Help tapped'),
+                onTap: () => Navigator.pushNamed(context, HelpScreenRoute),
                 leading: Icon(
                   Icons.help_outlined,
                   color: Colors.deepOrange,
@@ -85,7 +97,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('About Us tapped'),
+                onTap: () => Navigator.pushNamed(context, AboutUsScreenRoute),
                 leading: Icon(
                   Icons.assignment_late_outlined,
                   color: Colors.deepOrange,
@@ -100,7 +112,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('FQA tapped'),
+                onTap: () => Navigator.pushNamed(context, FqaScreenRoute),
                 leading: Icon(
                   Icons.question_answer_outlined,
                   color: Colors.deepOrange,

@@ -1,7 +1,11 @@
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/views/home_cycle/category_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/help_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
 import 'package:aview2/views/home_cycle/new_places_screen.dart';
+import 'package:aview2/views/home_cycle/profile_screen.dart';
 import 'package:aview2/views/home_cycle/trending_places_screen.dart';
 import 'package:aview2/views/login_cycle/sign_up_screen.dart';
 import 'package:aview2/views/splash_cycle/splash_screen.dart';
@@ -33,6 +37,15 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => TrendingPlacesScreen());
     case SettingsScreenRoute:
       return MaterialPageRoute(builder: (context) => SettingsScreen());
+    case ProfileScreenRoute:
+      return MaterialPageRoute(builder: (context) => ProfileScreen());
+
+    case AboutUsScreenRoute:
+      return MaterialPageRoute(builder: (context) => AboutUsScreen());
+    case FqaScreenRoute:
+      return MaterialPageRoute(builder: (context) => FqaScreen());
+    case HelpScreenRoute:
+      return MaterialPageRoute(builder: (context) => HelpScreen());
 
     default:
       return MaterialPageRoute(builder: (context) => SplashScreen());

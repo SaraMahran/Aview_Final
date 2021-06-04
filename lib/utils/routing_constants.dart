@@ -7,3 +7,8 @@ const String CategoryScreenRoute = "CategoryScreenRoute";
 const String SettingsScreenRoute = "SettingsScreenRoute";
 const String NewPlacesScreenRoute = "NewPlacesScreenRoute";
 const String TrendingPlacesScreenRoute = "TrendingPlacesScreenRoute";
+const String ProfileScreenRoute = "ProfileScreenRoute";
+const String FqaScreenRoute = "FqaScreenRoute";
+const String HelpScreenRoute = "HelpScreenRoute";
+const String AboutUsScreenRoute = "AboutUsScreenRoute";
+
