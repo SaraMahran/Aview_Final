@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: EdgeInsets.only(
                       left: _width! / 12.0,
                       right: _width! / 12.0,
-                      top: _height! / 20.0),
+                      top: _height! / 10.0),
                   child: Form(
                     child: Column(
                       children: <Widget>[
@@ -91,7 +91,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     "Login using social media",
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                    style: TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: Colors.deepPurple[500]),
                   ),
                 ),
                 SocialMediaIconsRow(), //signInTextRow(),

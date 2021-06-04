@@ -106,8 +106,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   child: Text(
                     "Or create using social media",
                     style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: _large! ? 12 : (_medium! ? 11 : 10)),
+                        fontWeight: FontWeight.w800,
+                        color: Colors.deepPurple[500],
+                        fontSize: _large! ? 14 : (_medium! ? 13 : 12)),
                   ),
                 ),
                 SocialMediaIconsRow() //signInTextRow(),

@@ -26,6 +26,9 @@ class _SplashScreenState extends State<SplashScreen>
               scale: 2.0,
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
           Text(
             'Reviewer Home',
             style: TextStyle(

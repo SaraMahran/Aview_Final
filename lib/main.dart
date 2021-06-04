@@ -1,5 +1,6 @@
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
+import 'package:aview2/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'views/router.dart' as route;
@@ -30,6 +31,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => SliderProvider()),
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
