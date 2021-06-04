@@ -25,7 +25,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => LoginScreen());
     case HomeScreenRoute:
       return MaterialPageRoute(builder: (context) => HomeScreen());
-    case HomeDetailsScreenRoute:
+    case CategoryScreenRoute:
       return MaterialPageRoute(builder: (context) => CategoryScreen());
     case NewPlacesScreenRoute:
       return MaterialPageRoute(builder: (context) => NewPlacesScreen());

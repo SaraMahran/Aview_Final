@@ -67,7 +67,10 @@ class CategoryScreen extends StatelessWidget {
                                   Icons.star,
                                   color: Colors.deepOrange,
                                 ),
-                                half: Container(),
+                                half: Icon(
+                                  Icons.star_half_outlined,
+                                  color: Colors.deepOrange,
+                                ),
                                 empty: Icon(
                                   Icons.star,
                                   color: Colors.grey,

@@ -143,6 +143,7 @@ class HomeScreen extends StatelessWidget {
                 // TODO: lama b3ml set ll data with provider thrown exception check it
                 Provider.of<HomeProvider>(context, listen: false)
                     .setTitle(homeModelList[index].title);
+                Navigator.pushNamed(context, CategoryScreenRoute);
                 print(
                     Provider.of<HomeProvider>(context, listen: false).getTitle);
               },
