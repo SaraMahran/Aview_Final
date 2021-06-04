@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:aview2/components/items/home_item.dart';
 import 'package:aview2/models/home_model.dart';
 
-
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey(); // Create a key
 
@@ -41,7 +40,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
               child: ListTile(
-                onTap: () => print('Settings tapped'),
+                onTap: () => Navigator.pushNamed(context, SettingsScreenRoute),
                 leading: Icon(
                   Icons.settings,
                   size: 30,
@@ -144,7 +143,6 @@ class HomeScreen extends StatelessWidget {
                 // TODO: lama b3ml set ll data with provider thrown exception check it
                 Provider.of<HomeProvider>(context, listen: false)
                     .setTitle(homeModelList[index].title);
-                Navigator.pushNamed(context, HomeDetailsScreenRoute);
                 print(
                     Provider.of<HomeProvider>(context, listen: false).getTitle);
               },
