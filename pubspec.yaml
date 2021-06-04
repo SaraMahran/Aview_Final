@@ -31,8 +31,7 @@ dependencies:
   firebase_analytics: ^5.0.6
   image_picker:
   lottie: ^1.0.1
-  fancy_bottom_navigation: ^0.3.2
-  font_awesome_flutter: ^9.0.0
+  flutter_rating_bar: ^4.0.0
 
 
 
@@ -53,6 +52,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/test/
     - assets/23228-orange-juice.json
     - assets/35115-women-arms-workout.json
 
