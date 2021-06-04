@@ -1,13 +1,14 @@
-import 'package:aview2/views/routing_constants.dart';
-import 'package:aview2/views/sign_up_screen.dart';
-import 'package:aview2/views/splash_screen.dart';
+import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/views/home_cycle/category_screen.dart';
+import 'package:aview2/views/login_cycle/sign_up_screen.dart';
+import 'package:aview2/views/splash_cycle/splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'login_screen.dart';
+import '../views/login_cycle/login_screen.dart';
 import 'routing_constants.dart';
-import 'splash_screen.dart';
-import 'slider_screen.dart';
-import 'home_screen.dart';
-
+import '../views/splash_cycle/splash_screen.dart';
+import '../views/splash_cycle/slider_screen.dart';
+import '../views/home_cycle/home_screen.dart';
+import '../views/home_cycle/category_screen.dart';
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case SplashScreenRoute:

@@ -1,19 +1,19 @@
-import 'package:aview2/ui/widgets/custom_appBar.dart';
-import 'package:aview2/ui/widgets/custom_shape_login_header.dart';
-import 'package:aview2/ui/widgets/login_and_signup_header.dart';
-import 'package:aview2/ui/widgets/signup_button.dart';
-import 'package:aview2/ui/widgets/social_media_row.dart';
-import 'package:aview2/ui/widgets/textFormField.dart';
-import 'package:aview2/views/routing_constants.dart';
+import 'package:aview2/components/widgets/custom_appBar.dart';
+import 'package:aview2/components/widgets/custom_shape_login_header.dart';
+import 'package:aview2/components/widgets/login_and_signup_header.dart';
+import 'package:aview2/components/widgets/signup_button.dart';
+import 'package:aview2/components/widgets/social_media_row.dart';
+import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:aview2/utils/routing_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:aview2/ui/widgets/responsive_ui.dart';
+import 'package:aview2/components/widgets/responsive_ui.dart';
 
-class SignUpScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   @override
-  _SignUpScreenState createState() => _SignUpScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   bool checkBoxValue = false;
   double? _height;
   double? _width;
@@ -21,8 +21,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   bool? _large;
   bool? _medium;
 
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordControl = TextEditingController();
 
@@ -46,33 +44,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Opacity(
                     opacity: 0.88,
                     child: CustomAppBar(
-                      haveArrowButton: true,
+                      haveArrowButton: false,
                     )),
                 LoginAndSignUpHeader(),
                 Container(
                   margin: EdgeInsets.only(
                       left: _width! / 12.0,
                       right: _width! / 12.0,
-                      top: _height! / 20.0),
+                      top: _height! / 10.0),
                   child: Form(
                     child: Column(
                       children: <Widget>[
-                        CustomTextField(
-                          keyboardType: TextInputType.text,
-                          icon: Icons.person,
-                          hint: "First Name",
-                          textEditingController: firstNameController,
-                        ),
-                        SizedBox(height: _height! / 60.0),
-
-                        CustomTextField(
-                          keyboardType: TextInputType.text,
-                          icon: Icons.person,
-                          hint: "Last Name",
-                          textEditingController: lastNameController,
-                        ),
-                        SizedBox(height: _height! / 60.0),
-
                         CustomTextField(
                           keyboardType: TextInputType.emailAddress,
                           icon: Icons.email,
@@ -82,7 +64,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         // SizedBox(height: _height! / 60.0),
                         // phoneTextFormField(),
                         SizedBox(height: _height! / 60.0),
-
                         CustomTextField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
@@ -94,24 +75,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),
                 ),
+                SizedBox(height: 20),
+                DefaultButton(
+                  buttonTitle: 'Login',
+                  onTap: () => Navigator.pushNamed(context, HomeScreenRoute),
+                ),
                 SizedBox(
                   height: _height! / 35,
                 ),
                 DefaultButton(
                   buttonTitle: 'SignUp',
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10),
                   child: Text(
-                    "Or create using social media",
+                    "Login using social media",
                     style: TextStyle(
                         fontWeight: FontWeight.w800,
-                        color: Colors.deepPurple[500],
-                        fontSize: _large! ? 14 : (_medium! ? 13 : 12)),
+                        color: Colors.deepPurple[500]),
                   ),
                 ),
-                SocialMediaIconsRow() //signInTextRow(),
+                SocialMediaIconsRow(), //signInTextRow(),
               ],
             ),
           ),

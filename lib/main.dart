@@ -1,10 +1,11 @@
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
-import 'package:aview2/views/home_screen.dart';
+import 'package:aview2/views/home_cycle/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'views/router.dart' as route;
-import 'views/routing_constants.dart';
+import 'view_models/providers/home_provider.dart';
+import 'utils/router.dart' as route;
+import 'utils/routing_constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -35,10 +36,10 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primarySwatch: Colors.orange,
+          // primarySwatch: Colors.orange,
           accentColor: Colors.green,
           backgroundColor: Colors.yellow,
-          primaryColor: Colors.deepOrange,
+          primaryColor: Colors.white,
         ),
         debugShowCheckedModeBanner: false,
         title: 'Aview',
