@@ -13,6 +13,13 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       key: drawerKey,
       appBar: AppBar(
+        actions: [
+          Icon(
+            Icons.person_outlined,
+            color: Colors.orange[800],
+            size: 40,
+          )
+        ],
         backgroundColor: Colors.white,
         centerTitle: true,
         shadowColor: Colors.transparent,
@@ -156,7 +163,7 @@ class HomeScreen extends StatelessWidget {
 }
 
 class HomeProvider extends ChangeNotifier {
-  late final String _title;
+  late String _title;
 
   String get getTitle => _title;
 
