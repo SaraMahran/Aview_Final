@@ -40,6 +40,11 @@ class _MyAppState extends State<MyApp> {
           accentColor: Colors.green,
           backgroundColor: Colors.yellow,
           primaryColor: Colors.white,
+          textTheme: TextTheme(
+            headline1: TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Colors.orange),
+            headline2: TextStyle(fontSize: 16, fontStyle: FontStyle.italic,color: Colors.black),
+            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind',color: Colors.grey),
+          ),
         ),
         debugShowCheckedModeBanner: false,
         title: 'Aview',

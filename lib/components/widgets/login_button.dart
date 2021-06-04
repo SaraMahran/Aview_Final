@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class DefaultButton extends StatelessWidget {
+class LoginButton extends StatelessWidget {
   final String? buttonTitle;
   final VoidCallback onTap;
 
-  DefaultButton({Key? key, required this.buttonTitle, required this.onTap})
+  LoginButton({Key? key, required this.buttonTitle, required this.onTap})
       : super(key: key);
 
   @override

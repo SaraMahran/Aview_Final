@@ -1,7 +1,7 @@
 import 'package:aview2/components/widgets/custom_appBar.dart';
 import 'package:aview2/components/widgets/custom_shape_login_header.dart';
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
-import 'package:aview2/components/widgets/signup_button.dart';
+import 'package:aview2/components/widgets/login_button.dart';
 import 'package:aview2/components/widgets/social_media_row.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/utils/routing_constants.dart';
@@ -97,7 +97,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: _height! / 35,
                 ),
-                DefaultButton(
+                LoginButton(
                   buttonTitle: 'SignUp',
                   onTap: () {},
                 ),
