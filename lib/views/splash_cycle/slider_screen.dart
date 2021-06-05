@@ -124,7 +124,7 @@ class SliderScreen extends StatelessWidget {
                                             value.controller.animateToPage(
                                                 value.getIndex + 1,
                                                 duration:
-                                                    Duration(milliseconds: 500),
+                                                    Duration(milliseconds: 200),
                                                 curve: Curves.easeInExpo);
                                           }
                                         : () {
