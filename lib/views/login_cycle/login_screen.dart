@@ -5,8 +5,10 @@ import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/social_media_row.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:aview2/components/widgets/responsive_ui.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -77,9 +79,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20),
                 LoginButton(
-                  buttonTitle: 'Login',
-                  onTap: () => Navigator.pushNamed(context, HomeScreenRoute),
-                ),
+                    buttonTitle: 'Login',
+                    // onTap: () => Navigator.pushNamed(context, HomeScreenRoute),
+                    onTap: () async => await Provider.of<ReviewerProvider>(
+                            context,
+                            listen: false)
+                        .retriveUserData('ydFcfRjjsocfMZCfgoQg')),
                 SizedBox(
                   height: _height! / 35,
                 ),
