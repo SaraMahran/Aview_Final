@@ -85,3 +85,14 @@ InputDecoration kUnderlineDecorationTF = InputDecoration(
     borderSide: BorderSide(color: kOrangeColor),
   ),
 );
+BoxDecoration kCustomContainerDecoration=BoxDecoration(
+    color: Colors.white,
+    border: Border.all(color: Colors.deepOrange),
+    borderRadius: BorderRadius.circular(10),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black38,
+        blurRadius: 5,
+        offset: Offset(1, 1),
+      ),
+    ]);

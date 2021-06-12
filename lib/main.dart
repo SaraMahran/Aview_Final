@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         theme: ThemeData(
           // primarySwatch: Colors.orange,
-          accentColor: Colors.green,
+          accentColor: Colors.deepOrange,
           backgroundColor: Colors.yellow,
           primaryColor: Colors.white,
           scaffoldBackgroundColor: Colors.white,
@@ -50,6 +50,10 @@ class _MyAppState extends State<MyApp> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: Colors.orange),
+            headline3: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
             headline2: TextStyle(
                 fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black),
             bodyText2: TextStyle(

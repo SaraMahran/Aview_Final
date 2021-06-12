@@ -1,4 +1,5 @@
 import 'package:aview2/models/reviewer_model.dart';
+import 'package:aview2/utils/routing_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:aview2/models/user_info_model.dart';
@@ -20,8 +21,8 @@ class ReviewerProvider with ChangeNotifier {
     reviewer =
         ReviewerModel.fromJson(snapShot.data()!, userInfoSnapShot.data()!);
     reviewer.reviewerID = snapShot.id;
-    print(reviewer.noOFReviews);
-    print(reviewer.places);
-    print(reviewer.reviewerID);
+    print('noOFReviews = ${reviewer.noOFReviews}');
+    print('places = ${reviewer.places}');
+    print('reviewerID = ${reviewer.reviewerID}');
   }
 }
