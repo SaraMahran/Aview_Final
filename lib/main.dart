@@ -1,4 +1,5 @@
 import 'package:aview2/view_models/providers/review_provider.dart';
+import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
 import 'package:aview2/views/home_cycle/home_screen.dart';
@@ -35,6 +36,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => SettingProvider()),
+        ChangeNotifierProvider(create: (_) => ReviewerProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(
