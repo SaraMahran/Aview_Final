@@ -24,6 +24,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
+        title: Text('Profile'),
+        centerTitle: true,
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8),

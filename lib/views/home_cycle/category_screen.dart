@@ -61,7 +61,7 @@ class CategoryScreen extends StatelessWidget {
                 desc: categoryScreenList[index].desc,
                 rate: categoryScreenList[index].rate,
                 optionListWidget: SizedBox(
-                  height: 70,
+                  height: 40,
                   child: ListView.builder(
                     itemCount:
                         categoryScreenList[index].optionsTitleList.length,
@@ -70,9 +70,11 @@ class CategoryScreen extends StatelessWidget {
                     itemBuilder: (context, idx) {
                       return Row(
                         children: [
-                          Icon(Icons.check, color: Colors.orange, size: 30),
-                          Text(categoryScreenList[index].optionsTitleList[idx],
-                              style: Theme.of(context).textTheme.headline2),
+                          Icon(Icons.check, color: Colors.deepOrange, size: 30),
+                          Text(
+                            categoryScreenList[index].optionsTitleList[idx],
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
                         ],
                       );
                     },

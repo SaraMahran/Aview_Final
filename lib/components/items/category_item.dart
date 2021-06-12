@@ -1,7 +1,4 @@
-// ignore: must_be_immutable
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import '../custom_rating_bar.dart';
 
 class CategoryItem extends StatelessWidget {
@@ -44,7 +41,10 @@ class CategoryItem extends StatelessWidget {
                       title,
                       style: Theme.of(context).textTheme.headline1,
                     ),
-                    CustomRatingBar(rate: rate),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: CustomRatingBar(rate: rate),
+                    ),
                     Text(desc),
                   ],
                 )
