@@ -5,7 +5,14 @@ import 'package:provider/provider.dart';
 
 import 'category_screen.dart';
 
-class CategoryDetailsScreen extends StatelessWidget {
+class CategoryDetailsScreen extends StatefulWidget {
+  @override
+  _CategoryDetailsScreenState createState() => _CategoryDetailsScreenState();
+}
+
+class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
+  String dropdownValue = 'Haram';
+
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
@@ -43,25 +50,68 @@ class CategoryDetailsScreen extends StatelessWidget {
               ),
             ),
           ),
+          ListTile(
+            leading: Text('Contact', style: themeText.headline1),
+            trailing: Text('19019', style: themeText.headline3),
+          ),
+          ListTile(
+            leading: Text('Open', style: themeText.headline1),
+            trailing: Text('11:00 AM - 12:00 AM', style: themeText.headline3),
+          ),
+          ListTile(
+            leading:Text('Branches', style: themeText.headline1),
+            trailing:Container(
+              decoration: kCustomContainerDecoration,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: DropdownButton<String>(
+                value: dropdownValue,
+                underline: SizedBox(),
+                icon: Icon(Icons.keyboard_arrow_down,
+                    color: Colors.black),
+                iconSize: responsive.width * .08,
+                onChanged: (newValue) {
+                  setState(() {
+                    dropdownValue = newValue!;
+                  });
+                },
+                items: [
+                  'Haram',
+                  'October',
+                  'Faisal',
+                  'Shubra',
+                  'Nasr City',
+                ].map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value, style: themeText.headline6),
+                  );
+                }).toList(),
+              ),
+            ) ,
+          ),
           Divider(thickness: 8, color: Colors.deepOrange),
           Wrap(
             direction: Axis.horizontal,
             alignment: WrapAlignment.center,
             children: [
               CustomContainerCategoryDetails(
-                img: 'assets/images/facebook_logo.png',
+                onTap: () {},
+                img: 'assets/images/add_review_icon.png',
                 title: 'Add Review',
               ),
               CustomContainerCategoryDetails(
-                img: 'assets/images/facebook_logo.png',
+                onTap: () {},
+                img: 'assets/images/add_photo_icon.png',
                 title: 'Add Photo',
               ),
               CustomContainerCategoryDetails(
-                img: 'assets/images/facebook_logo.png',
+                onTap: () {},
+                img: 'assets/images/add_icon.png',
                 title: 'Add List',
               ),
               CustomContainerCategoryDetails(
-                img: 'assets/images/facebook_logo.png',
+                onTap: () {},
+                img: 'assets/images/share_icon.png',
                 title: 'Share',
               ),
             ],
@@ -159,26 +209,31 @@ class CustomContainerCategoryDetails extends StatelessWidget {
   late String img;
   late String title;
 
-  CustomContainerCategoryDetails({
-    required this.img,
-    required this.title,
-  });
+  late VoidCallback onTap;
+
+  CustomContainerCategoryDetails(
+      {required this.img, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final themeText = Theme.of(context).textTheme;
     final responsive = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.all(4),
-      width: responsive.width * .45,
-      decoration: kCustomContainerDecoration,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
-          children: [
-            Image.asset(img),
-            Text(title, style: themeText.headline3),
-          ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.all(4),
+        width: responsive.width * .45,
+        height: responsive.height * .1,
+        decoration: kCustomContainerDecoration,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Image.asset(img),
+              Text(title, style: themeText.headline3),
+            ],
+          ),
         ),
       ),
     );

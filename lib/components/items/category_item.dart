@@ -51,6 +51,7 @@ class CategoryItem extends StatelessWidget {
               ],
             ),
             optionListWidget,
+            Divider(thickness: 1.5,color: Colors.deepOrange)
           ],
         ),
       ),
