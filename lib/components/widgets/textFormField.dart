@@ -4,10 +4,10 @@ import 'responsive_ui.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
-  final TextEditingController textEditingController;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final IconData icon;
+  TextEditingController? textEditingController;
+  TextInputType? keyboardType;
+  bool? obscureText;
+  IconData? icon;
   double? _width;
   double? _pixelRatio;
   bool? large;
@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
 
   CustomTextField(
       {required this.hint,
-      required this.textEditingController,
+      this.textEditingController,
       required this.keyboardType,
       this.obscureText = false,
       required this.icon});
@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
       borderRadius: BorderRadius.circular(30.0),
       elevation: large! ? 12 : (medium! ? 10 : 8),
       child: TextFormField(
-        //controller: textEditingController,
+        controller: textEditingController,
         keyboardType: keyboardType,
         cursorColor: Colors.orange[200],
         decoration: InputDecoration(

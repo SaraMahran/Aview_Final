@@ -1,4 +1,5 @@
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/views/home_cycle/category_details_screen.dart';
 import 'package:aview2/views/home_cycle/category_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
@@ -39,6 +40,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SettingsScreen());
     case ProfileScreenRoute:
       return MaterialPageRoute(builder: (context) => ProfileScreen());
+    case CategoryDetailsScreenRoute:
+      return MaterialPageRoute(builder: (context) => CategoryDetailsScreen());
 
     case AboutUsScreenRoute:
       return MaterialPageRoute(builder: (context) => AboutUsScreen());

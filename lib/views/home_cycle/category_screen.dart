@@ -13,7 +13,12 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         shadowColor: Colors.transparent,
-        actions: [],
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('assets/images/filter_icon.png', width: 25),
+          ),
+        ],
         title: Text(
           Provider.of<HomeProvider>(context, listen: false).getTitle,
         ),
@@ -40,33 +45,81 @@ class CategoryScreen extends StatelessWidget {
             physics: ScrollPhysics(),
             itemBuilder: (context, index) {
               return CategoryItem(
+                onTap: () {
+                  final categoryProvider =
+                      Provider.of<CategoryProvider>(context, listen: false);
+                  categoryProvider
+                      .setPlaceName(categoryScreenList[index].title);
+                  categoryProvider.setPlaceImg(categoryScreenList[index].img);
+                  categoryProvider.setPlaceRate(categoryScreenList[index].rate);
+                  categoryProvider.setPlaceOptionList(
+                      categoryScreenList[index].optionsTitleList);
+                  Navigator.pushNamed(context, CategoryDetailsScreenRoute);
+                },
                 img: categoryScreenList[index].img,
                 title: categoryScreenList[index].title,
                 desc: categoryScreenList[index].desc,
                 rate: categoryScreenList[index].rate,
-                optionListWidget:           SizedBox(
-                  height: 70,
+                optionListWidget: SizedBox(
+                  height: 40,
                   child: ListView.builder(
-                    itemCount: categoryScreenList[index].optionsTitleList.length,
+                    itemCount:
+                        categoryScreenList[index].optionsTitleList.length,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, idx) {
                       return Row(
                         children: [
-                          Icon(Icons.check, color: Colors.orange, size: 30),
-                          Text(categoryScreenList[index].optionsTitleList[idx],
-                              style: Theme.of(context).textTheme.headline2),
+                          Icon(Icons.check, color: Colors.deepOrange, size: 30),
+                          Text(
+                            categoryScreenList[index].optionsTitleList[idx],
+                            style: Theme.of(context).textTheme.headline2,
+                          ),
                         ],
                       );
                     },
                   ),
-                )
-                ,
+                ),
               );
             },
           )
         ],
       ),
     );
+  }
+}
+
+class CategoryProvider extends ChangeNotifier {
+  late double _rate;
+  late List<String> _options;
+  late String _name;
+  late String _img;
+
+  String get getPlaceName => _name;
+
+  String get getPlaceImg => _img;
+
+  double get getPlaceRate => _rate;
+
+  List<String> get getPlaceOptionList => _options;
+
+  void setPlaceName(String name) {
+    this._name = name;
+    notifyListeners();
+  }
+
+  void setPlaceImg(String img) {
+    this._img = img;
+    notifyListeners();
+  }
+
+  void setPlaceRate(double rate) {
+    this._rate = rate;
+    notifyListeners();
+  }
+
+  void setPlaceOptionList(List<String> options) {
+    this._options = options;
+    notifyListeners();
   }
 }
