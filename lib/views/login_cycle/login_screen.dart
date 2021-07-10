@@ -81,10 +81,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 LoginButton(
                     buttonTitle: 'Login',
                     // onTap: () => Navigator.pushNamed(context, HomeScreenRoute),
-                    onTap: () async => await Provider.of<ReviewerProvider>(
-                            context,
-                            listen: false)
-                        .retriveUserData('ydFcfRjjsocfMZCfgoQg')),
+                    onTap: () async {
+                      Navigator.pushNamed(context, HomeScreenRoute);
+                      await Provider.of<ReviewerProvider>(context,
+                              listen: false)
+                          .retriveUserData('ydFcfRjjsocfMZCfgoQg');
+                    }),
                 SizedBox(
                   height: _height! / 35,
                 ),
