@@ -59,15 +59,14 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
             trailing: Text('11:00 AM - 12:00 AM', style: themeText.headline3),
           ),
           ListTile(
-            leading:Text('Branches', style: themeText.headline1),
-            trailing:Container(
+            leading: Text('Branches', style: themeText.headline1),
+            trailing: Container(
               decoration: kCustomContainerDecoration,
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: DropdownButton<String>(
                 value: dropdownValue,
                 underline: SizedBox(),
-                icon: Icon(Icons.keyboard_arrow_down,
-                    color: Colors.black),
+                icon: Icon(Icons.keyboard_arrow_down, color: Colors.black),
                 iconSize: responsive.width * .08,
                 onChanged: (newValue) {
                   setState(() {
@@ -87,7 +86,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                   );
                 }).toList(),
               ),
-            ) ,
+            ),
           ),
           Divider(thickness: 8, color: Colors.deepOrange),
           Wrap(
@@ -107,7 +106,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
               CustomContainerCategoryDetails(
                 onTap: () {},
                 img: 'assets/images/add_icon.png',
-                title: 'Add List',
+                title: 'Add To List',
               ),
               CustomContainerCategoryDetails(
                 onTap: () {},

@@ -5,6 +5,7 @@ import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/help_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
+import 'package:aview2/views/home_cycle/edit_profile.dart';
 import 'package:aview2/views/home_cycle/new_places_screen.dart';
 import 'package:aview2/views/home_cycle/profile_screen.dart';
 import 'package:aview2/views/home_cycle/trending_places_screen.dart';
@@ -42,6 +43,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case CategoryDetailsScreenRoute:
       return MaterialPageRoute(builder: (context) => CategoryDetailsScreen());
+    case EditProfileScreenRoute:
+      return MaterialPageRoute(builder: (context) => EditProfileScreen());
 
     case AboutUsScreenRoute:
       return MaterialPageRoute(builder: (context) => AboutUsScreen());

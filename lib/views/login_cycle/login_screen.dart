@@ -4,11 +4,14 @@ import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/social_media_row.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:aview2/components/widgets/responsive_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -20,20 +23,17 @@ class _LoginScreenState extends State<LoginScreen> {
   double? _height;
   double? _width;
   double? _pixelRatio;
-  bool? _large;
-  bool? _medium;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordControl = TextEditingController();
+
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    _large = ResponsiveWidget.isScreenLarge(_width!, _pixelRatio!);
-    _medium = ResponsiveWidget.isScreenMedium(_width!, _pixelRatio!);
-
     return Material(
       child: Scaffold(
         body: Container(
@@ -80,12 +80,18 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(height: 20),
                 LoginButton(
                     buttonTitle: 'Login',
-                    // onTap: () => Navigator.pushNamed(context, HomeScreenRoute),
                     onTap: () async {
                       Navigator.pushNamed(context, HomeScreenRoute);
-                      await Provider.of<ReviewerProvider>(context,
-                              listen: false)
-                          .retriveUserData('ydFcfRjjsocfMZCfgoQg');
+                      final firebaseAuthService = FirebaseAuthService(
+                        firebaseAuth: FirebaseAuth.instance,
+                      );
+                      await firebaseAuthService.SignUp(
+                        email: emailController.text,
+                        password: passwordControl.text,
+                      );
+                      // await Provider.of<ReviewerProvider>(context,
+                      //         listen: false)
+                      //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
                     }),
                 SizedBox(
                   height: _height! / 35,

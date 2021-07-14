@@ -1,4 +1,5 @@
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
+import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +16,10 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           GestureDetector(
-            onTap: ()=>Navigator.pushNamed(context, ProfileScreenRoute),
+            onTap: () => Navigator.pushNamed(context, ProfileScreenRoute),
             child: Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 10),
-              child: CircleAvatar(
-                backgroundColor: Colors.orange,
-                child: Icon(Icons.person_outline, color: Colors.white),
-              ),
+              padding: EdgeInsets.all(7),
+              child: Image.asset('assets/images/unnamed.png'),
             ),
           ),
         ],
@@ -127,7 +125,8 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
               child: ListTile(
-                onTap: () => print('Log Out tapped'),
+                onTap: () => context.read()<FirebaseAuthService>().signOut(),
+                //=> Navigator.pushNamed(context, SignUpScreenRoute),
                 leading: Icon(
                   Icons.logout,
                   color: Colors.deepOrange,

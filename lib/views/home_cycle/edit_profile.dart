@@ -3,15 +3,14 @@ import 'package:aview2/components/items/radio_button.dart';
 import 'package:aview2/components/items/reviews_profile_item.dart';
 import 'package:aview2/components/widgets/buttons/custom_rounded_border_button.dart';
 import 'package:aview2/helper/helper_style.dart';
-import 'package:aview2/utils/routing_constants.dart';
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatefulWidget {
+class EditProfileScreen extends StatefulWidget {
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   String dropdownValue = '2006';
   String genderGroupValue = 'Female';
   TextEditingController nameTEC = TextEditingController(text: '');
@@ -25,35 +24,44 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         shadowColor: Colors.transparent,
-        title: Text('Profile'),
+        title: Text('Edit Profile'),
         centerTitle: true,
-        actions: [
-          InkWell(
-            onTap: () => Navigator.pushNamed(context, EditProfileScreenRoute),
-            child: Padding(
-              padding: EdgeInsets.all(15),
-              child: Image.asset(
-                  'assets/images/image_icon_edit_4_pic_512x512.png'),
-            ),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            Container(
-              height: responsive.height * .2,
-              margin: EdgeInsets.only(bottom: 10),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                    image: AssetImage('assets/images/woman.png'),
-                    fit: BoxFit.contain),
-              ),
+            Stack(
+              children: [
+                Container(
+                  height: responsive.height * .2,
+                  margin: EdgeInsets.only(bottom: 10),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/woman.png'),
+                        fit: BoxFit.contain),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  left: responsive.width * .55,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 25,
+                    child: Icon(Icons.add_a_photo,
+                        color: Colors.purple[900], size: 35),
+                  ),
+                ),
+              ],
             ),
             CustomShadow(
-              child: Text('Name: Radwa ElHassany'),
+              child: TextField(
+                controller: nameTEC,
+                decoration: kRoundedDecorationTF.copyWith(
+                  hintText: 'Name',
+                ),
+              ),
             ),
             CustomShadow(
               child: TextField(
@@ -69,61 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: 14),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Badges', style: textTheme.headline1),
-                SizedBox(width: responsive.width * .3),
-                Image.asset('assets/images/medal.png', height: 60, width: 60)
-              ],
-            ),
-            SizedBox(height: 9),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text('Review Number', style: textTheme.headline1),
-                SizedBox(width: responsive.width * .15),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: kCustomContainerDecoration,
-                  child: Text('2', style: textTheme.headline1),
-                ),
-              ],
-            ),
-            SizedBox(height: 14),
-            Text('Reviews: ', style: textTheme.headline1),
-            SizedBox(
-              height: responsive.height * .16,
-              child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                  return ReviewsItem(
-                    rate: 2.5,
-                    reviewDescription: 'best burger in egypt',
-                    reviewPlace: 'Buffalo Burger',
-                  );
-                },
-              ),
-            ),
-            SizedBox(height: 14),
             Text('Lists: ', style: textTheme.headline1),
-            SizedBox(
-              height: responsive.height * .08,
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                  itemBuilder: (context, index) {
-                    return CustomShadow(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text('Name: Radwa ElHassany'),
-                      ),
-                    );
-                  }),
-            ),
+            Center(child: Text('No Lists to show')),
             SizedBox(height: 20),
             Text('Optional Info:', style: textTheme.headline1),
             SizedBox(height: 10),
@@ -188,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: kCustomContainerDecoration,
-                  child: Text('+02 01129264839', style: textTheme.headline3),
+                  child: Text('+02 01129264839', style: textTheme.headline1),
                 )
               ],
             ),
@@ -218,6 +173,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   },
                 ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
+              child: CustomRoundedBorderButton(
+                onTap: () => print('Changes Saved'),
+                titleBtn: 'Save Changes',
+              ),
             ),
           ],
         ),

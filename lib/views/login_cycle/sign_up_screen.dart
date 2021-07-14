@@ -1,12 +1,16 @@
+import 'package:aview2/components/widgets/buttons/sign_up_button.dart';
 import 'package:aview2/components/widgets/custom_appBar.dart';
 import 'package:aview2/components/widgets/custom_shape_login_header.dart';
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/social_media_row.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:aview2/components/widgets/responsive_ui.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -25,6 +29,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController lastNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordControl = TextEditingController();
+  FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +102,24 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(
                   height: _height! / 35,
                 ),
-                LoginButton(
+                SignUpButton(
+                    buttonTitle: 'SignUp',
+                    onTap: () async {
+                      Navigator.pushNamed(context, HomeScreenRoute);
+                      final firebaseAuthService = FirebaseAuthService(
+                        firebaseAuth: FirebaseAuth.instance,
+                      );
+                      await firebaseAuthService.SignUp(
+                        email: emailController.text,
+                        password: passwordControl.text,
+                      );
+                    }),
+                SizedBox(
+                  height: _height! / 35,
+                ),
+                SignUpButton(
                   buttonTitle: 'SignUp',
-                  onTap: () {},
+                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

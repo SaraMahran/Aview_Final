@@ -12,4 +12,4 @@ const String FqaScreenRoute = "FqaScreenRoute";
 const String HelpScreenRoute = "HelpScreenRoute";
 const String AboutUsScreenRoute = "AboutUsScreenRoute";
 const String CategoryDetailsScreenRoute = "CategoryDetailsScreen";
-
+const String EditProfileScreenRoute = "EditProfileScreen";
