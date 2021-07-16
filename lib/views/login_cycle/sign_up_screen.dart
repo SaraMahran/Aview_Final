@@ -3,7 +3,6 @@ import 'package:aview2/components/widgets/custom_appBar.dart';
 import 'package:aview2/components/widgets/custom_shape_login_header.dart';
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
-import 'package:aview2/components/widgets/social_media_row.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
@@ -103,35 +102,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   height: _height! / 35,
                 ),
                 SignUpButton(
-                    buttonTitle: 'SignUp',
-                    onTap: () async {
-                      // Navigator.pushNamed(context, HomeScreenRoute);
-                      final firebaseAuthService = FirebaseAuthService(
-                        firebaseAuth: FirebaseAuth.instance,
-                      );
-                      await firebaseAuthService.SignUp(
-                        email: emailController.text,
-                        password: passwordControl.text,
-                      );
-                    }),
-                SizedBox(
-                  height: _height! / 35,
-                ),
-                SignUpButton(
                   buttonTitle: 'SignUp',
-                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
+                  onTap: () async {
+                    Navigator.pushNamed(context, HomeScreenRoute);
+                    final firebaseAuthService = FirebaseAuthService(
+                      firebaseAuth: FirebaseAuth.instance,
+                    );
+                    await firebaseAuthService.SignUp(
+                      email: emailController.text,
+                      password: passwordControl.text,
+                    );
+                  },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Or create using social media",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: Colors.deepPurple[500],
-                        fontSize: _large! ? 14 : (_medium! ? 13 : 12)),
-                  ),
-                ),
-                SocialMediaIconsRow() //signInTextRow(),
               ],
             ),
           ),

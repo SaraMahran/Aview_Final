@@ -4,7 +4,7 @@ class FirebaseAuthService {
   late FirebaseAuth firebaseAuth;
 
   FirebaseAuthService({required this.firebaseAuth});
-  //Stream<String> get onAuthStateChanges => firebaseAuth.authStateChanges();
+  Stream<User?> get onAuthStateChanges => firebaseAuth.authStateChanges();
   Future<void> SignOut() async {
     await firebaseAuth.signOut();
   }
@@ -37,5 +37,9 @@ class FirebaseAuthService {
     } on FirebaseAuthException catch (e) {
       return e.message.toString();
     }
+  }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    return firebaseAuth.sendPasswordResetEmail(email: email);
   }
 }

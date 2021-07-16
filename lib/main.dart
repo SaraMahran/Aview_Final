@@ -1,4 +1,5 @@
 import 'package:aview2/services/firebase_auth_service.dart';
+import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
@@ -17,23 +18,12 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    Firebase.initializeApp();
-    super.initState();
-  }
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -44,6 +34,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => SettingProvider()),
         ChangeNotifierProvider(create: (_) => ReviewerProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         Provider<FirebaseAuthService>(
           create: (_) =>
               FirebaseAuthService(firebaseAuth: FirebaseAuth.instance),
@@ -59,15 +50,22 @@ class _MyAppState extends State<MyApp> {
           scaffoldBackgroundColor: Colors.white,
           textTheme: TextTheme(
             headline1: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.orange[900]),
+              fontFamily: 'ChelaOne',
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepOrange,
+            ),
             headline3: TextStyle(
                 fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
             headline2: TextStyle(
-                fontSize: 16, fontStyle: FontStyle.italic, color: Colors.black),
+                fontSize: 25,
+                fontFamily: 'ChelaOne',
+                //fontStyle: FontStyle.italic,
+                color: Colors.purple[900]),
             bodyText2: TextStyle(
-                fontSize: 14.0, fontFamily: 'Hind', color: Colors.black),
+                fontSize: 14.0,
+                fontFamily: 'Hind',
+                color: Color.fromARGB(255, 245, 212, 202)),
           ),
         ),
         debugShowCheckedModeBanner: false,
@@ -90,7 +88,8 @@ class AuthenticaionWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
     if (firebaseUser != null) {
       return HomeScreen();
+    } else {
+      return LoginScreen();
     }
-    return LoginScreen();
   }
 }

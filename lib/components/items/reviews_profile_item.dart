@@ -29,7 +29,7 @@ class ReviewsItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(reviewPlace, style: Theme.of(context).textTheme.headline1),
+              Text(reviewPlace, style: Theme.of(context).textTheme.headline2),
               RatingBar(
                 initialRating: rate,
                 ignoreGestures: true,

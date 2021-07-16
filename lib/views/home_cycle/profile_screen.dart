@@ -4,6 +4,7 @@ import 'package:aview2/components/items/reviews_profile_item.dart';
 import 'package:aview2/components/widgets/buttons/custom_rounded_border_button.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -52,21 +53,54 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fit: BoxFit.contain),
               ),
             ),
-            CustomShadow(
-              child: Text('Name: Radwa ElHassany'),
+            SizedBox(
+              height: 10,
             ),
-            CustomShadow(
-              child: TextField(
-                controller: emailTEC,
-                decoration: kRoundedDecorationTF.copyWith(hintText: 'Email'),
+            /*Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.orange.withOpacity(0.3),
+                    spreadRadius: 6,
+                    blurRadius: 20,
+                    offset: Offset(0, 5), // changes position of shadow
+                  ),
+                ],
+              ),*/
+            Row(children: [
+              Text('Name: ', style: textTheme.headline1),
+              Text(
+                'Radwa ElHassany',
+                style: textTheme.headline2,
               ),
+            ]),
+            SizedBox(
+              height: 10,
             ),
-            CustomShadow(
-              child: TextField(
-                controller: bioTEC,
-                maxLines: 5,
-                decoration: kRoundedDecorationTF.copyWith(hintText: 'Bio...'),
+            /*Container(
+              decoration: BoxDecoration(
+                shape: BoxShape.rectangle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.orange.withOpacity(0.3),
+                    spreadRadius: 6,
+                    blurRadius: 20,
+                    offset: Offset(1, 5), // changes position of shadow
+                  ),
+                ],
+              ),*/
+            Row(children: [
+              Text(
+                'Email: ',
+                style: textTheme.headline1,
               ),
+              Text(
+                'RadwaHassany@gmail.com',
+                style: textTheme.headline2,
+              ),
+            ]),
+            SizedBox(
+              height: 10,
             ),
             SizedBox(height: 14),
             Row(
@@ -74,22 +108,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Text('Badges', style: textTheme.headline1),
                 SizedBox(width: responsive.width * .3),
-                Image.asset('assets/images/medal.png', height: 60, width: 60)
+                Container(
+                  margin: EdgeInsets.only(left: 35),
+                  child: Image.asset(
+                    'assets/images/medal.png',
+                    height: 70,
+                    width: 70,
+                    //scale: 7,
+                  ),
+                )
               ],
             ),
             SizedBox(height: 9),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text('Review Number', style: textTheme.headline1),
+                Text('Number of reviews', style: textTheme.headline1),
                 SizedBox(width: responsive.width * .15),
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: kCustomContainerDecoration,
-                  child: Text('2', style: textTheme.headline1),
+                  child: Text('2', style: textTheme.headline2),
                 ),
               ],
             ),
+            /* ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.purple,
+                minimumSize: Size(double.infinity, 50),
+              ),
+              onPressed: () {
+                print('Hi');
+              },
+              child: Text('ElevatedButton'),
+            ),*/
             SizedBox(height: 14),
             Text('Reviews: ', style: textTheme.headline1),
             SizedBox(

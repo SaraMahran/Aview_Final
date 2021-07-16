@@ -13,3 +13,5 @@ const String HelpScreenRoute = "HelpScreenRoute";
 const String AboutUsScreenRoute = "AboutUsScreenRoute";
 const String CategoryDetailsScreenRoute = "CategoryDetailsScreen";
 const String EditProfileScreenRoute = "EditProfileScreen";
+const String PhoneAuthenticationScreenRoute = "PhoneAuthenticationScreen";
+const String OTPScreenRoute = "OTPScreen";
