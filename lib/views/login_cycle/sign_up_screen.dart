@@ -105,7 +105,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SignUpButton(
                     buttonTitle: 'SignUp',
                     onTap: () async {
-                      Navigator.pushNamed(context, HomeScreenRoute);
+                      // Navigator.pushNamed(context, HomeScreenRoute);
                       final firebaseAuthService = FirebaseAuthService(
                         firebaseAuth: FirebaseAuth.instance,
                       );
