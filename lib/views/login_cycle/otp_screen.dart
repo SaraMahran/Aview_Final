@@ -7,7 +7,7 @@ import 'package:aview2/utils/routing_constants.dart';
 class OTPScreen extends StatefulWidget {
   final String? phone;
 
-  OTPScreen({this.phone});
+  OTPScreen(String text, {this.phone});
 
   @override
   _OTPScreenState createState() => _OTPScreenState();

@@ -163,7 +163,7 @@ class ReviewsOfPlaceItem extends StatelessWidget {
     final themeText = Theme.of(context).textTheme;
     final responsive = MediaQuery.of(context).size;
     return Container(
-      width: responsive.width * .5,
+      width: responsive.width * .55,
       margin: EdgeInsets.all(8),
       child: Column(
         children: [
@@ -193,11 +193,15 @@ class ReviewsOfPlaceItem extends StatelessWidget {
           ),
           SizedBox(height: 8),
           Container(
-              decoration: kCustomContainerDecoration,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(reviewDescription),
-              ))
+            decoration: kCustomContainerDecoration,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                reviewDescription,
+                style: themeText.headline3!.copyWith(fontSize: 14),
+              ),
+            ),
+          ),
         ],
       ),
     );

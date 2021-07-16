@@ -1,3 +1,4 @@
+import 'package:aview2/utils/routing_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package: otp_screen.dart';
@@ -12,6 +13,7 @@ class PhoneAuthenticationScreen extends StatefulWidget {
 
 class _PhoneAuthenticationScreenState extends State<PhoneAuthenticationScreen> {
   TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,18 +43,19 @@ class _PhoneAuthenticationScreenState extends State<PhoneAuthenticationScreen> {
             ),
             Container(
               margin: EdgeInsets.only(top: 40, right: 10, left: 10),
-              child: TextField(
+              child: TextFormField(
+                style: TextStyle(color: Colors.black, fontSize: 18),
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(
-                      color: Colors.purple,
-                    ),
-                  ),
+                      borderSide: BorderSide(color: Colors.purple)),
                   hintText: 'Phone Number',
-                  prefix: Padding(
-                    padding: EdgeInsets.all(4),
+                  hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                  prefixIcon: Container(
+                    margin: EdgeInsets.only(top: 12),
                     child: Text(
-                      '+0',
+                      '+02',
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -62,6 +65,21 @@ class _PhoneAuthenticationScreenState extends State<PhoneAuthenticationScreen> {
               ),
             )
           ]),
+          Container(
+            margin: EdgeInsets.all(10),
+            width: double.infinity,
+            child: FlatButton(
+              color: Colors.deepOrange,
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => OTPScreen(_controller.text)));
+              },
+              child: Text(
+                'Next',
+                style: TextStyle(color: Colors.purple),
+              ),
+            ),
+          ),
         ],
       ),
     );

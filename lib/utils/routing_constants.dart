@@ -15,3 +15,4 @@ const String CategoryDetailsScreenRoute = "CategoryDetailsScreen";
 const String EditProfileScreenRoute = "EditProfileScreen";
 const String PhoneAuthenticationScreenRoute = "PhoneAuthenticationScreen";
 const String OTPScreenRoute = "OTPScreen";
+const String MapsScreenRoute = "MapsScreen";
