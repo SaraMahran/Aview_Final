@@ -9,6 +9,8 @@ import 'package:aview2/views/home_cycle/edit_profile.dart';
 import 'package:aview2/views/home_cycle/new_places_screen.dart';
 import 'package:aview2/views/home_cycle/profile_screen.dart';
 import 'package:aview2/views/home_cycle/trending_places_screen.dart';
+import 'package:aview2/views/login_cycle/otp_screen.dart';
+import 'package:aview2/views/login_cycle/phone_authentication_screen.dart';
 import 'package:aview2/views/login_cycle/sign_up_screen.dart';
 import 'package:aview2/views/splash_cycle/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SignUpScreen());
     case LoginScreenRoute:
       return MaterialPageRoute(builder: (context) => LoginScreen());
+    case PhoneAuthenticationScreenRoute:
+      return MaterialPageRoute(
+          builder: (context) => PhoneAuthenticationScreen());
+    case OTPScreenRoute:
+      return MaterialPageRoute(builder: (context) => OTPScreen());
     case HomeScreenRoute:
       return MaterialPageRoute(builder: (context) => HomeScreen());
     case CategoryScreenRoute:
