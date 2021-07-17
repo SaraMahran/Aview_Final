@@ -66,6 +66,11 @@ class MyApp extends StatelessWidget {
                 fontSize: 14.0,
                 fontFamily: 'Hind',
                 color: Color.fromARGB(255, 245, 212, 202)),
+            headline4: TextStyle(
+              fontSize: 14.0,
+              fontFamily: 'Hind',
+              color:Colors.grey,
+            ),
           ),
         ),
         debugShowCheckedModeBanner: false,
