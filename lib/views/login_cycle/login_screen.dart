@@ -8,6 +8,7 @@ import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
+import 'package:aview2/view_models/providers/place_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 LoginButton(
                     buttonTitle: 'Login',
                     onTap: () async {
-                      // Navigator.pushNamed(context, MapsScreenRoute);
                       Navigator.pushNamed(context, HomeScreenRoute);
                       final firebaseAuthService = FirebaseAuthService(
                         firebaseAuth: FirebaseAuth.instance,

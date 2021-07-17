@@ -1,39 +1,19 @@
+import 'package:aview2/models/review_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
 class ReviewProvider with ChangeNotifier {
-  Future RetriveReviews() async {
+  final List<ReviewModel> _list = [];
+
+  List<ReviewModel> get getReviewList => _list;
+
+  Future<void> retrieveReviews() async {
     final result = await FirebaseFirestore.instance.collection('Review').get();
     result.docs.forEach((element) {
       final jsonData = element.data();
       final review = ReviewModel.fromJsom(jsonData);
-
-
-      print('noOfLikes = ${review.noOfLikes} reviewerID = ${review
-          .reviewerID} date = ${review.date} reviewID = ${review.reviewID}');
+      _list.add(review);
+      print('noOfLikes = ${review.noOfLikes}');
     });
-  }
-}
-
-class ReviewModel {
-  var noOfLikes;
-  var reviewerID;
-  var reviewID;
-  var date;
-
-  ReviewModel({
-    required this.noOfLikes,
-    required this.reviewerID,
-    required this.date,
-    required this.reviewID,
-  });
-
-  factory ReviewModel.fromJsom(Map<String, dynamic> data) {
-    return ReviewModel(
-      noOfLikes: data['noOfLikes'],
-      reviewerID: data['reviewerID'],
-      date: data['date'],
-      reviewID: data['reviewID'],
-    );
   }
 }

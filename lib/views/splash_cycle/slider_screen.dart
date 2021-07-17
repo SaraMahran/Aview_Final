@@ -120,7 +120,7 @@ class SliderScreen extends StatelessWidget {
                                             await Provider.of<ReviewProvider>(
                                                     context,
                                                     listen: false)
-                                                .RetriveReviews();
+                                                .retrieveReviews();
                                             value.controller.animateToPage(
                                                 value.getIndex + 1,
                                                 duration:

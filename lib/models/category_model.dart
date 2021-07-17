@@ -5,12 +5,14 @@ class CategoryModel {
   List<String> optionsTitleList;
   double rate;
 
-  CategoryModel(
-      {required this.title,
-        required this.desc,
-        required this.img,
-        required this.optionsTitleList,
-        required this.rate});
+  CategoryModel({
+    required this.title,
+    required this.desc,
+    required this.img,
+    required this.optionsTitleList,
+    required this.rate,
+  });
+
 }
 
 List<CategoryModel> categoryScreenList = [
