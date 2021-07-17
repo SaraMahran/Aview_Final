@@ -84,6 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 LoginButton(
                     buttonTitle: 'Login',
                     onTap: () async {
+                      // Navigator.pushNamed(context, MapsScreenRoute);
                       Navigator.pushNamed(context, HomeScreenRoute);
                       final firebaseAuthService = FirebaseAuthService(
                         firebaseAuth: FirebaseAuth.instance,
@@ -101,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 LoginButton(
                   buttonTitle: 'SignUp',
-                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
+                  onTap: () => Navigator.pushNamed(context, OTPScreenRoute),
                 ),
                 SizedBox(
                   height: 10,

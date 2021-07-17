@@ -38,6 +38,13 @@ dependencies:
   http: ^0.13.3
   google_sign_in: ^5.0.4
   pinput: ^1.2.0
+
+  fluttertoast: ^8.0.7
+#  map
+  google_maps_flutter: ^2.0.6
+  geocoding: ^2.0.0
+  geolocator: ^7.3.0
+  location: ^4.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

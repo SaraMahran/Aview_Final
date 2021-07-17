@@ -1,11 +1,12 @@
 import 'package:aview2/utils/routing_constants.dart';
-import 'package:aview2/views/home_cycle/category_details_screen.dart';
-import 'package:aview2/views/home_cycle/category_screen.dart';
+import 'package:aview2/views/home_cycle/category/category_details_screen.dart';
+import 'package:aview2/views/home_cycle/category/category_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/help_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
 import 'package:aview2/views/home_cycle/edit_profile.dart';
+import 'package:aview2/views/home_cycle/map/map_screen.dart';
 import 'package:aview2/views/home_cycle/new_places_screen.dart';
 import 'package:aview2/views/home_cycle/profile_screen.dart';
 import 'package:aview2/views/home_cycle/trending_places_screen.dart';
@@ -19,7 +20,7 @@ import 'routing_constants.dart';
 import '../views/splash_cycle/splash_screen.dart';
 import '../views/splash_cycle/slider_screen.dart';
 import '../views/home_cycle/home_screen.dart';
-import '../views/home_cycle/category_screen.dart';
+import '../views/home_cycle/category/category_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -34,8 +35,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case PhoneAuthenticationScreenRoute:
       return MaterialPageRoute(
           builder: (context) => PhoneAuthenticationScreen());
-    case OTPScreenRoute:
-      return MaterialPageRoute(builder: (context) => OTPScreen());
+    //case OTPScreenRoute:
+    //return MaterialPageRoute(builder: (context) => OTPScreen());
+    case MapsScreenRoute:
+      return MaterialPageRoute(builder: (context) => MapsScreen());
     case HomeScreenRoute:
       return MaterialPageRoute(builder: (context) => HomeScreen());
     case CategoryScreenRoute:
