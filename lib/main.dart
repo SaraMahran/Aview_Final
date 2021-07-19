@@ -1,5 +1,6 @@
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
+import 'package:aview2/view_models/providers/place_provider.dart';
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/view_models/providers/sign_up_provider.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => ReviewerProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => PlaceProvider()),
         ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         Provider<FirebaseAuthService>(
           create: (_) =>
@@ -89,7 +91,7 @@ class MyApp extends StatelessWidget {
         title: 'Aview',
         onGenerateRoute: route.generateRoute,
         initialRoute: SplashScreenRoute,
-        home: AuthenticaionWrapper(),
+        home: LoginScreen(),
       ),
     );
   }

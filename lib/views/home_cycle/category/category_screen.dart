@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,10 +45,10 @@ class CategoryScreen extends StatelessWidget {
             itemCount: categoryScreenList.length,
             physics: ScrollPhysics(),
             itemBuilder: (context, index) {
+              final categoryProvider =
+                  Provider.of<CategoryProvider>(context, listen: false);
               return CategoryItem(
                 onTap: () {
-                  final categoryProvider =
-                      Provider.of<CategoryProvider>(context, listen: false);
                   categoryProvider
                       .setPlaceName(categoryScreenList[index].title);
                   categoryProvider.setPlaceImg(categoryScreenList[index].img);
@@ -57,7 +58,7 @@ class CategoryScreen extends StatelessWidget {
                   Navigator.pushNamed(context, CategoryDetailsScreenRoute);
                 },
                 img: categoryScreenList[index].img,
-                title: categoryScreenList[index].title,
+                title:  categoryScreenList[index].title,
                 desc: categoryScreenList[index].desc,
                 rate: categoryScreenList[index].rate,
                 optionListWidget: SizedBox(
