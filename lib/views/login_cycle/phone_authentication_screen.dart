@@ -18,6 +18,12 @@ class _PhoneAuthenticationScreenState extends State<PhoneAuthenticationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.deepOrange, //change your color here
+        ),
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        shadowColor: Colors.transparent,
         title: Text(
           'Phone Authentication',
           style: TextStyle(
@@ -47,13 +53,13 @@ class _PhoneAuthenticationScreenState extends State<PhoneAuthenticationScreen> {
                 style: TextStyle(color: Colors.black, fontSize: 18),
                 decoration: InputDecoration(
                   focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.purple)),
+                      borderSide: BorderSide(color: Colors.deepPurple)),
                   hintText: 'Phone Number',
                   hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
                   prefixIcon: Container(
                     margin: EdgeInsets.only(top: 12),
                     child: Text(
-                      '+02',
+                      '+20',
                       style: TextStyle(color: Colors.black, fontSize: 18),
                       textAlign: TextAlign.center,
                     ),
@@ -71,12 +77,15 @@ class _PhoneAuthenticationScreenState extends State<PhoneAuthenticationScreen> {
             child: FlatButton(
               color: Colors.deepOrange,
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => OTPScreen(_controller.text)));
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => OTPScreen(phone: _controller.text),
+                  ),
+                );
               },
               child: Text(
                 'Next',
-                style: TextStyle(color: Colors.purple),
+                style: TextStyle(color: Colors.black, fontSize: 18),
               ),
             ),
           ),

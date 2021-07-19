@@ -7,12 +7,13 @@ import 'package:provider/provider.dart';
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Consumer<SettingProvider>(
       builder: (ctx, value, child) {
         return Scaffold(
           appBar: AppBar(
             iconTheme: IconThemeData(
-              color: Colors.orange[800], //change your color here
+              color: Colors.deepOrange, //change your color here
             ),
             backgroundColor: Colors.white,
             centerTitle: true,
@@ -21,7 +22,7 @@ class SettingsScreen extends StatelessWidget {
               'Settings',
               style: TextStyle(
                 fontSize: 20,
-                color: Colors.orange[800],
+                color: Colors.deepOrange,
               ),
             ),
           ),
@@ -38,9 +39,12 @@ class SettingsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 CenterSettingTitle(title: 'Preferences'),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   'Language',
-                  style: TextStyle(fontSize: 20),
+                  style: textTheme.headline2,
                 ),
                 Row(
                   children: [
@@ -65,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
                 SizedBox(height: 30),
                 Text(
                   'Notification',
-                  style: TextStyle(fontSize: 25),
+                  style: textTheme.headline2,
                 ),
                 Row(
                   children: [
@@ -87,11 +91,18 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 20,
+                ),
                 CenterSettingTitle(title: 'Privacy'),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   'Location',
-                  style: TextStyle(fontSize: 25),
+                  style: textTheme.headline2,
                 ),
+
                 Row(
                   children: [
                     LabeledRadio(
@@ -115,7 +126,7 @@ class SettingsScreen extends StatelessWidget {
                 SizedBox(height: 20),
                 Text(
                   'Lists',
-                  style: TextStyle(fontSize: 25),
+                  style: textTheme.headline2,
                 ),
                 Row(
                   children: [
@@ -137,7 +148,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                CenterSettingTitle(title: 'Account'),
+                //CenterSettingTitle(title: 'Account'),
               ],
             ),
           ),
@@ -156,7 +167,7 @@ class CenterSettingTitle extends StatelessWidget {
       child: Container(
         width: 150,
         decoration: BoxDecoration(
-          color: Colors.orange,
+          color: Colors.deepOrange,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(

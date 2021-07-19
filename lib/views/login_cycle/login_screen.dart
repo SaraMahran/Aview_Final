@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:aview2/components/widgets/custom_appBar.dart';
 import 'package:aview2/components/widgets/custom_shape_login_header.dart';
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
@@ -22,13 +20,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
   bool checkBoxValue = false;
   double? _height;
   double? _width;
   double? _pixelRatio;
 
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordControl = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -58,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       right: _width! / 12.0,
                       top: _height! / 10.0),
                   child: Form(
+                    key: globalKey,
                     child: Column(
                       children: <Widget>[
                         CustomTextField(
@@ -65,6 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icons.email,
                           hint: "Email ",
                           textEditingController: emailController,
+                          onClick: (value) {
+                            emailController = value;
+                          },
                         ),
                         // SizedBox(height: _height! / 60.0),
                         // phoneTextFormField(),
@@ -74,35 +78,45 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: true,
                           icon: Icons.lock,
                           hint: "Password",
-                          textEditingController: passwordControl,
+                          textEditingController: passwordController,
+                          onClick: (value) {
+                            passwordController = value;
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
-                LoginButton(
+                Builder(
+                  builder: (context) => LoginButton(
                     buttonTitle: 'Login',
                     onTap: () async {
-                      // Navigator.pushNamed(context, MapsScreenRoute);
-                      Navigator.pushNamed(context, HomeScreenRoute);
-                      final firebaseAuthService = FirebaseAuthService(
-                        firebaseAuth: FirebaseAuth.instance,
-                      );
-                      await firebaseAuthService.SignUp(
-                        email: emailController.text,
-                        password: passwordControl.text,
-                      );
-                      // await Provider.of<ReviewerProvider>(context,
-                      //         listen: false)
-                      //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
-                    }),
+                      if (globalKey.currentState!.validate()) {
+                        globalKey.currentState!.save();
+                        try {} catch (e) {}
+                        // Navigator.pushNamed(context, MapsScreenRoute);
+                        Navigator.pushNamed(context, HomeScreenRoute);
+                        // final firebaseAuthService = FirebaseAuthService(
+                        //   firebaseAuth: FirebaseAuth.instance,
+                        // );
+                        // await firebaseAuthService.SignUp(
+                        //   email: emailController.text,
+                        //   password: passwordControl.text,
+                        // );
+                        // await Provider.of<ReviewerProvider>(context,
+                        //         listen: false)
+                        //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
+                      }
+                    },
+                  ),
+                ),
                 SizedBox(
                   height: _height! / 35,
                 ),
                 LoginButton(
                   buttonTitle: 'SignUp',
-                  onTap: () => Navigator.pushNamed(context, OTPScreenRoute),
+                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
                 ),
                 SizedBox(
                   height: 10,

@@ -13,6 +13,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       key: drawerKey,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, MapsScreenRoute),
+        child: Icon(Icons.map),
+      ),
       appBar: AppBar(
         actions: [
           GestureDetector(
