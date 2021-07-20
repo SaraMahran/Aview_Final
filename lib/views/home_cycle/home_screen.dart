@@ -1,4 +1,5 @@
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
+import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/home_provider.dart';
 import 'package:flutter/material.dart';
@@ -6,14 +7,26 @@ import 'package:provider/provider.dart';
 import 'package:aview2/components/items/home_item.dart';
 import 'package:aview2/models/home_model.dart';
 
-
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey(); // Create a key
 
   Widget build(BuildContext context) {
     return Scaffold(
       key: drawerKey,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.pushNamed(context, MapsScreenRoute),
+        child: Icon(Icons.map),
+      ),
       appBar: AppBar(
+        actions: [
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, ProfileScreenRoute),
+            child: Padding(
+              padding: EdgeInsets.all(7),
+              child: Image.asset('assets/images/unnamed.png'),
+            ),
+          ),
+        ],
         backgroundColor: Colors.white,
         centerTitle: true,
         shadowColor: Colors.transparent,
@@ -41,7 +54,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 10),
               child: ListTile(
-                onTap: () => print('Settings tapped'),
+                onTap: () => Navigator.pushNamed(context, SettingsScreenRoute),
                 leading: Icon(
                   Icons.settings,
                   size: 30,
@@ -56,7 +69,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('Help tapped'),
+                onTap: () => Navigator.pushNamed(context, HelpScreenRoute),
                 leading: Icon(
                   Icons.help_outlined,
                   color: Colors.deepOrange,
@@ -86,7 +99,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('About Us tapped'),
+                onTap: () => Navigator.pushNamed(context, AboutUsScreenRoute),
                 leading: Icon(
                   Icons.assignment_late_outlined,
                   color: Colors.deepOrange,
@@ -101,7 +114,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('FQA tapped'),
+                onTap: () => Navigator.pushNamed(context, FqaScreenRoute),
                 leading: Icon(
                   Icons.question_answer_outlined,
                   color: Colors.deepOrange,
@@ -116,7 +129,8 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
               child: ListTile(
-                onTap: () => print('Log Out tapped'),
+                onTap: () => context.read()<FirebaseAuthService>().signOut(),
+                //=> Navigator.pushNamed(context, SignUpScreenRoute),
                 leading: Icon(
                   Icons.logout,
                   color: Colors.deepOrange,
@@ -144,7 +158,7 @@ class HomeScreen extends StatelessWidget {
                 // TODO: lama b3ml set ll data with provider thrown exception check it
                 Provider.of<HomeProvider>(context, listen: false)
                     .setTitle(homeModelList[index].title);
-                Navigator.pushNamed(context, HomeDetailsScreenRoute);
+                Navigator.pushNamed(context, CategoryScreenRoute);
                 print(
                     Provider.of<HomeProvider>(context, listen: false).getTitle);
               },
