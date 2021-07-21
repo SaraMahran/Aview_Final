@@ -53,7 +53,7 @@ class EmailScreen extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Thank you for contacting with us!',
+                'Thank you for contacting us!',
                 style: textTheme.headline1,
               ),
             ],

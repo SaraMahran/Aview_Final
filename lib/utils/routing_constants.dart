@@ -19,3 +19,4 @@ const String MapsScreenRoute = "MapsScreen";
 const String SignUpPlaceOwnerRoute = "SignUpPlaceOwnerRoute";
 const String EmailScreenRoute = "EmailScreen";
 const String ChatScreenRoute = "ChatScreen";
+const String QAScreenRoute = "QAScreen";

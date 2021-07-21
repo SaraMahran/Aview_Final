@@ -59,22 +59,12 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
               color: Colors.deepOrange,
             ),
-            headline3: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
             headline2: TextStyle(
                 fontSize: 25,
                 fontFamily: 'ChelaOne',
-                //fontStyle: FontStyle.italic,
                 color: Colors.purple[900]),
-            headline6: TextStyle(
-                fontFamily: 'Crimson',
-                fontSize: 17,
-                fontWeight: FontWeight.bold,
-                color: Colors.white),
-            bodyText2: TextStyle(
-                fontSize: 14.0,
-                fontFamily: 'Hind',
-                color: Color.fromARGB(255, 245, 212, 202)),
+            headline3: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
             headline4: TextStyle(
               fontSize: 14.0,
               fontFamily: 'Hind',
@@ -85,6 +75,21 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'ChelaOne',
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
+            headline6: TextStyle(
+                fontFamily: 'Crimson',
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
+            bodyText1: TextStyle(
+              fontSize: 22.0,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Satisfy',
+              color: Colors.deepOrange,
+            ),
+            bodyText2: TextStyle(
+                fontSize: 14.0,
+                fontFamily: 'Hind',
+                color: Color.fromARGB(255, 245, 212, 202)),
           ),
         ),
         debugShowCheckedModeBanner: false,

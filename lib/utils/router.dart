@@ -2,8 +2,10 @@ import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/views/home_cycle/category/category_details_screen.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/email_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/help_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/q&a_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
 import 'package:aview2/views/home_cycle/edit_profile.dart';
 import 'package:aview2/views/home_cycle/map/map_screen.dart';
@@ -29,7 +31,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SplashScreen());
     case SliderScreenRoute:
       return MaterialPageRoute(builder: (context) => SliderScreen());
-    case SignUpPlaceOwnerRoute :
+    case SignUpPlaceOwnerRoute:
       return MaterialPageRoute(builder: (context) => SignUpPlaceOwnerScreen());
     case SignUpScreenRoute:
       return MaterialPageRoute(builder: (context) => SignUpScreen());
@@ -56,8 +58,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case CategoryDetailsScreenRoute:
       return MaterialPageRoute(builder: (context) => CategoryDetailsScreen());
+    case QAScreenRoute:
+      return MaterialPageRoute(builder: (context) => QASCreen());
     case EditProfileScreenRoute:
       return MaterialPageRoute(builder: (context) => EditProfileScreen());
+    case EmailScreenRoute:
+      return MaterialPageRoute(builder: (context) => EmailScreen());
 
     case AboutUsScreenRoute:
       return MaterialPageRoute(builder: (context) => AboutUsScreen());

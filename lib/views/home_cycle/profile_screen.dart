@@ -177,7 +177,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizedBox(height: 14),
-          Text('Reviews: ', style: textTheme.headline1),
+          Text('Reviews: ', style: textTheme.bodyText1),
           SizedBox(
             height: responsive.height * .16,
             child: ListView.builder(
@@ -194,7 +194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizedBox(height: 14),
-          Text('Lists: ', style: textTheme.headline1),
+          Text('Lists: ', style: textTheme.bodyText1),
           SizedBox(
             height: responsive.height * .08,
             child: ListView.builder(
@@ -211,12 +211,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }),
           ),
           SizedBox(height: 20),
-          Text('Optional Info:', style: textTheme.headline1),
+          Text('Optional Info:', style: textTheme.bodyText1),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Year of birth ', style: textTheme.headline1),
+              Text('Year of birth ', style: textTheme.bodyText1),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Container(
@@ -270,7 +270,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Phone Number', style: textTheme.headline1),
+              Text('Phone Number', style: textTheme.bodyText1),
               Container(
                 padding: EdgeInsets.all(8),
                 decoration: kCustomContainerDecoration,
@@ -282,7 +282,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Gender', style: textTheme.headline1),
+              Text('Gender', style: textTheme.bodyText1),
               LabeledRadio(
                 value: 'Male',
                 label: 'Male',
