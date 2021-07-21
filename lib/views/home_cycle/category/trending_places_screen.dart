@@ -13,7 +13,7 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
   @override
   void initState() {
     Provider.of<PlaceProvider>(context, listen: false).retrievePlaces();
-    // Provider.of<ReviewProvider>(context, listen: false).retrieveReviews();
+    Provider.of<ReviewProvider>(context, listen: false).retrieveReviews();
     super.initState();
   }
 
@@ -26,12 +26,14 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
       appBar: AppBar(shadowColor: Colors.transparent),
       body: Container(
         child: FutureBuilder(
-          future: placesProvider.retrievePlaces(),
-          // future: Provider.of<ReviewProvider>(context).retrieveReviews(),
+          // future: placesProvider.retrievePlaces(),
+          future: reviewProvider.retrieveReviews(),
           builder: (context, snapshot) {
-            if (placesProvider.getPlaceList.isNotEmpty) {
+            // if (placesProvider.getPlaceList.isNotEmpty) {
+            if (reviewProvider.getReviewList.isNotEmpty) {
               return ListView.builder(
-                itemCount: placesProvider.getPlaceList.length,
+                // itemCount: placesProvider.getPlaceList.length,
+                itemCount: reviewProvider.getReviewList.length,
                 itemBuilder: (context, index) {
                   return Container(
                     decoration: kCustomContainerDecoration,
@@ -39,9 +41,13 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                     padding: EdgeInsets.all(8),
                     child: Column(
                       children: [
-                        Text(placesProvider.getPlaceList
+                        // Text(placesProvider.getPlaceList
+                        //     .elementAt(index)
+                        //     .placeName),
+                        Text(reviewProvider.getReviewList
                             .elementAt(index)
-                            .placeName),
+                            .noOfLikes
+                            .toString()),
                       ],
                     ),
                   );

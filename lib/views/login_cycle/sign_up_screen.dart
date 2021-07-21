@@ -37,6 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
     _large = ResponsiveWidget.isScreenLarge(_width!, _pixelRatio!);
     _medium = ResponsiveWidget.isScreenMedium(_width!, _pixelRatio!);
+    final formKey = GlobalKey<FormState>();
 
     return Material(
       child: Scaffold(
@@ -59,6 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       right: _width! / 12.0,
                       top: _height! / 20.0),
                   child: Form(
+                    key: formKey,
                     child: Column(
                       children: <Widget>[
                         CustomTextField(
@@ -68,7 +70,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           textEditingController: firstNameController,
                         ),
                         SizedBox(height: _height! / 60.0),
-
                         CustomTextField(
                           keyboardType: TextInputType.text,
                           icon: Icons.person,

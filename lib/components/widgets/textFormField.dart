@@ -18,7 +18,7 @@ class CustomTextField extends StatelessWidget {
       this.textEditingController,
       required this.keyboardType,
       this.obscureText = false,
-      required this.icon});
+       this.icon});
 
   @override
   Widget build(BuildContext context) {

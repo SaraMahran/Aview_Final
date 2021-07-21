@@ -97,18 +97,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       //         listen: false)
                       //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
                     }),
-                SizedBox(
-                  height: _height! / 35,
-                ),
                 LoginButton(
                   buttonTitle: 'SignUp',
                   onTap: () => Navigator.pushNamed(context, OTPScreenRoute),
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(4),
                   child: Text(
                     "Login using social media",
                     style: TextStyle(
@@ -201,13 +196,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(width: 30),
                     GestureDetector(
-                        onTap: () async {
-                          Navigator.pushNamed(
-                              context, PhoneAuthenticationScreenRoute);
-                        },
-                        child: Image.asset('assets/images/phone_logo.png'))
+                      onTap: () async {
+                        Navigator.pushNamed(
+                            context, PhoneAuthenticationScreenRoute);
+                      },
+                      child: Image.asset('assets/images/phone_logo.png'),
+                    )
                   ],
                 ),
+                TextButton(
+                  onPressed: () =>Navigator.pushNamed(context, SignUpPlaceOwnerRoute),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: 'Are you place owner?',
+                      style: Theme.of(context).textTheme.headline2,
+                      children: [
+                        TextSpan(
+                          text: ' SignUp!',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.w800),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
