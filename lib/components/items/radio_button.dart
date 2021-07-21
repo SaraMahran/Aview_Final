@@ -39,7 +39,10 @@ class LabeledRadio extends StatelessWidget {
             Text(
               label,
               maxLines: 1,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black),
             ),
           ],
         ),

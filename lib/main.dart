@@ -3,6 +3,7 @@ import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
 import 'package:aview2/view_models/providers/place_provider.dart';
 import 'package:aview2/view_models/providers/review_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
+import 'package:aview2/view_models/providers/sign_up_provider.dart';
 import 'package:aview2/view_models/providers/slider_provider.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ReviewProvider()),
         ChangeNotifierProvider(create: (_) => HomeProvider()),
         ChangeNotifierProvider(create: (_) => SettingProvider()),
+        ChangeNotifierProvider(create: (_) => SignUpProvider()),
         ChangeNotifierProvider(create: (_) => ReviewerProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => PlaceProvider()),
@@ -64,6 +66,11 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'ChelaOne',
                 //fontStyle: FontStyle.italic,
                 color: Colors.purple[900]),
+            headline6: TextStyle(
+                fontFamily: 'Crimson',
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
             bodyText2: TextStyle(
                 fontSize: 14.0,
                 fontFamily: 'Hind',
@@ -71,8 +78,13 @@ class MyApp extends StatelessWidget {
             headline4: TextStyle(
               fontSize: 14.0,
               fontFamily: 'Hind',
-              color:Colors.grey,
+              color: Colors.grey,
             ),
+            headline5: TextStyle(
+                fontSize: 25,
+                fontFamily: 'ChelaOne',
+                fontWeight: FontWeight.bold,
+                color: Colors.white),
           ),
         ),
         debugShowCheckedModeBanner: false,

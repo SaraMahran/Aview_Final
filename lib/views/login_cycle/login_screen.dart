@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:aview2/components/widgets/custom_appBar.dart';
 import 'package:aview2/components/widgets/custom_shape_login_header.dart';
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
@@ -8,7 +6,6 @@ import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
-import 'package:aview2/view_models/providers/place_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +20,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
+
   bool checkBoxValue = false;
   double? _height;
   double? _width;
   double? _pixelRatio;
 
   TextEditingController emailController = TextEditingController();
-  TextEditingController passwordControl = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -57,8 +56,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: EdgeInsets.only(
                       left: _width! / 12.0,
                       right: _width! / 12.0,
-                      top: _height! / 10.0),
+                      top: _height! / 16.0),
                   child: Form(
+                    key: globalKey,
                     child: Column(
                       children: <Widget>[
                         CustomTextField(
@@ -66,6 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icons.email,
                           hint: "Email ",
                           textEditingController: emailController,
+                          onClick: (value) {
+                            emailController = value;
+                          },
                         ),
                         // SizedBox(height: _height! / 60.0),
                         // phoneTextFormField(),
@@ -75,35 +78,46 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: true,
                           icon: Icons.lock,
                           hint: "Password",
-                          textEditingController: passwordControl,
+                          textEditingController: passwordController,
+                          onClick: (value) {
+                            passwordController = value;
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
-                LoginButton(
+                Builder(
+                  builder: (context) => LoginButton(
                     buttonTitle: 'Login',
                     onTap: () async {
-                      Navigator.pushNamed(context, HomeScreenRoute);
-                      final firebaseAuthService = FirebaseAuthService(
-                        firebaseAuth: FirebaseAuth.instance,
-                      );
-                      await firebaseAuthService.SignUp(
-                        email: emailController.text,
-                        password: passwordControl.text,
-                      );
-                      // await Provider.of<ReviewerProvider>(context,
-                      //         listen: false)
-                      //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
-                    }),
+                      if (globalKey.currentState!.validate()) {
+                        globalKey.currentState!.save();
+                        try {} catch (e) {}
+                        // Navigator.pushNamed(context, MapsScreenRoute);
+                        Navigator.pushNamed(context, HomeScreenRoute);
+                        // final firebaseAuthService = FirebaseAuthService(
+                        //   firebaseAuth: FirebaseAuth.instance,
+                        // );
+                        // await firebaseAuthService.SignUp(
+                        //   email: emailController.text,
+                        //   password: passwordControl.text,
+                        // );
+                        // await Provider.of<ReviewerProvider>(context,
+                        //         listen: false)
+                        //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
+                      }
+                    },
+                  ),
+                ),
+                SizedBox(height: 8),
                 LoginButton(
                   buttonTitle: 'SignUp',
-                  onTap: () => Navigator.pushNamed(context, OTPScreenRoute),
+                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
                 ),
-                SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(10),
                   child: Text(
                     "Login using social media",
                     style: TextStyle(
@@ -112,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 17),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -196,16 +210,16 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     SizedBox(width: 30),
                     GestureDetector(
-                      onTap: () async {
-                        Navigator.pushNamed(
-                            context, PhoneAuthenticationScreenRoute);
-                      },
-                      child: Image.asset('assets/images/phone_logo.png'),
-                    )
+                        onTap: () async {
+                          Navigator.pushNamed(
+                              context, PhoneAuthenticationScreenRoute);
+                        },
+                        child: Image.asset('assets/images/phone_logo.png')),
                   ],
                 ),
                 TextButton(
-                  onPressed: () =>Navigator.pushNamed(context, SignUpPlaceOwnerRoute),
+                  onPressed: () =>
+                      Navigator.pushNamed(context, SignUpPlaceOwnerRoute),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:aview2/models/user_info_model.dart';
 
 class ReviewerModel {
-  late UserInfo info;
+  late UserInfoModel userInfo;
   late bool verifiedReviewer;
   late List<dynamic> favoriteReviewers;
   late List<dynamic> places;
@@ -10,11 +10,13 @@ class ReviewerModel {
   late String reviewerID;
 
   ReviewerModel.fromJson(
-      Map<String, dynamic> data, Map<String, dynamic> userData) {
-    verifiedReviewer = data['verifiedReviewer'] ?? 'verifiedReviewer';
-    favoriteReviewers = data['favoriteReviewers'] ?? ['favoriteReviewers'];
-    places = data['places'] ?? [];
-    noOFReviews = data['noOfReviewers'] ?? 0;
-    info = UserInfo.fromJson(userData);
+    Map<String, dynamic> data,
+    Map<String, dynamic> userData,
+  ) {
+    verifiedReviewer = data['verifiedReviewer'];
+    favoriteReviewers = data['favoriteReviewers'];
+    places = data['places'];
+    noOFReviews = data['noOfReviewers'];
+    userInfo = UserInfoModel.fromJson(userData);
   }
 }
