@@ -36,31 +36,22 @@ class HelpScreen extends StatelessWidget {
             ),
         child: Center(
           child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(
-                height: 80,
-              ),
+              SizedBox(height: 80),
               Image.asset('assets/images/call-center.png', scale: 5),
-              SizedBox(
-                width: 20,
-                height: 20,
-              ),
+              SizedBox(height: 20),
               Center(
                 child: Text(
                   'How can we help you?',
                   style: textTheme.headline2,
                 ),
               ),
-              SizedBox(
-                height: 150,
-              ),
+              SizedBox(height: 150),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 143),
-
-                    //padding: const EdgeInsets.fromLTRB(20, 20, 120, 10),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, ChatScreenRoute),
                     child: Column(
                       children: [
                         Container(
@@ -70,29 +61,18 @@ class HelpScreen extends StatelessWidget {
                           height: 100,
                           width: 100,
                           alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () async {
-                              Navigator.pushNamed(context, ChatScreenRoute);
-                            },
-                            child: Image.asset(
-                              'assets/images/chat.png',
-                              scale: 4,
-                            ),
+                          child: Image.asset(
+                            'assets/images/chat.png',
+                            scale: 4,
                           ),
                         ),
-                        SizedBox(
-                          width: 20,
-                          height: 20,
-                        ),
-                        Text(
-                          'Chat with us',
-                          style: textTheme.headline1,
-                        ),
+                        SizedBox(height: 20),
+                        Text('Chat with us', style: textTheme.headline1),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                  GestureDetector(
+                    onTap: () => Navigator.pushNamed(context, EmailScreenRoute),
                     child: Column(
                       children: [
                         Container(
@@ -102,14 +82,9 @@ class HelpScreen extends StatelessWidget {
                           height: 100,
                           width: 100,
                           alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () async {
-                              Navigator.pushNamed(context, EmailScreenRoute);
-                            },
-                            child: Image.asset(
-                              'assets/images/email.png',
-                              scale: 7,
-                            ),
+                          child: Image.asset(
+                            'assets/images/email.png',
+                            scale: 7,
                           ),
                         ),
                         SizedBox(

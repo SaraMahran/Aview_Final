@@ -13,6 +13,14 @@ class EmailScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         shadowColor: Colors.transparent,
+        title: Text(
+          'Email Us',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.deepOrange,
+          ),
+        ),
+
       ),
       body: Container(
         decoration: BoxDecoration(

@@ -2,6 +2,7 @@ import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/views/home_cycle/category/category_details_screen.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/chat_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/email_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/help_screen.dart';
@@ -44,6 +45,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //return MaterialPageRoute(builder: (context) => OTPScreen());
     case MapsScreenRoute:
       return MaterialPageRoute(builder: (context) => MapsScreen());
+    case ChatScreenRoute:
+      return MaterialPageRoute(builder: (context) => ChatScreen());
     case HomeScreenRoute:
       return MaterialPageRoute(builder: (context) => HomeScreen());
     case CategoryScreenRoute:
