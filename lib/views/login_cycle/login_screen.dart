@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: EdgeInsets.only(
                       left: _width! / 12.0,
                       right: _width! / 12.0,
-                      top: _height! / 10.0),
+                      top: _height! / 16.0),
                   child: Form(
                     key: globalKey,
                     child: Column(
@@ -111,15 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ),
-                SizedBox(
-                  height: _height! / 35,
-                ),
+                SizedBox(height: 8),
                 LoginButton(
                   buttonTitle: 'SignUp',
                   onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
-                ),
-                SizedBox(
-                  height: 10,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
@@ -131,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 17),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
@@ -219,9 +214,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.pushNamed(
                               context, PhoneAuthenticationScreenRoute);
                         },
-                        child: Image.asset('assets/images/phone_logo.png'))
+                        child: Image.asset('assets/images/phone_logo.png')),
                   ],
                 ),
+                TextButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, SignUpPlaceOwnerRoute),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: 'Are you place owner?',
+                      style: Theme.of(context).textTheme.headline2,
+                      children: [
+                        TextSpan(
+                          text: ' SignUp!',
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline2!
+                              .copyWith(
+                                  color: Colors.orange,
+                                  fontWeight: FontWeight.w800),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
               ],
             ),
           ),
