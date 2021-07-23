@@ -4,7 +4,9 @@ class FirebaseAuthService {
   late FirebaseAuth firebaseAuth;
 
   FirebaseAuthService({required this.firebaseAuth});
+
   Stream<User?> get onAuthStateChanges => firebaseAuth.authStateChanges();
+
   Future<void> SignOut() async {
     await firebaseAuth.signOut();
   }
@@ -12,8 +14,11 @@ class FirebaseAuthService {
   Future<String?> SignIn(
       {required String email, required String password}) async {
     try {
-      await firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
+      await firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then(
+            (value) => print('userEmail = ${value.user!.email}'),
+          );
       return "Signed In Successfully ";
     } on FirebaseAuthException catch (e) {
       return e.message;

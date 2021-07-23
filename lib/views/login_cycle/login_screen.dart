@@ -13,6 +13,8 @@ import 'package:aview2/components/widgets/responsive_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
+import 'package:aview2/utils/string_validation.dart';
+import 'package:aview2/utils/string_validation.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -65,6 +67,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           keyboardType: TextInputType.emailAddress,
                           icon: Icons.email,
                           hint: "Email ",
+                          validator: (input) {
+                            if (emailController.text.isEmpty) {
+                              return 'Email is required';
+                            } else if (input!.isNotValidEmail()) {
+                              return 'Invalid Email';
+                            }
+                            return null;
+                          },
                           textEditingController: emailController,
                           onClick: (value) {
                             emailController = value;
@@ -77,6 +87,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           keyboardType: TextInputType.text,
                           obscureText: true,
                           icon: Icons.lock,
+                          validator: (input) {
+                            // if (passwordController.text.isEmpty) {
+                            //   return 'Password is required';
+                            // } else if (input!.isNotValidPassword()) {
+                            //   return 'Invalid Password';
+                            // }
+                            return null;
+                          },
                           hint: "Password",
                           textEditingController: passwordController,
                           onClick: (value) {
@@ -94,19 +112,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () async {
                       if (globalKey.currentState!.validate()) {
                         globalKey.currentState!.save();
-                        try {} catch (e) {}
-                        // Navigator.pushNamed(context, MapsScreenRoute);
-                        Navigator.pushNamed(context, HomeScreenRoute);
-                        // final firebaseAuthService = FirebaseAuthService(
-                        //   firebaseAuth: FirebaseAuth.instance,
-                        // );
-                        // await firebaseAuthService.SignUp(
-                        //   email: emailController.text,
-                        //   password: passwordControl.text,
-                        // );
+                        final firebaseAuthService = FirebaseAuthService(
+                          firebaseAuth: FirebaseAuth.instance,
+                        );
+
+                        await firebaseAuthService.SignIn(
+                          email: emailController.text,
+                          password: passwordController.text
+                        );
                         // await Provider.of<ReviewerProvider>(context,
                         //         listen: false)
-                        //     .retriveUserData('ydFcfRjjsocfMZCfgoQg');
+                        //     .retrieveUserData('ydFcfRjjsocfMZCfgoQg');
+                        Navigator.pushNamed(context, HomeScreenRoute);
                       }
                     },
                   ),

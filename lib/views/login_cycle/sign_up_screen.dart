@@ -21,10 +21,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   double? _height;
   double? _width;
 
-  TextEditingController firstNameController = TextEditingController(text:'');
-  TextEditingController lastNameController = TextEditingController(text:'');
-  TextEditingController emailController = TextEditingController(text:'');
-  TextEditingController passwordController = TextEditingController(text:'');
+  TextEditingController firstNameController = TextEditingController(text: '');
+  TextEditingController lastNameController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseAuthService firebaseAuthService =
       FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
@@ -68,6 +68,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 keyboardType: TextInputType.text,
                                 icon: Icons.person,
                                 hint: "First Name",
+                                validator: (input) {
+                                  if (firstNameController.text.isEmpty) {
+                                    return 'First Name is required';
+                                  }
+                                  return null;
+                                },
                                 textEditingController: firstNameController,
                                 onClick: (value) {
                                   firstNameController = value;
@@ -78,6 +84,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 keyboardType: TextInputType.text,
                                 icon: Icons.person,
                                 hint: "Last Name",
+                                validator: (input) {
+                                  if (lastNameController.text.isEmpty) {
+                                    return 'Last Name is required';
+                                  }
+                                  return null;
+                                },
                                 textEditingController: lastNameController,
                                 onClick: (value) {
                                   lastNameController = value;
@@ -90,9 +102,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hint: "Email ",
                                 textEditingController: emailController,
                                 validator: (input) {
-                                  if (input!.isNotValidEmail())
+                                  if (emailController.text.isEmpty) {
+                                    return 'Email is required';
+                                  } else if (input!.isNotValidEmail()) {
                                     return 'Invalid Email';
-
+                                  }
                                   return null;
                                 },
                                 onClick: (value) {
@@ -108,6 +122,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 obscureText: true,
                                 icon: Icons.lock,
                                 hint: "Password",
+                                validator: (input) {
+                                  if (passwordController.text.isEmpty) {
+                                    return 'Password is required';
+                                  } else if (input!.isNotValidPassword()) {
+                                    return 'Invalid password pattern';
+                                  }
+                                  return null;
+                                },
                                 textEditingController: passwordController,
                                 onClick: (value) {
                                   passwordController = value;
