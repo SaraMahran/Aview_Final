@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aview2/components/cutom_shadow.dart';
 import 'package:aview2/components/documentation_image_picker_widget.dart';
 import 'package:aview2/components/items/radio_button.dart';
@@ -6,6 +8,7 @@ import 'package:aview2/components/widgets/buttons/custom_rounded_border_button.d
 import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreen extends StatefulWidget {
   @override
@@ -19,6 +22,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   TextEditingController nameTEC = TextEditingController(text: '');
   TextEditingController emailTEC = TextEditingController(text: '');
   TextEditingController bioTEC = TextEditingController(text: '');
+  File? file;
+
+  Future<void> pickImg() async {
+    final pickedImg = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImg != null) {
+      print('picked');
+      setState(() {
+        file = File(pickedImg.path);
+      });
+      print('pickedImgPath = ${file!.path}');
+    } else {
+      print('Canceled');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,16 +64,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           children: [
             Stack(
               children: [
-                Container(
-                  height: responsive.height * .2,
-                  margin: EdgeInsets.only(bottom: 10),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/woman.png'),
-                        fit: BoxFit.contain),
-                  ),
-                ),
+                file != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.file(
+                          file!,
+                          height: responsive.height * .2,
+                          fit: BoxFit.fill,
+                        ),
+                      )
+                    : GestureDetector(
+                        onTap: pickImg,
+                        child: Container(
+                          height: responsive.height * .2,
+                          margin: EdgeInsets.only(bottom: 10),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: AssetImage('assets/images/woman.png'),
+                                fit: BoxFit.contain),
+                          ),
+                        ),
+                      ),
                 Positioned(
                   bottom: 0,
                   left: responsive.width * .55,
