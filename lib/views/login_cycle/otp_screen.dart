@@ -6,7 +6,7 @@ import 'package:pinput/pin_put/pin_put.dart';
 import 'package:aview2/utils/routing_constants.dart';
 
 class OTPScreen extends StatefulWidget {
-  final String phone;
+  final String? phone;
 
   OTPScreen({required this.phone});
 
@@ -66,21 +66,18 @@ class _OTPScreenState extends State<OTPScreen> {
                       .signInWithCredential(
                     PhoneAuthProvider.credential(
                       verificationId: _verificationCode,
-                      smsCode: '147912',
+                      smsCode: pin,
                     ),
                   )
                       .then((value) async {
                     if (value.user != null) {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreen()),
-                          (route) => false);
+                      Navigator.pushNamed(context, HomeScreenRoute);
                     }
                   });
                 } catch (e) {
                   FocusScope.of(context).unfocus();
                   _scaffoldkey.currentState!
-                      .showSnackBar(SnackBar(content: Text('invalid OTP')));
+                      .showSnackBar(SnackBar(content: Text('Invalid OTP')));
                 }
               },
             ),
@@ -92,7 +89,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+20 100 175 8162',
+        phoneNumber: '+1${widget.phone}',
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
               .signInWithCredential(credential)

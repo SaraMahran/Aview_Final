@@ -7,9 +7,11 @@ import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
+import 'package:aview2/views/home_cycle/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:aview2/components/widgets/responsive_ui.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
@@ -30,7 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -113,17 +115,35 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 8),
                 LoginButton(
-                  buttonTitle: 'SignUp',
-                  onTap: () => Navigator.pushNamed(context, SignUpScreenRoute),
+                    buttonTitle: 'Sign Up',
+                    onTap: () async {
+                      Navigator.pushNamed(context, SignUpScreenRoute);
+                      //   await Provider.of<GoogleSignInProvider>(context,
+                      //           listen: false)
+                      //       .googleSignOut();
+                      //   Fluttertoast.showToast(msg: 'sign out done');
+                    }),
+                LoginButton(
+                  buttonTitle: 'Login Anonymously',
+                  onTap: () async {
+                    dynamic result = await auth.signInAnonymously();
+                    if (result == null) {
+                      print('Error signing in');
+                    } else {
+                      print('Signed in');
+                      print(result);
+                    }
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     "Login using social media",
                     style: TextStyle(
+                        fontFamily: 'Crimson',
                         fontWeight: FontWeight.w800,
                         color: Colors.deepPurple[500],
-                        fontSize: 17),
+                        fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 8),
@@ -132,10 +152,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     GestureDetector(
                         onTap: () async {
-                          final provider = Provider.of<GoogleSignInProvider>(
-                              context,
-                              listen: false);
-                          await provider.googleLogin();
+                          //GoogleSignInAccount? _user;
+                          final googleSignIn = GoogleSignIn();
+                          final googleUser = await googleSignIn.signIn();
+                          if (googleUser != null) {
+                            final googleAuth = await googleUser.authentication;
+                            if (googleAuth.idToken != null) {
+                              await FirebaseAuth.instance.signInWithCredential(
+                                  GoogleAuthProvider.credential(
+                                      accessToken: googleAuth.accessToken,
+                                      idToken: googleAuth.idToken));
+                              final user = FirebaseAuth.instance.currentUser;
+                            }
+                          }
                         },
                         child: Image.asset('assets/images/google_logo.png')),
                     SizedBox(width: 30),
@@ -223,22 +252,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: 'Are you place owner?',
-                      style: Theme.of(context).textTheme.headline2,
+                      text: 'Are you a place owner?',
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .copyWith(fontFamily: 'Crimson', fontSize: 20),
                       children: [
                         TextSpan(
-                          text: ' SignUp!',
+                          text: ' Sign Up!',
                           style: Theme.of(context)
                               .textTheme
-                              .headline2!
-                              .copyWith(
-                                  color: Colors.orange,
-                                  fontWeight: FontWeight.w800),
+                              .headline1!
+                              .copyWith(fontFamily: 'ChelaOne', fontSize: 25),
                         ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

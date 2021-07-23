@@ -41,9 +41,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         actions: [
           InkWell(
             onTap: () async {
-              // Navigator.pushNamed(context, EditProfileScreenRoute);
-              await Provider.of<ReviewerProvider>(context, listen: false)
-                  .retrieveUserData('0bsCX1kRU26pNJDQKub9');
+              Navigator.pushNamed(context, EditProfileScreenRoute);
+              // await Provider.of<ReviewerProvider>(context, listen: false)
+              //     .retrieveUserData('0bsCX1kRU26pNJDQKub9');
             },
             child: Padding(
               padding: EdgeInsets.all(15),
@@ -211,7 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }),
           ),
           SizedBox(height: 20),
-          Text('Optional Info:', style: textTheme.bodyText1),
+          Text('Optional Info:', style: textTheme.headline1),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

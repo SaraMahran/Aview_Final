@@ -26,7 +26,7 @@ InputDecoration kRoundedDecorationTF = InputDecoration(
   ),
 );
 
-BoxDecoration kCustomContainerDecoration=BoxDecoration(
+BoxDecoration kCustomContainerDecoration = BoxDecoration(
     color: Colors.white,
     border: Border.all(color: Colors.deepOrange),
     borderRadius: BorderRadius.circular(10),

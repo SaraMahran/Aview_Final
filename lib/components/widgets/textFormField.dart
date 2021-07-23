@@ -35,23 +35,22 @@ class CustomTextField extends StatelessWidget {
     return Material(
       borderRadius: BorderRadius.circular(30.0),
       elevation: large! ? 12 : (medium! ? 10 : 8),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 4),
-        child: TextFormField(
-          controller: textEditingController,
-          validator: validator,
-          onSaved: (click) {},
-          keyboardType: keyboardType,
-          cursorColor: Colors.orange[200],
-          obscureText: hint == "Password" ? true : false,
-          decoration: InputDecoration(
-            prefixIcon:
-                Icon(icon, color: Colors.deepOrangeAccent[400], size: 20),
-            hintText: hint,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                borderSide: BorderSide.none),
+      child: TextFormField(
+        controller: textEditingController,
+        validator: validator,
+        onSaved: (click) {},
+        keyboardType: keyboardType,
+        cursorColor: Colors.orange[200],
+        obscureText: hint == "Password" ? true : false,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.deepOrangeAccent[400], size: 20),
+          hintText: hint,
+          hintStyle: TextStyle(
+            fontSize: 16,
           ),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide.none),
         ),
       ),
     );

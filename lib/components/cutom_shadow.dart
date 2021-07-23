@@ -8,7 +8,7 @@ class CustomShadow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      shadowColor: Colors.black,
+      shadowColor: Colors.deepOrange,
       elevation: 4,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: child,

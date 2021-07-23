@@ -21,10 +21,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   double? _height;
   double? _width;
 
-  TextEditingController firstNameController = TextEditingController(text:'');
-  TextEditingController lastNameController = TextEditingController(text:'');
-  TextEditingController emailController = TextEditingController(text:'');
-  TextEditingController passwordController = TextEditingController(text:'');
+  TextEditingController firstNameController = TextEditingController(text: '');
+  TextEditingController lastNameController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController passwordController = TextEditingController(text: '');
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseAuthService firebaseAuthService =
       FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
@@ -89,12 +89,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 icon: Icons.email,
                                 hint: "Email ",
                                 textEditingController: emailController,
-                                validator: (input) {
-                                  if (input!.isNotValidEmail())
-                                    return 'Invalid Email';
-
-                                  return null;
-                                },
+                                // validator: (input) {
+                                //   if (input.)
+                                //     {
+                                //
+                                //     }
+                                // },
                                 onClick: (value) {
                                   emailController = value;
                                 },

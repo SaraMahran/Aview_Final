@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="saramahran.com.aview2">
 
@@ -11,7 +12,8 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="aview2">
+        android:label="aview2"
+        android:usesCleartextTraffic="true">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAMJcewWNoL7gvPWZNHNqvZveGndPpjwN0"/>
         <activity

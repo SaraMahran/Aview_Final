@@ -5,12 +5,12 @@ import 'package:provider/provider.dart';
 
 import 'category_screen.dart';
 
-class CategoryDetailsScreen extends StatefulWidget {
+class PlaceScreen extends StatefulWidget {
   @override
-  _CategoryDetailsScreenState createState() => _CategoryDetailsScreenState();
+  _PlaceScreenState createState() => _PlaceScreenState();
 }
 
-class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
+class _PlaceScreenState extends State<PlaceScreen> {
   String dropdownValue = 'Haram';
 
   @override
@@ -21,9 +21,18 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
     final responsive = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.deepOrange, //change your color here
+        ),
+        backgroundColor: Colors.white,
         centerTitle: true,
         shadowColor: Colors.transparent,
-        title: Text(categoryProvider.getPlaceName),
+        title: Text(
+          categoryProvider.getPlaceName,
+          style: TextStyle(
+            color: Colors.deepOrange,
+          ),
+        ),
       ),
       body: ListView(
         children: [
@@ -39,7 +48,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                 itemBuilder: (context, index) {
                   return Row(
                     children: [
-                      Icon(Icons.check, color: Colors.orange, size: 30),
+                      Icon(Icons.check, color: Colors.deepOrange, size: 30),
                       Text(
                         categoryProvider.getPlaceOptionList[index],
                         style: Theme.of(context).textTheme.headline2,
@@ -82,36 +91,42 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value, style: themeText.headline6),
+                    child: Text(value, style: themeText.headline3),
                   );
                 }).toList(),
               ),
             ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Divider(thickness: 8, color: Colors.deepOrange),
+          SizedBox(
+            height: 10,
+          ),
           Wrap(
             direction: Axis.horizontal,
             alignment: WrapAlignment.center,
             children: [
               CustomContainerCategoryDetails(
                 onTap: () {},
-                img: 'assets/images/add_review_icon.png',
+                img: 'assets/images/feedback.png',
                 title: 'Add Review',
               ),
               CustomContainerCategoryDetails(
                 onTap: () {},
-                img: 'assets/images/add_photo_icon.png',
+                img: 'assets/images/picture.png',
                 title: 'Add Photo',
               ),
               CustomContainerCategoryDetails(
                 onTap: () {},
-                img: 'assets/images/add_icon.png',
+                img: 'assets/images/add-button.png',
                 title: 'Add To List',
               ),
               CustomContainerCategoryDetails(
                 onTap: () {},
-                img: 'assets/images/share_icon.png',
-                title: 'Share',
+                img: 'assets/images/report.png',
+                title: 'Report',
               ),
             ],
           ),
@@ -129,7 +144,7 @@ class _CategoryDetailsScreenState extends State<CategoryDetailsScreen> {
                 return ReviewsOfPlaceItem(
                   reviewerName: 'Malak $index',
                   img: categoryProvider.getPlaceImg,
-                  reviewDescription: 'best chicken Sandwich in the world',
+                  reviewDescription: 'Best chicken Sandwich in the world.',
                   reviewDate: '5/3/2021',
                   rate: 2.5,
                 );
@@ -184,8 +199,8 @@ class ReviewsOfPlaceItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(reviewerName, style: themeText.headline3),
-                  Text(reviewDate, style: themeText.headline3),
+                  Text(reviewerName, style: themeText.headline2),
+                  Text(reviewDate, style: themeText.headline2),
                   CustomRatingBar(rate: rate),
                 ],
               ),
@@ -198,7 +213,9 @@ class ReviewsOfPlaceItem extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 reviewDescription,
-                style: themeText.headline3!.copyWith(fontSize: 14),
+                style: themeText.headline3!.copyWith(
+                  fontSize: 17,
+                ),
               ),
             ),
           ),
@@ -226,14 +243,17 @@ class CustomContainerCategoryDetails extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.all(4),
         width: responsive.width * .45,
-        height: responsive.height * .1,
+        height: responsive.height * .07,
         decoration: kCustomContainerDecoration,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset(img),
+              Image.asset(
+                img,
+                scale: 7,
+              ),
               Text(title, style: themeText.headline3),
             ],
           ),
