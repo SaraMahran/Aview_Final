@@ -13,6 +13,14 @@ class EmailScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
         shadowColor: Colors.transparent,
+        title: Text(
+          'Email Us',
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.deepOrange,
+          ),
+        ),
+
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -53,7 +61,7 @@ class EmailScreen extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                'Thank you for contacting with us!',
+                'Thank you for contacting us!',
                 style: textTheme.headline1,
               ),
             ],

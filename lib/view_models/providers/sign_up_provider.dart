@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:aview2/models/user_info_model.dart';
 
 class SignUpProvider extends ChangeNotifier {
-  CollectionReference users = FirebaseFirestore.instance.collection('UserInfo');
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('UserInfo');
 
   Future<void> addUser({
     required String firstName,

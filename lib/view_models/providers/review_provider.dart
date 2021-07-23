@@ -9,6 +9,7 @@ class ReviewProvider with ChangeNotifier {
 
   Future<void> retrieveReviews() async {
     final result = await FirebaseFirestore.instance.collection('Review').get();
+    _list.clear();
     result.docs.forEach((element) {
       final jsonData = element.data();
       final review = ReviewModel.fromJsom(jsonData);

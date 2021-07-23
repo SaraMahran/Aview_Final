@@ -6,6 +6,7 @@ import 'package:aview2/views/home_cycle/drawer_screens/chat_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/email_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/fqa_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/help_screen.dart';
+import 'package:aview2/views/home_cycle/drawer_screens/q&a_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/setting_screen.dart';
 import 'package:aview2/views/home_cycle/edit_profile.dart';
 import 'package:aview2/views/home_cycle/map/map_screen.dart';
@@ -14,6 +15,7 @@ import 'package:aview2/views/home_cycle/profile_screen.dart';
 import 'package:aview2/views/home_cycle/category/trending_places_screen.dart';
 import 'package:aview2/views/login_cycle/otp_screen.dart';
 import 'package:aview2/views/login_cycle/phone_authentication_screen.dart';
+import 'package:aview2/views/login_cycle/sign_up_place_owner_screen.dart';
 import 'package:aview2/views/login_cycle/sign_up_screen.dart';
 import 'package:aview2/views/splash_cycle/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +32,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => SplashScreen());
     case SliderScreenRoute:
       return MaterialPageRoute(builder: (context) => SliderScreen());
+    case SignUpPlaceOwnerRoute:
+      return MaterialPageRoute(builder: (context) => SignUpPlaceOwnerScreen());
     case SignUpScreenRoute:
       return MaterialPageRoute(builder: (context) => SignUpScreen());
     case LoginScreenRoute:
@@ -41,6 +45,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //return MaterialPageRoute(builder: (context) => OTPScreen());
     case MapsScreenRoute:
       return MaterialPageRoute(builder: (context) => MapsScreen());
+    case ChatScreenRoute:
+      return MaterialPageRoute(builder: (context) => ChatScreen());
     case HomeScreenRoute:
       return MaterialPageRoute(builder: (context) => HomeScreen());
     case CategoryScreenRoute:
@@ -55,8 +61,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case CategoryDetailsScreenRoute:
       return MaterialPageRoute(builder: (context) => CategoryDetailsScreen());
+    case QAScreenRoute:
+      return MaterialPageRoute(builder: (context) => QASCreen());
     case EditProfileScreenRoute:
       return MaterialPageRoute(builder: (context) => EditProfileScreen());
+    case EmailScreenRoute:
+      return MaterialPageRoute(builder: (context) => EmailScreen());
 
     case AboutUsScreenRoute:
       return MaterialPageRoute(builder: (context) => AboutUsScreen());
@@ -64,10 +74,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => FqaScreen());
     case HelpScreenRoute:
       return MaterialPageRoute(builder: (context) => HelpScreen());
-    case EmailScreenRoute:
-      return MaterialPageRoute(builder: (context) => EmailScreen());
-    case ChatScreenRoute:
-      return MaterialPageRoute(builder: (context) => ChatScreen());
+
     default:
       return MaterialPageRoute(builder: (context) => SplashScreen());
   }

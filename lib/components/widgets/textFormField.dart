@@ -22,9 +22,9 @@ class CustomTextField extends StatelessWidget {
       this.textEditingController,
       required this.keyboardType,
       this.obscureText = true,
-      required this.icon,
+      this.icon,
       this.validator,
-      required this.onClick});
+      this.onClick});
 
   @override
   Widget build(BuildContext context) {
