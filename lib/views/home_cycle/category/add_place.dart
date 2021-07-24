@@ -1,9 +1,7 @@
 import 'dart:io';
 
-import 'package:aview2/components/documentation_image_picker_widget.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
-import 'package:aview2/models/place_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +33,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       setState(() {
         file = File(pickedImg.path);
       });
-      Reference ref = FirebaseStorage.instance.ref().child("Place_photo${x++}");
+      Reference ref =
+          FirebaseStorage.instance.ref().child("Place_photo${file!.path}");
       await ref.putFile(File(pickedImg.path));
       String imageUrl = await ref.getDownloadURL();
       this.imageUrl = imageUrl;

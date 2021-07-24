@@ -63,7 +63,8 @@ class _PlaceScreenState extends State<PlaceScreen> {
           ),
           ListTile(
             leading: Text('Contact', style: themeText.headline1),
-            trailing: Text(categoryProvider.getPhone, style: themeText.headline3),
+            trailing:
+                Text(categoryProvider.getPhone, style: themeText.headline3),
           ),
           ListTile(
             leading: Text('Open', style: themeText.headline1),
@@ -123,7 +124,27 @@ class _PlaceScreenState extends State<PlaceScreen> {
                 title: 'Add Photo',
               ),
               CustomContainerCategoryDetails(
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return Dialog(
+                        backgroundColor: Colors.transparent,
+                        child: Container(
+                          height: 150,
+                          decoration: kCustomContainerDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              'hello',
+                              style: TextStyle(color: Colors.black, fontSize: 20),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
                 img: 'assets/images/add-button.png',
                 title: 'Add To List',
               ),
@@ -196,6 +217,7 @@ class ReviewsOfPlaceItem extends StatelessWidget {
       width: responsive.width * .55,
       margin: EdgeInsets.all(8),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [

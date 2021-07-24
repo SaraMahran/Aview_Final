@@ -52,50 +52,6 @@ class CategoryScreen extends StatelessWidget {
                   titleBtn: 'Trending Places'),
             ],
           ),
-          // ListView.builder(
-          //   shrinkWrap: true,
-          //   itemCount: categoryScreenList.length,
-          //   physics: ScrollPhysics(),
-          //   itemBuilder: (context, index) {
-          //     final categoryProvider =
-          //         Provider.of<CategoryProvider>(context, listen: false);
-          //     return CategoryItem(
-          //       onTap: () {
-          //         categoryProvider
-          //             .setPlaceName(categoryScreenList[index].title);
-          //         categoryProvider.setPlaceImg(categoryScreenList[index].img);
-          //         categoryProvider.setPlaceRate(categoryScreenList[index].rate);
-          //         categoryProvider.setPlaceOptionList(
-          //             categoryScreenList[index].optionsTitleList);
-          //         Navigator.pushNamed(context, PlaceScreenRoute);
-          //       },
-          //       img: categoryScreenList[index].img,
-          //       title: categoryScreenList[index].title,
-          //       desc: categoryScreenList[index].desc,
-          //       rate: categoryScreenList[index].rate,
-          //       optionListWidget: SizedBox(
-          //         height: 40,
-          //         child: ListView.builder(
-          //           itemCount:
-          //               categoryScreenList[index].optionsTitleList.length,
-          //           shrinkWrap: true,
-          //           scrollDirection: Axis.horizontal,
-          //           itemBuilder: (context, idx) {
-          //             return Row(
-          //               children: [
-          //                 Icon(Icons.check, color: Colors.deepOrange, size: 30),
-          //                 Text(
-          //                   categoryScreenList[index].optionsTitleList[idx],
-          //                   style: Theme.of(context).textTheme.headline2,
-          //                 ),
-          //               ],
-          //             );
-          //           },
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // )
           StreamBuilder<QuerySnapshot>(
             stream: _firestore.collection('places').snapshots(),
             builder: (context, snapshot) {
