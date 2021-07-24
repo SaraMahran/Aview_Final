@@ -22,4 +22,12 @@ class PlaceModel {
       placeName: data['placeName'],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'category': category,
+        'location': location,
+        'noOfReviewers': noOfReviewers,
+        'placeID': placeID,
+        'placeName': placeName
+      };
 }

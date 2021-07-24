@@ -1,6 +1,7 @@
 import 'package:aview2/components/custom_rating_bar.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +38,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
       ),
       body: ListView(
         children: [
-          Image.asset(categoryProvider.getPlaceImg, height: 150),
+          Image.network(categoryProvider.getPlaceImg, height: 150),
           Center(child: CustomRatingBar(rate: categoryProvider.getPlaceRate)),
           Center(
             child: SizedBox(
@@ -62,7 +63,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
           ),
           ListTile(
             leading: Text('Contact', style: themeText.headline1),
-            trailing: Text('19019', style: themeText.headline3),
+            trailing: Text(categoryProvider.getPhone, style: themeText.headline3),
           ),
           ListTile(
             leading: Text('Open', style: themeText.headline1),
@@ -137,23 +138,32 @@ class _PlaceScreenState extends State<PlaceScreen> {
             padding: EdgeInsets.all(12),
             child: Text('Reviews', style: themeText.headline1),
           ),
-          SizedBox(
-            height: responsive.height * .22,
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: 8,
-              itemBuilder: (context, index) {
-                return ReviewsOfPlaceItem(
-                  reviewerName: 'Malak $index',
-                  img: categoryProvider.getPlaceImg,
-                  reviewDescription: 'Best chicken Sandwich in the world.',
-                  reviewDate: '5/3/2021',
-                  rate: 2.5,
-                );
-              },
-            ),
-          ),
+          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+            stream: FirebaseFirestore.instance
+                .collection('places')
+                .doc('UBBJvrNgeU1coJaw6Ish')
+                .snapshots(),
+            builder: (_, snapshot) {
+              return SizedBox(
+                height: responsive.height * .22,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: snapshot.data!.data()!['reviewsList'].length,
+                  itemBuilder: (_, index) {
+                    final data = snapshot.data!.data()!['reviewsList'][index];
+                    return ReviewsOfPlaceItem(
+                      reviewerName: data['userName'],
+                      img: categoryProvider.getPlaceImg,
+                      reviewDescription: data['review'],
+                      reviewDate: data['date'],
+                      rate: data['rate'],
+                    );
+                  },
+                ),
+              );
+            },
+          )
         ],
       ),
     );
@@ -191,7 +201,7 @@ class ReviewsOfPlaceItem extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 6),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(14),
-                  child: Image.asset(
+                  child: Image.network(
                     img,
                     width: 60,
                     fit: BoxFit.fill,

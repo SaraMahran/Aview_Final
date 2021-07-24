@@ -30,7 +30,7 @@ class CategoryItem extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.asset(
+                Image.network(
                   img,
                   width: 150,
                   height: 100,

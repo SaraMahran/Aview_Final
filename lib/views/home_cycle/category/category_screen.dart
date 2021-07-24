@@ -3,10 +3,13 @@ import 'package:aview2/components/widgets/buttons/custom_rounded_border_button.d
 import 'package:aview2/models/category_model.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/home_provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatelessWidget {
+  final _firestore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,50 +52,106 @@ class CategoryScreen extends StatelessWidget {
                   titleBtn: 'Trending Places'),
             ],
           ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount: categoryScreenList.length,
-            physics: ScrollPhysics(),
-            itemBuilder: (context, index) {
-              final categoryProvider =
-                  Provider.of<CategoryProvider>(context, listen: false);
-              return CategoryItem(
-                onTap: () {
-                  categoryProvider
-                      .setPlaceName(categoryScreenList[index].title);
-                  categoryProvider.setPlaceImg(categoryScreenList[index].img);
-                  categoryProvider.setPlaceRate(categoryScreenList[index].rate);
-                  categoryProvider.setPlaceOptionList(
-                      categoryScreenList[index].optionsTitleList);
-                  Navigator.pushNamed(context, PlaceScreenRoute);
-                },
-                img: categoryScreenList[index].img,
-                title: categoryScreenList[index].title,
-                desc: categoryScreenList[index].desc,
-                rate: categoryScreenList[index].rate,
-                optionListWidget: SizedBox(
-                  height: 40,
-                  child: ListView.builder(
-                    itemCount:
-                        categoryScreenList[index].optionsTitleList.length,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, idx) {
-                      return Row(
-                        children: [
-                          Icon(Icons.check, color: Colors.deepOrange, size: 30),
-                          Text(
-                            categoryScreenList[index].optionsTitleList[idx],
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
-                        ],
-                      );
+          // ListView.builder(
+          //   shrinkWrap: true,
+          //   itemCount: categoryScreenList.length,
+          //   physics: ScrollPhysics(),
+          //   itemBuilder: (context, index) {
+          //     final categoryProvider =
+          //         Provider.of<CategoryProvider>(context, listen: false);
+          //     return CategoryItem(
+          //       onTap: () {
+          //         categoryProvider
+          //             .setPlaceName(categoryScreenList[index].title);
+          //         categoryProvider.setPlaceImg(categoryScreenList[index].img);
+          //         categoryProvider.setPlaceRate(categoryScreenList[index].rate);
+          //         categoryProvider.setPlaceOptionList(
+          //             categoryScreenList[index].optionsTitleList);
+          //         Navigator.pushNamed(context, PlaceScreenRoute);
+          //       },
+          //       img: categoryScreenList[index].img,
+          //       title: categoryScreenList[index].title,
+          //       desc: categoryScreenList[index].desc,
+          //       rate: categoryScreenList[index].rate,
+          //       optionListWidget: SizedBox(
+          //         height: 40,
+          //         child: ListView.builder(
+          //           itemCount:
+          //               categoryScreenList[index].optionsTitleList.length,
+          //           shrinkWrap: true,
+          //           scrollDirection: Axis.horizontal,
+          //           itemBuilder: (context, idx) {
+          //             return Row(
+          //               children: [
+          //                 Icon(Icons.check, color: Colors.deepOrange, size: 30),
+          //                 Text(
+          //                   categoryScreenList[index].optionsTitleList[idx],
+          //                   style: Theme.of(context).textTheme.headline2,
+          //                 ),
+          //               ],
+          //             );
+          //           },
+          //         ),
+          //       ),
+          //     );
+          //   },
+          // )
+          StreamBuilder<QuerySnapshot>(
+            stream: _firestore.collection('places').snapshots(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  final docs = snapshot.data!.docs[index];
+                  final categoryProvider =
+                      Provider.of<CategoryProvider>(context, listen: false);
+                  final id = snapshot.data!.docs.map((document) => document.id);
+                  return CategoryItem(
+                    onTap: () {
+                      categoryProvider.setPlaceName(docs['name']);
+                      categoryProvider.setPlaceImg(docs['image']);
+                      categoryProvider.setPhone(docs['phone']);
+                      categoryProvider.setDocumentId(id.toString());
+                      categoryProvider
+                          .setPlaceRate(categoryScreenList[index].rate);
+                      categoryProvider.setPlaceOptionList(
+                          categoryScreenList[index].optionsTitleList);
+                      Navigator.pushNamed(context, PlaceScreenRoute);
                     },
-                  ),
-                ),
+                    img: docs['image'],
+                    title: docs['name'],
+                    desc: docs['description'],
+                    rate: categoryScreenList[index].rate,
+                    optionListWidget: SizedBox(
+                      height: 40,
+                      child: ListView.builder(
+                        itemCount:
+                            categoryScreenList[index].optionsTitleList.length,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, idx) {
+                          return Row(
+                            children: [
+                              Icon(Icons.check,
+                                  color: Colors.deepOrange, size: 30),
+                              Text(
+                                categoryScreenList[index].optionsTitleList[idx],
+                                style: Theme.of(context).textTheme.headline2,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
+                itemCount: snapshot.data!.docs.length,
               );
             },
-          )
+          ),
         ],
       ),
     );
@@ -103,9 +162,15 @@ class CategoryProvider extends ChangeNotifier {
   late double _rate;
   late List<String> _options;
   late String _name;
+  late String _phone;
+  late String _documentId;
   late String _img;
 
   String get getPlaceName => _name;
+
+  String get getDocumentId => _documentId;
+
+  String get getPhone => _phone;
 
   String get getPlaceImg => _img;
 
@@ -130,6 +195,16 @@ class CategoryProvider extends ChangeNotifier {
 
   void setPlaceOptionList(List<String> options) {
     this._options = options;
+    notifyListeners();
+  }
+
+  void setPhone(String phone) {
+    this._phone = phone;
+    notifyListeners();
+  }
+
+  void setDocumentId(String documentId) {
+    this._documentId = documentId;
     notifyListeners();
   }
 }

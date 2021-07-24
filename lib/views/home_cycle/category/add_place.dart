@@ -3,10 +3,11 @@ import 'dart:io';
 import 'package:aview2/components/documentation_image_picker_widget.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:aview2/models/place_model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddPlaceScreen extends StatefulWidget {
@@ -18,11 +19,13 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   final TextEditingController placeLocation = TextEditingController(text: ''),
       placePhoto = TextEditingController(text: ''),
       placeName = TextEditingController(text: ''),
-      placeEmail = TextEditingController(text: ''),
+      placeDescription = TextEditingController(text: ''),
       placeCategory = TextEditingController(text: ''),
       placePhone = TextEditingController(text: '');
 
   File? file;
+  late String imageUrl;
+  int x = 0;
 
   Future<void> pickImg() async {
     final pickedImg = await ImagePicker().getImage(
@@ -32,13 +35,14 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       setState(() {
         file = File(pickedImg.path);
       });
-      // Reference ref = FirebaseStorage.instance.ref().child("Place_photo");
-      // await ref.putFile(File(pickedImg.path));
-      // String imageUrl = await ref.getDownloadURL();
-      // print('imageUrl = $imageUrl');
-
+      Reference ref = FirebaseStorage.instance.ref().child("Place_photo${x++}");
+      await ref.putFile(File(pickedImg.path));
+      String imageUrl = await ref.getDownloadURL();
+      this.imageUrl = imageUrl;
+      print('imageUrl = $imageUrl');
+      setState(() {});
     } else {
-      print('Canceled');
+      print('failed load');
     }
   }
 
@@ -61,7 +65,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
       body: Column(
         children: [
           GestureDetector(
-            onTap: pickImg,
+            onTap: () => pickImg(),
             child: Container(
               child: file != null
                   ? Image.file(
@@ -123,70 +127,24 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                           textEditingController: placeLocation,
                         )),
                       ),
-                      // DocumentationImagePickerWidget(
-                      //   textField: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: CustomTextField(
-                      //       textEditingController: licenceNumberTEC,
-                      //       icon: FontAwesomeIcons.paperclip,
-                      //       hint: 'Place Licence',
-                      //       keyboardType: TextInputType.number,
-                      //       // icon: Icons.email,
-                      //     ),
-                      //   ),
-                      //),
-                      DocumentationImagePickerWidget(
-                        textField: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            textEditingController: placePhoto,
-                            icon: Icons.photo,
-                            hint: 'Place Photo',
-                            keyboardType: TextInputType.number,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomTextField(
+                          icon: Icons.phone,
+                          textEditingController: placePhone,
+                          hint: 'Place Phone Number',
+                          keyboardType: TextInputType.name,
                         ),
                       ),
-                      DocumentationImagePickerWidget(
-                        textField: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            textEditingController: placeEmail,
-                            icon: Icons.email,
-                            hint: 'Place Email ',
-                            keyboardType: TextInputType.datetime,
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: CustomTextField(
+                          icon: Icons.description_outlined,
+                          textEditingController: placeDescription,
+                          hint: 'description',
+                          keyboardType: TextInputType.name,
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10),
-                      //   child: Text(
-                      //     'Bank Account Details',
-                      //     style: theme.textTheme.headline2!.copyWith(
-                      //       color: Colors.deepPurple,
-                      //     ),
-                      //   ),
-                      // ),
-                      DocumentationImagePickerWidget(
-                        textField: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            icon: Icons.phone,
-                            textEditingController: placePhone,
-                            hint: 'Place Phone Number',
-                            keyboardType: TextInputType.name,
-                          ),
-                        ),
-                      ),
-                      // DocumentationImagePickerWidget(
-                      //   textField: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: CustomTextField(
-                      //       textEditingController: bankAccountNumberTEC,
-                      //       hint: 'Bank Account Number',
-                      //       keyboardType: TextInputType.number,
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -198,20 +156,28 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             child: Align(
               alignment: Alignment.topCenter,
               child: LoginButton(
-                onTap: () {
-                  Map<String, dynamic> data = {
-                    "category": placeCategory,
-                    "location": placeLocation,
-                    "noOfReviewers": null,
+                onTap: () async {
+                  print('pressed');
+                  final Map<String, dynamic> data = {
+                    'category': placeCategory.text,
+                    'image': imageUrl,
+                    'location': placeLocation.text,
+                    'name': placeName.text,
+                    'description': placeDescription.text,
+                    'phone': placePhone.text
                   };
-                  // Fluttertoast.showToast(
-                  //   msg:
-                  //       "Thanks for contributing to our system.\n We will send you a verification email after checking the place's information.",
-                  //   textColor: Colors.black,
-                  //   backgroundColor: Colors.deepOrange,
-                  //   fontSize: 20,
-                  //   gravity: ToastGravity.CENTER_RIGHT,
-                  // );
+
+                  await FirebaseFirestore.instance
+                      .collection('places')
+                      .add(data);
+                  Fluttertoast.showToast(
+                    msg: "Added Done",
+                    textColor: Colors.black,
+                    backgroundColor: Colors.deepOrange,
+                    fontSize: 20,
+                    gravity: ToastGravity.CENTER_RIGHT,
+                  );
+                  Navigator.pop(context);
                 },
                 buttonTitle: 'Add Place',
               ),
