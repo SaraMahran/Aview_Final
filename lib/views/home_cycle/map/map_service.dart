@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:ui' as ui;
 
 class MapService {
   static List<Marker> markers = [];
@@ -69,10 +72,9 @@ class MapService {
   static void replaceMarker(double lat, double long) {
     markers.replaceRange(0, 1, [
       Marker(
-        markerId: MarkerId('2'),
+        markerId: MarkerId('pinMarker'),
         position: LatLng(lat, long),
         icon: BitmapDescriptor.defaultMarker,
-        // icon: BitmapDescriptor.fromAssetImage(ImageConfiguration.size.width, 'assetName'),
         onTap: () => print('on tap marker'),
       ),
     ]);
@@ -82,11 +84,37 @@ class MapService {
   static void addMarker(double lat, double long) {
     markers.add(
       Marker(
-        markerId: MarkerId('1'),
+        markerId: MarkerId('pinMarker'),
         position: LatLng(lat, long),
         icon: BitmapDescriptor.defaultMarker,
-        // icon: BitmapDescriptor.fromAssetImage(ImageConfiguration.size.width, 'assetName'),
         onTap: () => print('on tap marker'),
+      ),
+    );
+  }
+
+  static Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
+  }
+
+  ///this method added custom marker
+  static Future<void> addCustomMarker(
+      double lat, double long, String image,String markerId) async {
+    // BitmapDescriptor customMarker = await BitmapDescriptor.fromAssetImage(
+    //   ImageConfiguration(devicePixelRatio: 3.2, size: Size(4, 4)),
+    //   image,
+    // );
+    final Uint8List markerIcon = await getBytesFromAsset(image, 150);
+    markers.add(
+      Marker(
+        markerId: MarkerId(markerId),
+        position: LatLng(lat, long),
+        icon: BitmapDescriptor.fromBytes(markerIcon),
       ),
     );
   }
