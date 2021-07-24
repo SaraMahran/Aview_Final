@@ -10,6 +10,14 @@ import 'package:aview2/models/home_model.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey(); // Create a key
+  // createAlertDialog(BuildContext context) {
+  //   return showDialog(context: context, builder: context{
+  //    AlertDialog(
+  //    title: Text("Hi"),
+  //   content: ,
+  //    );
+  //   });
+  //}
 
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -92,9 +100,12 @@ class HomeScreen extends StatelessWidget {
                   color: Colors.deepOrange,
                   size: 30,
                 ),
-                title: Text(
-                  'Share',
-                  style: textTheme.subtitle1,
+                title: GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    'Share',
+                    style: textTheme.subtitle1,
+                  ),
                 ),
               ),
             ),

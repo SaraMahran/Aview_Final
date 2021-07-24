@@ -112,7 +112,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
             children: [
               CustomContainerCategoryDetails(
                 onTap: () {
-                  Navigator.pushNamed(context, TextClassifierModelRoute);
+                  Navigator.pushNamed(context, AddReviewScreenRoute);
                 },
                 img: 'assets/images/feedback.png',
                 title: 'Add Review',
@@ -128,7 +128,9 @@ class _PlaceScreenState extends State<PlaceScreen> {
                 title: 'Add To List',
               ),
               CustomContainerCategoryDetails(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, ReportScreenRoute);
+                },
                 img: 'assets/images/report.png',
                 title: 'Report',
               ),
