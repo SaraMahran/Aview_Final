@@ -1,4 +1,6 @@
+import 'package:aview2/models/text_classifier_model.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/views/home_cycle/category/add_place.dart';
 import 'package:aview2/views/home_cycle/category/place_screen.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
@@ -56,6 +58,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => HomeScreen());
     case CategoryScreenRoute:
       return MaterialPageRoute(builder: (context) => CategoryScreen());
+    case AddPlaceScreenRoute:
+      return MaterialPageRoute(builder: (context) => AddPlaceScreen());
     case NewPlacesScreenRoute:
       return MaterialPageRoute(builder: (context) => NewPlacesScreen());
     case TrendingPlacesScreenRoute:
@@ -70,6 +74,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => EditProfileScreen());
     case EmailScreenRoute:
       return MaterialPageRoute(builder: (context) => EmailScreen());
+    case TextClassifierModelRoute:
+      return MaterialPageRoute(builder: (context) => TextClassifierModel());
 
     case AboutUsScreenRoute:
       return MaterialPageRoute(builder: (context) => AboutUsScreen());

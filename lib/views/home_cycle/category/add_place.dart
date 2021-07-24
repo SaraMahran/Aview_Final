@@ -1,23 +1,50 @@
+import 'dart:io';
+
 import 'package:aview2/components/documentation_image_picker_widget.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 
-class SignUpPlaceOwnerScreen extends StatelessWidget {
-  final TextEditingController licenceNumberTEC =
-          TextEditingController(text: ''),
-      nationalIdPhotoTEC = TextEditingController(text: ''),
-      placePhotoTEC = TextEditingController(text: ''),
-      fullName = TextEditingController(text: ''),
-      email = TextEditingController(text: ''),
-      password = TextEditingController(text: '');
+class AddPlaceScreen extends StatefulWidget {
+  @override
+  _AddPlaceScreenState createState() => _AddPlaceScreenState();
+}
+
+class _AddPlaceScreenState extends State<AddPlaceScreen> {
+  final TextEditingController placeLocation = TextEditingController(text: ''),
+      placePhoto = TextEditingController(text: ''),
+      placeName = TextEditingController(text: ''),
+      placeEmail = TextEditingController(text: ''),
+      placeCategory = TextEditingController(text: ''),
+      placePhone = TextEditingController(text: '');
+
+  File? file;
+
+  Future<void> pickImg() async {
+    final pickedImg = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImg != null) {
+      setState(() {
+        file = File(pickedImg.path);
+      });
+      // Reference ref = FirebaseStorage.instance.ref().child("Place_photo");
+      // await ref.putFile(File(pickedImg.path));
+      // String imageUrl = await ref.getDownloadURL();
+      // print('imageUrl = $imageUrl');
+
+    } else {
+      print('Canceled');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    TextEditingController nameController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -27,19 +54,31 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
         centerTitle: true,
         shadowColor: Colors.transparent,
         title: Text(
-          'Place Owner Sign Up',
+          'Add Place',
           style: TextStyle(color: Colors.deepOrange),
         ),
       ),
       body: Column(
         children: [
+          GestureDetector(
+            onTap: pickImg,
+            child: Container(
+              child: file != null
+                  ? Image.file(
+                      file!,
+                      width: 80,
+                      height: 80,
+                    )
+                  : Icon(Icons.add_a_photo, size: 100),
+            ),
+          ),
           SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.all(5),
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                'Place Owner Info',
+                'Place Information',
                 style: theme.textTheme.headline2!.copyWith(
                   color: Colors.deepPurple,
                 ),
@@ -59,9 +98,9 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                         child: (CustomTextField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
-                          icon: FontAwesomeIcons.userAlt,
-                          hint: "Full Name",
-                          textEditingController: fullName,
+                          icon: Icons.place,
+                          hint: "Place Name",
+                          textEditingController: placeName,
                         )),
                       ),
                       Padding(
@@ -69,9 +108,9 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                         child: (CustomTextField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
-                          icon: FontAwesomeIcons.userAlt,
-                          hint: "Email",
-                          textEditingController: email,
+                          icon: Icons.place,
+                          hint: "Place Category",
+                          textEditingController: placeCategory,
                         )),
                       ),
                       Padding(
@@ -79,20 +118,31 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                         child: (CustomTextField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
-                          icon: FontAwesomeIcons.userLock,
-                          hint: "Password",
-                          textEditingController: password,
+                          icon: Icons.place,
+                          hint: "Place location",
+                          textEditingController: placeLocation,
                         )),
                       ),
+                      // DocumentationImagePickerWidget(
+                      //   textField: Padding(
+                      //     padding: const EdgeInsets.all(8.0),
+                      //     child: CustomTextField(
+                      //       textEditingController: licenceNumberTEC,
+                      //       icon: FontAwesomeIcons.paperclip,
+                      //       hint: 'Place Licence',
+                      //       keyboardType: TextInputType.number,
+                      //       // icon: Icons.email,
+                      //     ),
+                      //   ),
+                      //),
                       DocumentationImagePickerWidget(
                         textField: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CustomTextField(
-                            textEditingController: licenceNumberTEC,
-                            icon: FontAwesomeIcons.paperclip,
-                            hint: 'Place Licence',
+                            textEditingController: placePhoto,
+                            icon: Icons.photo,
+                            hint: 'Place Photo',
                             keyboardType: TextInputType.number,
-                            // icon: Icons.email,
                           ),
                         ),
                       ),
@@ -100,20 +150,9 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                         textField: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: CustomTextField(
-                            textEditingController: nationalIdPhotoTEC,
-                            icon: FontAwesomeIcons.paperclip,
-                            hint: 'National Id Photo',
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                      ),
-                      DocumentationImagePickerWidget(
-                        textField: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            textEditingController: placePhotoTEC,
-                            icon: FontAwesomeIcons.paperclip,
-                            hint: 'Place Photo ',
+                            textEditingController: placeEmail,
+                            icon: Icons.email,
+                            hint: 'Place Email ',
                             keyboardType: TextInputType.datetime,
                           ),
                         ),
@@ -127,16 +166,17 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                       //     ),
                       //   ),
                       // ),
-                      // DocumentationImagePickerWidget(
-                      //   textField: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: CustomTextField(
-                      //       textEditingController: bankNameTEC,
-                      //       hint: 'Bank Account Number',
-                      //       keyboardType: TextInputType.name,
-                      //     ),
-                      //   ),
-                      // ),
+                      DocumentationImagePickerWidget(
+                        textField: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CustomTextField(
+                            icon: Icons.phone,
+                            textEditingController: placePhone,
+                            hint: 'Place Phone Number',
+                            keyboardType: TextInputType.name,
+                          ),
+                        ),
+                      ),
                       // DocumentationImagePickerWidget(
                       //   textField: Padding(
                       //     padding: const EdgeInsets.all(8.0),
@@ -159,16 +199,21 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: LoginButton(
                 onTap: () {
-                  Fluttertoast.showToast(
-                    msg:
-                        'Thanks for signing up\n We will send you a verification email after checking your information.',
-                    textColor: Colors.black,
-                    backgroundColor: Colors.deepOrange,
-                    fontSize: 20,
-                    gravity: ToastGravity.CENTER_RIGHT,
-                  );
+                  Map<String, dynamic> data = {
+                    "category": placeCategory,
+                    "location": placeLocation,
+                    "noOfReviewers": null,
+                  };
+                  // Fluttertoast.showToast(
+                  //   msg:
+                  //       "Thanks for contributing to our system.\n We will send you a verification email after checking the place's information.",
+                  //   textColor: Colors.black,
+                  //   backgroundColor: Colors.deepOrange,
+                  //   fontSize: 20,
+                  //   gravity: ToastGravity.CENTER_RIGHT,
+                  // );
                 },
-                buttonTitle: 'Sign Up',
+                buttonTitle: 'Add Place',
               ),
             ),
           ),

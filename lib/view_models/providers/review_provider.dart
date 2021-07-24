@@ -14,7 +14,7 @@ class ReviewProvider with ChangeNotifier {
       final jsonData = element.data();
       final review = ReviewModel.fromJsom(jsonData);
       _list.add(review);
-      print('noOfLikes = ${review.noOfLikes}');
+      // print('noOfLikes = ${review.noOfLikes}');
     });
   }
 }

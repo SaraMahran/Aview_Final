@@ -1,5 +1,6 @@
 import 'package:aview2/components/custom_rating_bar.dart';
 import 'package:aview2/helper/helper_style.dart';
+import 'package:aview2/utils/routing_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -109,7 +110,9 @@ class _PlaceScreenState extends State<PlaceScreen> {
             alignment: WrapAlignment.center,
             children: [
               CustomContainerCategoryDetails(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, TextClassifierModelRoute);
+                },
                 img: 'assets/images/feedback.png',
                 title: 'Add Review',
               ),

@@ -151,6 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     } else {
                       print('Signed in');
                       print(result);
+                      Navigator.pushNamed(context, HomeScreenRoute);
                     }
                   },
                 ),

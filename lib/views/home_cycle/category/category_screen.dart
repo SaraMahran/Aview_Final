@@ -18,7 +18,9 @@ class CategoryScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AddPlaceScreenRoute);
+              },
               child: Icon(
                 Icons.add,
                 color: Colors.deepOrange,

@@ -18,9 +18,10 @@ dependencies:
   provider: ^5.0.0
   firebase_core: ^1.4.0
   cloud_firestore: ^2.4.0
+  firebase_storage: ^10.0.1
   firebase_analytics: ^5.0.6
   firebase_auth: ^3.0.1
-  image_picker:
+  image_picker: ^0.8.2
   lottie: ^1.0.1
   font_awesome_flutter: ^9.1.0
   flutter_rating_bar: ^4.0.0
@@ -35,6 +36,9 @@ dependencies:
   fluttertoast: ^8.0.7
   form_field_validator: ^1.1.0
   uuid: ^3.0.4
+  sentiment_dart: ^0.0.4
+  shared_preferences: ^2.0.6
+  tflite: ^1.1.2
 #  map
   google_maps_flutter: ^2.0.6
   geocoding: ^2.0.0
