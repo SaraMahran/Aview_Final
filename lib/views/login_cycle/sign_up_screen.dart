@@ -1,5 +1,6 @@
 import 'package:aview2/components/widgets/buttons/sign_up_button.dart';
 import 'package:aview2/components/widgets/custom_appBar.dart';
+import 'package:aview2/helper/helper_method.dart';
 import 'package:aview2/utils/string_validation.dart';
 import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
@@ -65,15 +66,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: Column(
                             children: <Widget>[
                               CustomTextField(
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "First name is required";
+                                  }
+                                },
                                 keyboardType: TextInputType.text,
                                 icon: Icons.person,
                                 hint: "First Name",
-                                validator: (input) {
-                                  if (firstNameController.text.isEmpty) {
-                                    return 'First Name is required';
-                                  }
-                                  return null;
-                                },
                                 textEditingController: firstNameController,
                                 onClick: (value) {
                                   firstNameController = value;
@@ -84,11 +84,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 keyboardType: TextInputType.text,
                                 icon: Icons.person,
                                 hint: "Last Name",
-                                validator: (input) {
-                                  if (lastNameController.text.isEmpty) {
-                                    return 'Last Name is required';
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Last name is required";
                                   }
-                                  return null;
                                 },
                                 textEditingController: lastNameController,
                                 onClick: (value) {
@@ -102,12 +101,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 hint: "Email ",
                                 textEditingController: emailController,
                                 validator: (input) {
-                                  if (emailController.text.isEmpty) {
+                                  if (input!.isEmpty) {
                                     return 'Email is required';
-                                  } else if (input!.isNotValidEmail()) {
+                                  } else if (input.isNotValidEmail()) {
                                     return 'Invalid Email';
                                   }
-                                  return null;
                                 },
                                 onClick: (value) {
                                   emailController = value;
@@ -121,15 +119,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 keyboardType: TextInputType.text,
                                 obscureText: true,
                                 icon: Icons.lock,
-                                hint: "Password",
                                 validator: (input) {
-                                  if (passwordController.text.isEmpty) {
+                                  if (input!.isEmpty) {
                                     return 'Password is required';
-                                  } else if (input!.isNotValidPassword()) {
-                                    return 'Invalid password pattern';
+                                    //print("Password is required");
+                                  } else if (input.length < 8) {
+                                    // print("Password must be longer than 8 characters");
+                                    return "Password must be longer than 8 characters";
+                                  } else if (input.isNotValidPassword()) {
+                                    //print('Invalid Password');
+                                    return 'Invalid Password';
                                   }
-                                  return null;
                                 },
+                                hint: "Password",
                                 textEditingController: passwordController,
                                 onClick: (value) {
                                   passwordController = value;
@@ -142,13 +144,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           height: _height! / 35,
                         ),
                         SignUpButton(
-                          buttonTitle: 'SignUp',
-                          onTap: () async {
-                            if (globalKey.currentState!.validate()) {
-                              globalKey.currentState!.save();
+                            buttonTitle: 'SignUp',
+                            onTap: () async {
+                              globalKey.currentState!.validate()
+                                  ? Scaffold.of(context).showSnackBar(
+                                      SnackBar(content: Text("This is valid")))
+                                  : Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text("This is not valid")));
 
-                              print(emailController);
-                              print(passwordController);
+                              // globalKey.currentState!.validate()) {
+                              //    globalKey.currentState!.save();
+                              //
+                              //    print(emailController);
+                              //    print(passwordController);
                               try {
                                 // final signUpProvider = Provider.of<SignUpProvider>(
                                 //   context,
@@ -172,8 +180,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 print(e.toString());
                               }
                             }
-                          },
-                        ),
+                            //},
+                            ),
                       ],
                     ),
                   ),

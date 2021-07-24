@@ -211,7 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }),
           ),
           SizedBox(height: 20),
-          Text('Optional Info:', style: textTheme.bodyText1),
+          Text('Optional Info:', style: textTheme.headline1),
           SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

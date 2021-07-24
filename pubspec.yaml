@@ -22,15 +22,19 @@ dependencies:
   firebase_auth: ^3.0.1
   image_picker:
   lottie: ^1.0.1
-  font_awesome_flutter: ^9.0.0
+  font_awesome_flutter: ^9.1.0
   flutter_rating_bar: ^4.0.0
   flutter_login_facebook: ^1.0.0-nullsafety.1
   http: ^0.13.3
   google_sign_in: ^5.0.4
   pinput: ^1.2.0
   modal_progress_hud_nsn: ^0.1.0-nullsafety-
-
+  expandable: ^5.0.1
+  expansion_tile_card: ^2.0.0
+  tflite_flutter: ^0.9.0
   fluttertoast: ^8.0.7
+  form_field_validator: ^1.1.0
+  uuid: ^3.0.4
 #  map
   google_maps_flutter: ^2.0.6
   geocoding: ^2.0.0
@@ -51,6 +55,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/images/
     - assets/images/test/
     - assets/23228-orange-juice.json

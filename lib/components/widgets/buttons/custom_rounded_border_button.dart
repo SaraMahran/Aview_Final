@@ -11,8 +11,8 @@ class CustomRoundedBorderButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-        side: BorderSide(color: Colors.orange, width: 2),
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: Colors.deepOrange, width: 2),
       ),
       onPressed: onTap,
       child: Text(

@@ -20,7 +20,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  //await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   runApp(MyApp());
 }
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ReviewerProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => PlaceProvider()),
-        ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
+        //ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         Provider<FirebaseAuthService>(
           create: (_) =>
               FirebaseAuthService(firebaseAuth: FirebaseAuth.instance),
@@ -54,6 +54,17 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           textTheme: TextTheme(
             headline1: TextStyle(
+              fontFamily: 'Lobster',
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepOrange,
+            ),
+            subtitle1: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.deepPurple[700],
+                fontFamily: 'Crimson'),
+            subtitle2: TextStyle(
               fontFamily: 'ChelaOne',
               fontSize: 25,
               fontWeight: FontWeight.bold,
@@ -81,7 +92,7 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
             bodyText1: TextStyle(
-              fontSize: 22.0,
+              fontSize: 25.0,
               fontWeight: FontWeight.bold,
               fontFamily: 'Satisfy',
               color: Colors.deepOrange,

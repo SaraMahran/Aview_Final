@@ -2,6 +2,7 @@ import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/home_provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:aview2/components/items/home_item.dart';
@@ -11,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey(); // Create a key
 
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Scaffold(
       key: drawerKey,
       floatingActionButton: FloatingActionButton(
@@ -62,7 +64,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Settings',
-                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                  style: textTheme.subtitle1,
                 ),
               ),
             ),
@@ -77,7 +79,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Help',
-                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                  style: textTheme.subtitle1,
                 ),
               ),
             ),
@@ -92,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Share',
-                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                  style: textTheme.subtitle1,
                 ),
               ),
             ),
@@ -107,7 +109,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'About Us',
-                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                  style: textTheme.subtitle1,
                 ),
               ),
             ),
@@ -121,16 +123,18 @@ class HomeScreen extends StatelessWidget {
                   size: 30,
                 ),
                 title: Text(
-                  'FQA',
-                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                  'FAQ',
+                  style: textTheme.subtitle1,
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 0),
               child: ListTile(
-                onTap: () => context.read()<FirebaseAuthService>().signOut(),
-                //=> Navigator.pushNamed(context, SignUpScreenRoute),
+                onTap: () {
+                  //context.read()<FirebaseAuthService>().signOut();
+                  Navigator.pushNamed(context, LoginScreenRoute);
+                },
                 leading: Icon(
                   Icons.logout,
                   color: Colors.deepOrange,
@@ -138,7 +142,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 title: Text(
                   'Log Out',
-                  style: TextStyle(fontSize: 20, color: Colors.deepPurple[700]),
+                  style: textTheme.subtitle1,
                 ),
               ),
             ),
@@ -146,11 +150,11 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: GridView.builder(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
-              childAspectRatio: 2 / 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10),
+          semanticChildCount: 3,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: 2 / 2,
+            crossAxisCount: 2,
+          ),
           itemCount: homeModelList.length,
           itemBuilder: (BuildContext ctx, index) {
             return HomeItem(

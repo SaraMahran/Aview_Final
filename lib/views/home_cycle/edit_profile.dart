@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:aview2/components/cutom_shadow.dart';
+import 'package:aview2/components/documentation_image_picker_widget.dart';
 import 'package:aview2/components/items/radio_button.dart';
 import 'package:aview2/components/items/reviews_profile_item.dart';
 import 'package:aview2/components/widgets/buttons/custom_rounded_border_button.dart';
+import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -16,6 +18,7 @@ class EditProfileScreen extends StatefulWidget {
 class _EditProfileScreenState extends State<EditProfileScreen> {
   String dropdownValue = '2006';
   String genderGroupValue = 'Female';
+  final TextEditingController personalImage = TextEditingController(text: '');
   TextEditingController nameTEC = TextEditingController(text: '');
   TextEditingController emailTEC = TextEditingController(text: '');
   TextEditingController bioTEC = TextEditingController(text: '');
@@ -42,9 +45,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     var responsive = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        shadowColor: Colors.transparent,
-        title: Text('Edit Profile'),
+        iconTheme: IconThemeData(
+          color: Colors.deepOrange, //change your color here
+        ),
+        backgroundColor: Colors.white,
         centerTitle: true,
+        shadowColor: Colors.transparent,
+        title: Text(
+          'Edit Profile',
+          style: TextStyle(
+            color: Colors.deepOrange,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -91,24 +103,43 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 controller: nameTEC,
                 decoration: kRoundedDecorationTF.copyWith(
                   hintText: 'Name',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[600],
+                    fontFamily: 'Lobster',
+                  ),
                 ),
               ),
             ),
             CustomShadow(
               child: TextField(
                 controller: emailTEC,
-                decoration: kRoundedDecorationTF.copyWith(hintText: 'Email'),
+                decoration: kRoundedDecorationTF.copyWith(
+                  hintText: 'Email',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[600],
+                    fontFamily: 'Lobster',
+                  ),
+                ),
               ),
             ),
             CustomShadow(
               child: TextField(
                 controller: bioTEC,
                 maxLines: 5,
-                decoration: kRoundedDecorationTF.copyWith(hintText: 'Bio...'),
+                decoration: kRoundedDecorationTF.copyWith(
+                  hintText: 'Bio...',
+                  hintStyle: TextStyle(
+                    color: Colors.grey[600],
+                    fontFamily: 'Lobster',
+                  ),
+                ),
               ),
             ),
             SizedBox(height: 14),
-            Text('Lists: ', style: textTheme.headline1),
+            Text(
+              'Lists: ',
+              style: textTheme.bodyText1,
+            ),
             Center(child: Text('No Lists to show')),
             SizedBox(height: 20),
             Text('Optional Info:', style: textTheme.headline1),
@@ -116,7 +147,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Year of birth ', style: textTheme.headline1),
+                Text(
+                  'Year of birth ',
+                  style: textTheme.bodyText1,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
                   child: Container(
@@ -158,7 +192,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ].map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value, style: textTheme.headline6),
+                          child: Text(value, style: textTheme.headline3),
                         );
                       }).toList(),
                     ),
@@ -170,11 +204,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Phone Number', style: textTheme.headline1),
+                Text(
+                  'Phone Number',
+                  style: textTheme.bodyText1,
+                ),
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: kCustomContainerDecoration,
-                  child: Text('+02 01129264839', style: textTheme.headline1),
+                  child: Text('+02 01129264839', style: textTheme.headline3),
                 )
               ],
             ),
@@ -182,7 +219,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Gender', style: textTheme.headline1),
+                Text(
+                  'Gender',
+                  style: textTheme.bodyText1,
+                ),
                 LabeledRadio(
                   value: 'Male',
                   label: 'Male',

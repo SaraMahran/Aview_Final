@@ -1,24 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseAuthService {
-  late FirebaseAuth firebaseAuth;
+  final FirebaseAuth? firebaseAuth;
 
-  FirebaseAuthService({required this.firebaseAuth});
-
-  Stream<User?> get onAuthStateChanges => firebaseAuth.authStateChanges();
-
+  FirebaseAuthService({this.firebaseAuth});
+  Stream<User?> get onAuthStateChanges => firebaseAuth!.authStateChanges();
   Future<void> SignOut() async {
-    await firebaseAuth.signOut();
+    await firebaseAuth!.signOut();
   }
 
   Future<String?> SignIn(
       {required String email, required String password}) async {
     try {
-      await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then(
-            (value) => print('userEmail = ${value.user!.email}'),
-          );
+      await firebaseAuth!
+          .signInWithEmailAndPassword(email: email, password: password);
       return "Signed In Successfully ";
     } on FirebaseAuthException catch (e) {
       return e.message;
@@ -44,7 +39,18 @@ class FirebaseAuthService {
     }
   }
 
+  Future<User?> signInAnon() async {
+    try {
+      UserCredential result = await firebaseAuth!.signInAnonymously();
+      User? user = result.user;
+      return user;
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future<void> sendPasswordResetEmail(String email) async {
-    return firebaseAuth.sendPasswordResetEmail(email: email);
+    return firebaseAuth!.sendPasswordResetEmail(email: email);
   }
 }

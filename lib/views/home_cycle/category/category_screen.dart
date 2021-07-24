@@ -7,21 +7,28 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         shadowColor: Colors.transparent,
+        iconTheme: IconThemeData(color: Colors.deepOrange),
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/images/filter_icon.png', width: 25),
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.add,
+                color: Colors.deepOrange,
+              ),
+            ),
           ),
         ],
         title: Text(
           Provider.of<HomeProvider>(context, listen: false).getTitle,
+          style: TextStyle(color: Colors.deepOrange),
         ),
       ),
       body: ListView(
@@ -55,10 +62,10 @@ class CategoryScreen extends StatelessWidget {
                   categoryProvider.setPlaceRate(categoryScreenList[index].rate);
                   categoryProvider.setPlaceOptionList(
                       categoryScreenList[index].optionsTitleList);
-                  Navigator.pushNamed(context, CategoryDetailsScreenRoute);
+                  Navigator.pushNamed(context, PlaceScreenRoute);
                 },
                 img: categoryScreenList[index].img,
-                title:  categoryScreenList[index].title,
+                title: categoryScreenList[index].title,
                 desc: categoryScreenList[index].desc,
                 rate: categoryScreenList[index].rate,
                 optionListWidget: SizedBox(

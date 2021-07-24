@@ -19,7 +19,7 @@ class LoginButton extends StatelessWidget {
       child: Container(
         alignment: Alignment.center,
 //        height: _height / 20,
-        width: _width / 4,
+        width: _width / 2,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
           gradient: LinearGradient(

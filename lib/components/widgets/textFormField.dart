@@ -17,14 +17,15 @@ class CustomTextField extends StatelessWidget {
   bool? large;
   bool? medium;
 
-  CustomTextField(
-      {required this.hint,
-      this.textEditingController,
-      required this.keyboardType,
-      this.obscureText = true,
-      this.icon,
-      this.validator,
-      this.onClick});
+  CustomTextField({
+    required this.hint,
+    this.textEditingController,
+    required this.keyboardType,
+    this.obscureText = true,
+    this.icon,
+    this.validator,
+    this.onClick,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,26 +33,26 @@ class CustomTextField extends StatelessWidget {
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
     large = ResponsiveWidget.isScreenLarge(_width!, _pixelRatio!);
     medium = ResponsiveWidget.isScreenMedium(_width!, _pixelRatio!);
+
     return Material(
       borderRadius: BorderRadius.circular(30.0),
       elevation: large! ? 12 : (medium! ? 10 : 8),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 4),
-        child: TextFormField(
-          controller: textEditingController,
-          validator: validator,
-          onSaved: (click) {},
-          keyboardType: keyboardType,
-          cursorColor: Colors.orange[200],
-          obscureText: hint == "Password" ? true : false,
-          decoration: InputDecoration(
-            prefixIcon:
-                Icon(icon, color: Colors.deepOrangeAccent[400], size: 20),
-            hintText: hint,
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                borderSide: BorderSide.none),
+      child: TextFormField(
+        controller: textEditingController,
+        validator: validator,
+        onSaved: (click) {},
+        keyboardType: keyboardType,
+        cursorColor: Colors.orange[200],
+        obscureText: hint == "Password" ? true : false,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.deepOrangeAccent[400], size: 20),
+          hintText: hint,
+          hintStyle: TextStyle(
+            fontSize: 16,
           ),
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(30.0),
+              borderSide: BorderSide.none),
         ),
       ),
     );

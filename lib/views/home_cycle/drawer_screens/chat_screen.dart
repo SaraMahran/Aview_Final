@@ -21,7 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
     super.initState();
     Future.delayed(Duration(milliseconds: 300), () {
       secondScrollController.animateTo(
-        secondScrollController.position.maxScrollExtent ,
+        secondScrollController.position.maxScrollExtent,
         duration: Duration(milliseconds: 300),
         curve: Curves.fastOutSlowIn,
       );
@@ -97,7 +97,6 @@ class _ChatScreenState extends State<ChatScreen> {
                           duration: Duration(milliseconds: 400),
                           curve: Curves.fastOutSlowIn,
                         );
-
                       } else {
                         Fluttertoast.showToast(msg: 'enter message');
                       }
@@ -153,7 +152,7 @@ class MessageBubble extends StatelessWidget {
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30),
                     topRight: Radius.circular(30)),
-            color: isMe ? Colors.orangeAccent : Colors.grey,
+            color: isMe ? Colors.deepOrange : Colors.grey,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: Text(
