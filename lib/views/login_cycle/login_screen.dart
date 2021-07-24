@@ -10,13 +10,12 @@ import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/views/home_cycle/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
 import 'package:aview2/utils/string_validation.dart';
-import 'package:aview2/utils/string_validation.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -70,12 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           icon: Icons.email,
                           hint: "Email ",
                           validator: (input) {
-                            if (emailController.text.isEmpty) {
+                            if (input!.isEmpty) {
                               return 'Email is required';
-                            } else if (input!.isNotValidEmail()) {
+                            } else if (input.isNotValidEmail()) {
                               return 'Invalid Email';
                             }
-                            return null;
                           },
                           textEditingController: emailController,
                           onClick: (value) {
@@ -90,12 +88,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: true,
                           icon: Icons.lock,
                           validator: (input) {
-                            // if (passwordController.text.isEmpty) {
-                            //   return 'Password is required';
-                            // } else if (input!.isNotValidPassword()) {
-                            //   return 'Invalid Password';
-                            // }
-                            return null;
+                            if (input!.isEmpty) {
+                              return 'Password is required';
+                              //print("Password is required");
+                            } else if (input.length < 8) {
+                              // print("Password must be longer than 8 characters");
+                              return "Password must be longer than 8 characters";
+                              // } else if (input.isNotValidPassword()) {
+                              //   //print('Invalid Password');
+                              //   return 'Invalid Password';
+                              // }
+                            }
                           },
                           hint: "Password",
                           textEditingController: passwordController,
@@ -119,9 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         );
 
                         await firebaseAuthService.SignIn(
-                          email: emailController.text,
-                          password: passwordController.text
-                        );
+                            email: emailController.text,
+                            password: passwordController.text);
                         // await Provider.of<ReviewerProvider>(context,
                         //         listen: false)
                         //     .retrieveUserData('ydFcfRjjsocfMZCfgoQg');
@@ -169,18 +171,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: <Widget>[
                     GestureDetector(
                         onTap: () async {
-                          //GoogleSignInAccount? _user;
-                          final googleSignIn = GoogleSignIn();
-                          final googleUser = await googleSignIn.signIn();
-                          if (googleUser != null) {
-                            final googleAuth = await googleUser.authentication;
-                            if (googleAuth.idToken != null) {
-                              await FirebaseAuth.instance.signInWithCredential(
-                                  GoogleAuthProvider.credential(
-                                      accessToken: googleAuth.accessToken,
-                                      idToken: googleAuth.idToken));
-                              final user = FirebaseAuth.instance.currentUser;
+                          try {
+                            //GoogleSignInAccount? _user;
+                            final googleSignIn = GoogleSignIn();
+                            final googleUser = await googleSignIn.signIn();
+                            if (googleUser != null) {
+                              final googleAuth =
+                                  await googleUser.authentication;
+                              if (googleAuth.idToken != null) {
+                                await FirebaseAuth.instance
+                                    .signInWithCredential(
+                                        GoogleAuthProvider.credential(
+                                            accessToken: googleAuth.accessToken,
+                                            idToken: googleAuth.idToken));
+                                final user = FirebaseAuth.instance.currentUser;
+                                print(user);
+                                print("Done");
+                              }
                             }
+                          } catch (e) {
+                            print(e.toString());
                           }
                         },
                         child: Image.asset('assets/images/google_logo.png')),

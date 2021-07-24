@@ -33,6 +33,8 @@ dependencies:
   expansion_tile_card: ^2.0.0
   tflite_flutter: ^0.9.0
   fluttertoast: ^8.0.7
+  form_field_validator: ^1.1.0
+  uuid: ^3.0.4
 #  map
   google_maps_flutter: ^2.0.6
   geocoding: ^2.0.0

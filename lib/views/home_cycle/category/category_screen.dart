@@ -17,8 +17,13 @@ class CategoryScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Image.asset('assets/images/filter_icon.png',
-                width: 25, color: Colors.deepOrange),
+            child: GestureDetector(
+              onTap: () {},
+              child: Icon(
+                Icons.add,
+                color: Colors.deepOrange,
+              ),
+            ),
           ),
         ],
         title: Text(

@@ -20,7 +20,7 @@ import 'package:firebase_core/firebase_core.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+  //await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
 
   runApp(MyApp());
 }
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ReviewerProvider()),
         ChangeNotifierProvider(create: (_) => CategoryProvider()),
         ChangeNotifierProvider(create: (_) => PlaceProvider()),
-        ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
+        //ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         Provider<FirebaseAuthService>(
           create: (_) =>
               FirebaseAuthService(firebaseAuth: FirebaseAuth.instance),
