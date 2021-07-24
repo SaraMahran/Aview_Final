@@ -21,6 +21,13 @@ class _MapsScreenState extends State<MapsScreen> {
 
   @override
   void initState() {
+    MapService.addCustomMarker(
+        29.994209, 31.160527, 'assets/images/test/kfc_logo.png', '1');
+    MapService.addCustomMarker(30.007015, 31.194833,
+        'assets/images/test/chicken_fila_logo.jpeg', '2');
+    MapService.addCustomMarker(30.207015, 31.194833,
+        'assets/images/test/chicken_fila_logo.jpeg', '3');
+
     MapService.getCurrentLocation(
       mapController: mapController,
       initialPosition: LatLng(0, 0),
@@ -45,15 +52,12 @@ class _MapsScreenState extends State<MapsScreen> {
             myLocationButtonEnabled: true,
             myLocationEnabled: true,
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * .8,
+              top: MediaQuery.of(context).size.height * .7,
             ),
             zoomControlsEnabled: true,
             markers: Set.from(MapService.markers),
             mapType: MapType.normal,
             onTap: (point) {
-              MapService.markers.isEmpty
-                  ? MapService.addMarker(point.latitude, point.longitude)
-                  : MapService.replaceMarker(point.latitude, point.longitude);
               lat = point.latitude;
               long = point.longitude;
               setState(() {});

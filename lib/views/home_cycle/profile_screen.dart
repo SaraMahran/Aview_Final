@@ -1,13 +1,9 @@
-import 'package:aview2/components/cutom_shadow.dart';
 import 'package:aview2/components/items/radio_button.dart';
 import 'package:aview2/components/items/reviews_profile_item.dart';
-import 'package:aview2/components/widgets/buttons/custom_rounded_border_button.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:aview2/utils/routing_constants.dart';
-import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -194,23 +190,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizedBox(height: 14),
-          Text('Lists: ', style: textTheme.bodyText1),
           SizedBox(
-            height: responsive.height * .08,
+            height: responsive.height * .17,
             child: ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                itemCount: 8,
+                itemCount: 2,
                 itemBuilder: (context, index) {
-                  return CustomShadow(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text('Name: Radwa ElHassany'),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.asset(
+                            index == 0
+                                ? 'assets/images/woman_reviewer.jpeg'
+                                : 'assets/images/man_reviewer.jpeg',
+                            height: 80,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        Text(
+                          index == 0 ? 'Radwa ElHassany' : 'Ahmed Nasser',
+                          style: Theme.of(context).textTheme.headline3,
+                        ),
+                      ],
                     ),
                   );
                 }),
           ),
-          SizedBox(height: 20),
+          Text('Lists: ', style: textTheme.bodyText1),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'My Fav Places',
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    'Show All List >>>',
+                    style: Theme.of(context).textTheme.headline4,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Text('Lists: ', style: textTheme.bodyText1),
           Text('Optional Info:', style: textTheme.headline1),
           SizedBox(height: 10),
           Row(
