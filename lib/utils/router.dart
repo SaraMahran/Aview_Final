@@ -1,9 +1,10 @@
-import 'package:aview2/models/text_classifier_model.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/views/home_cycle/category/add_place.dart';
+import 'package:aview2/views/home_cycle/category/add_review.dart';
 import 'package:aview2/views/home_cycle/category/place_screen.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
 import 'package:aview2/views/home_cycle/category/category_screen.dart';
+import 'package:aview2/views/home_cycle/category/report.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/about_us_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/chat_screen.dart';
 import 'package:aview2/views/home_cycle/drawer_screens/email_screen.dart';
@@ -70,12 +71,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => ProfileScreen());
     case PlaceScreenRoute:
       return MaterialPageRoute(builder: (context) => PlaceScreen());
+    case ReportScreenRoute:
+      return MaterialPageRoute(builder: (context) => ReportScreen());
+    case AddReviewScreenRoute:
+      return MaterialPageRoute(builder: (context) => AddReviewScreen());
     case EditProfileScreenRoute:
       return MaterialPageRoute(builder: (context) => EditProfileScreen());
     case EmailScreenRoute:
       return MaterialPageRoute(builder: (context) => EmailScreen());
-    case TextClassifierModelRoute:
-      return MaterialPageRoute(builder: (context) => TextClassifierModel());
 
     case AboutUsScreenRoute:
       return MaterialPageRoute(builder: (context) => AboutUsScreen());

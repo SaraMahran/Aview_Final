@@ -20,4 +20,5 @@ const String SignUpPlaceOwnerRoute = "SignUpPlaceOwnerRoute";
 const String EmailScreenRoute = "EmailScreen";
 const String ChatScreenRoute = "ChatScreen";
 const String AddPlaceScreenRoute = "AddPlaceScreen";
-const String TextClassifierModelRoute = "AddPlaceModel";
+const String ReportScreenRoute = "ReportScreen";
+const String AddReviewScreenRoute = "AddReviewScreen";

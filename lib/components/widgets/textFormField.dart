@@ -16,7 +16,7 @@ class CustomTextField extends StatelessWidget {
   double? _pixelRatio;
   bool? large;
   bool? medium;
-
+  int maxLine;
   CustomTextField({
     required this.hint,
     this.textEditingController,
@@ -25,6 +25,7 @@ class CustomTextField extends StatelessWidget {
     this.icon,
     this.validator,
     this.onClick,
+    this.maxLine = 1,
   });
 
   @override
@@ -44,6 +45,7 @@ class CustomTextField extends StatelessWidget {
         keyboardType: keyboardType,
         cursorColor: Colors.orange[200],
         obscureText: hint == "Password" ? true : false,
+        maxLines: maxLine,
         decoration: InputDecoration(
           prefixIcon: Icon(icon, color: Colors.deepOrangeAccent[400], size: 20),
           hintText: hint,

@@ -35,8 +35,6 @@ dependencies:
   tflite_flutter: ^0.9.0
   fluttertoast: ^8.0.7
   form_field_validator: ^1.1.0
-  uuid: ^3.0.4
-  sentiment_dart: ^0.0.4
   shared_preferences: ^2.0.6
   tflite: ^1.1.2
 #  map
