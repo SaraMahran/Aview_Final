@@ -18,8 +18,7 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
   @override
   Widget build(BuildContext context) {
     final placesProvider = Provider.of<PlaceProvider>(context, listen: false);
-    final textStyle =
-        Theme.of(context).textTheme.headline3!.copyWith(fontSize: 12);
+    final textStyle = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(shadowColor: Colors.transparent),
       body: Container(
@@ -33,38 +32,44 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                   final data = placesProvider.getPlaceList.elementAt(index);
                   return Container(
                     decoration: kCustomContainerDecoration,
-                    margin: EdgeInsets.all(8),
+                    margin: EdgeInsets.all(12),
                     padding: EdgeInsets.all(8),
-                    child: Column(
+                    child: Row(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.network(
+                            data.image ??
+                                'https://i.postimg.cc/sg1pfwDD/chicken-fila.jpg',
+                            width: 80,
+                            height: 80,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        SizedBox(width: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              data.placeName,
-                              style: textStyle,
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  data.placeName,
+                                  style: textStyle.headline1!
+                                      .copyWith(fontSize: 18),
+                                ),
+                                SizedBox(width: 40),
+                                Text(
+                                  data.location.toString(),
+                                  style: textStyle.headline2!.copyWith(fontSize: 16),
+                                ),
+                              ],
                             ),
-                            Text(
-                              data.location.toString(),
-                              style: textStyle,
-                            ),
+                            Text(data.category, style: textStyle.headline3!.copyWith(fontSize: 12)),
+                            Text('Reviews No.${data.placeID}', style: textStyle.headline3!.copyWith(fontSize: 14)),
                           ],
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Text(data.category, style: textStyle),
-                            Text(data.placeID, style: textStyle),
-                            Text(data.noOfReviewers.toString(),
-                                style: textStyle),
-                          ],
-                        ),
-                        Image.network(
-                          data.image ??
-                              'https://i.postimg.cc/sg1pfwDD/chicken-fila.jpg',
-                          width: 20,
-                          height: 20,
-                        )
                       ],
                     ),
                   );

@@ -33,7 +33,7 @@ class ReviewsItem extends StatelessWidget {
               RatingBar(
                 initialRating: rate,
                 ignoreGestures: true,
-                itemSize: 25,
+                itemSize: 18,
                 allowHalfRating: true,
                 onRatingUpdate: (ratingValue) {},
                 ratingWidget: RatingWidget(
@@ -47,7 +47,7 @@ class ReviewsItem extends StatelessWidget {
                   ),
                   empty: Icon(
                     Icons.star,
-                    color: Colors.grey[300],
+                    color: Colors.grey,
                   ),
                 ),
               ),

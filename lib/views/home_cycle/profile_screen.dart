@@ -7,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'category/favorite_reviewer.dart';
+
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -207,14 +209,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return
-                      //     },
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return FavoriteReviewer(index: index);
+                          },
+                        ),
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
