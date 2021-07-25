@@ -13,8 +13,9 @@ class FavoriteReviewer extends StatelessWidget {
     var textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.deepOrange),
         centerTitle: true,
-        title: index == 0 ? Text('Radwa') : Text('Ahmed'),
+        title: index == 0 ? Text('Radwa',style: TextStyle(color: Colors.deepOrange)) : Text('Ahmed',style: TextStyle(color: Colors.deepOrange)),
         shadowColor: Colors.transparent,
       ),
       body: SafeArea(

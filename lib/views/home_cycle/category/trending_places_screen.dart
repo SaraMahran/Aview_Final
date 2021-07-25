@@ -20,7 +20,12 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
     final placesProvider = Provider.of<PlaceProvider>(context, listen: false);
     final textStyle = Theme.of(context).textTheme;
     return Scaffold(
-      appBar: AppBar(shadowColor: Colors.transparent),
+      appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.deepOrange),
+        shadowColor: Colors.transparent,
+        title: Text('Trending places',style: TextStyle(color: Colors.deepOrange),),
+        centerTitle: true,
+      ),
       body: Container(
         child: FutureBuilder(
           future: placesProvider.retrievePlaces(),
@@ -50,7 +55,6 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -62,12 +66,17 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                                 SizedBox(width: 40),
                                 Text(
                                   data.location.toString(),
-                                  style: textStyle.headline2!.copyWith(fontSize: 16),
+                                  style: textStyle.headline2!
+                                      .copyWith(fontSize: 16),
                                 ),
                               ],
                             ),
-                            Text(data.category, style: textStyle.headline3!.copyWith(fontSize: 12)),
-                            Text('Reviews No.${data.placeID}', style: textStyle.headline3!.copyWith(fontSize: 14)),
+                            Text(data.category,
+                                style: textStyle.headline3!
+                                    .copyWith(fontSize: 12)),
+                            Text('Reviews No.${data.placeID}',
+                                style: textStyle.headline3!
+                                    .copyWith(fontSize: 14)),
                           ],
                         ),
                       ],
