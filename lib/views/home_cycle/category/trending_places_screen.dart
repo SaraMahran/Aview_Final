@@ -51,7 +51,7 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                             fit: BoxFit.fill,
                           ),
                         ),
-                        SizedBox(width: 20),
+                        SizedBox(width: 10),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -63,11 +63,11 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                                   style: textStyle.headline1!
                                       .copyWith(fontSize: 18),
                                 ),
-                                SizedBox(width: 40),
+                                SizedBox(width: 20),
                                 Text(
                                   data.location.toString(),
                                   style: textStyle.headline2!
-                                      .copyWith(fontSize: 16),
+                                      .copyWith(fontSize: 12),
                                 ),
                               ],
                             ),
