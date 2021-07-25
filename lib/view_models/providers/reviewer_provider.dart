@@ -3,6 +3,7 @@ import 'package:aview2/utils/routing_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:aview2/models/user_info_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ReviewerProvider with ChangeNotifier {
   late ReviewerModel reviewer;
@@ -13,15 +14,28 @@ class ReviewerProvider with ChangeNotifier {
   late String password;
   late String image;
 
-  Future<void> retrieveUserData(String userID) async {
-    print('userID = $userID');
+  late String userInfoUuid;
+
+  String get getUserInfoUuid => userInfoUuid;
+
+  set setUserInfoUuid(String userInfoUuid) => this.userInfoUuid = userInfoUuid;
+
+  Future<void> retrieveUserData() async {
+    final prefs = await SharedPreferences.getInstance();
+    print('UUID prefs = ${prefs.getString('UUID')}');
     final userInfoSnapShot = await FirebaseFirestore.instance
         .collection('UserInfo')
-        .doc(userID)
+        .doc(prefs.getString('UUID').toString())
         .get();
-    print('ReviewData = ${userInfoSnapShot.data()}');
-    print('image = ${userInfoSnapShot['list']['image']}');
-    print('listData = ${userInfoSnapShot['list']['title']}');
+    firstName = userInfoSnapShot['firstName'];
+    lastName = userInfoSnapShot['lastName'];
+    email = userInfoSnapShot['email'];
+    password = userInfoSnapShot['password'];
+    image = userInfoSnapShot['image'];
+
+    // print('ReviewData = ${userInfoSnapShot.data()}');
+    // print('image = ${userInfoSnapShot['list']['image']}');
+    // print('listData = ${userInfoSnapShot['list']['title']}');
     // print(
     //     'imageList = ${userInfoSnapShot['list']['image']},titleList = ${userInfoSnapShot['list']['title']}');
 

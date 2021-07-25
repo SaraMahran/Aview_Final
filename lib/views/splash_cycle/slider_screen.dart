@@ -59,113 +59,107 @@ class SliderScreen extends StatelessWidget {
                   },
                   children: sliderItemList,
                 ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(14),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  if (value.getIndex != 0)
-                                    value.controller.animateToPage(
-                                        value.getIndex - 1,
-                                        duration: Duration(milliseconds: 500),
-                                        curve: Curves.easeInExpo);
-                                },
-                                child: Visibility(
-                                  visible: value.getIndex != 0 ? true : false,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: Colors.deepOrange),
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            16, 8, 8, 8),
-                                        child: Icon(
-                                          Icons.arrow_back_ios,
-                                          color: Colors.white,
-                                        ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(14),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                if (value.getIndex != 0)
+                                  value.controller.animateToPage(
+                                      value.getIndex - 1,
+                                      duration: Duration(milliseconds: 500),
+                                      curve: Curves.easeInExpo);
+                              },
+                              child: Visibility(
+                                visible: value.getIndex != 0 ? true : false,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.deepOrange),
+                                  child: Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          16, 8, 8, 8),
+                                      child: Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Colors.white,
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                              value.getIndex != sliderItemList.length - 1
-                                  ? Container(
-                                      child: Row(
-                                        children: [
-                                          for (int i = 0;
-                                              i < sliderItemList.length;
-                                              i++)
-                                            i == value.getIndex
-                                                ? _buildPageIndicator(true)
-                                                : _buildPageIndicator(false)
-                                        ],
-                                      ),
-                                    )
-                                  : Container(),
-                              Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: value.getIndex !=
-                                            sliderItemList.length - 1
-                                        ? () async {
-                                            await Provider.of<ReviewProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .retrieveReviews();
-                                            value.controller.animateToPage(
-                                                value.getIndex + 1,
-                                                duration:
-                                                    Duration(milliseconds: 200),
-                                                curve: Curves.easeInExpo);
-                                          }
-                                        : () {
-                                            Future.delayed(
-                                                Duration.zero,
-                                                () => Navigator.pushNamed(
-                                                    context, LoginScreenRoute));
-                                          },
-                                    child: value.getIndex !=
-                                            sliderItemList.length - 1
-                                        ? Container(
-                                            decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.deepOrange),
-                                            child: Center(
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8.0),
-                                                child: Icon(
-                                                  Icons.arrow_forward_ios,
-                                                  color: Colors.white,
-                                                ),
+                            ),
+                            value.getIndex != sliderItemList.length - 1
+                                ? Container(
+                                    child: Row(
+                                      children: [
+                                        for (int i = 0;
+                                            i < sliderItemList.length;
+                                            i++)
+                                          i == value.getIndex
+                                              ? _buildPageIndicator(true)
+                                              : _buildPageIndicator(false)
+                                      ],
+                                    ),
+                                  )
+                                : Container(),
+                            Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: value.getIndex !=
+                                          sliderItemList.length - 1
+                                      ? () async {
+                                          value.controller.animateToPage(
+                                              value.getIndex + 1,
+                                              duration:
+                                                  Duration(milliseconds: 200),
+                                              curve: Curves.easeInExpo);
+                                        }
+                                      : () {
+                                          Future.delayed(
+                                              Duration.zero,
+                                              () => Navigator.pushNamed(
+                                                  context, LoginScreenRoute));
+                                        },
+                                  child: value.getIndex !=
+                                          sliderItemList.length - 1
+                                      ? Container(
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: Colors.deepOrange),
+                                          child: Center(
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.arrow_forward_ios,
+                                                color: Colors.white,
                                               ),
                                             ),
-                                          )
-                                        : Text(
-                                            'Get Started',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontFamily: 'Lobster',
-                                                color: Colors.deepOrange,
-                                                fontSize: 30),
                                           ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                        )
+                                      : Text(
+                                          'Get Started',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Lobster',
+                                              color: Colors.deepOrange,
+                                              fontSize: 20),
+                                        ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 )
               ],

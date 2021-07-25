@@ -1,5 +1,6 @@
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -72,10 +73,21 @@ class AddReviewScreen extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: LoginButton(
-                    onTap: () {
+                    onTap: () async {
                       if (reviewController.text.length == 0 || rate == 0) {
                         Fluttertoast.showToast(msg: 'complete review fields');
                       } else {
+                        Map<String, dynamic> data = {
+                          'description': reviewController.text,
+                          'rate': rate,
+                          'name': 'sara',
+                          'date': DateTime.now()
+                        };
+                        FirebaseFirestore.instance
+                            .collection('places')
+                            .doc('RCTrmWmbBEiF8Zlk0ZLX')
+                            .collection('reviews')
+                            .add(data);
                         Fluttertoast.showToast(
                             msg: 'Your review has been submitted. ');
                         Navigator.pop(context);

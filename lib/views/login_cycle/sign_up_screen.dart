@@ -6,10 +6,13 @@ import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/view_models/providers/sign_up_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aview2/components/widgets/responsive_ui.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -34,6 +37,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
+    final signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+    final firebaseAuthService =
+        FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
+
     return Material(
       child: Scaffold(
         body: Container(
@@ -147,35 +154,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             buttonTitle: 'SignUp',
                             onTap: () async {
                               globalKey.currentState!.validate()
-                                  ? Scaffold.of(context).showSnackBar(
-                                      SnackBar(content: Text("This is valid")))
-                                  : Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text("This is not valid")));
-
-                              // globalKey.currentState!.validate()) {
-                              //    globalKey.currentState!.save();
-                              //
-                              //    print(emailController);
-                              //    print(passwordController);
+                                  ? Fluttertoast.showToast(msg: 'This is valid')
+                                  : Fluttertoast.showToast(
+                                      msg: 'This is not valid');
                               try {
-                                // final signUpProvider = Provider.of<SignUpProvider>(
-                                //   context,
-                                //   listen: false,
-                                // );
-                                // await signUpProvider.addUser(
-                                //     firstName: firstNameController.text,
-                                //     lastName: lastNameController.text,
-                                //     email: emailController.text,
-                                //     password: passwordController.text,
-                                //     image: "Sara'sImage");
-                                Navigator.pushNamed(context, HomeScreenRoute);
-                                //final firebaseAuthService = FirebaseAuthService(
-                                //   firebaseAuth: FirebaseAuth.instance,
-                                //   );
                                 await firebaseAuthService.SignUp(
                                   email: emailController.text,
                                   password: passwordController.text,
                                 );
+                                await signUpProvider.addUser(
+                                  context: context,
+                                  firstName: firstNameController.text,
+                                  lastName: lastNameController.text,
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  image: "Sara'sImage",
+                                );
+                                Navigator.pushNamed(context, HomeScreenRoute);
                               } catch (e) {
                                 print(e.toString());
                               }

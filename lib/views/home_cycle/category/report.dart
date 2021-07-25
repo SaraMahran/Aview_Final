@@ -28,6 +28,7 @@ class ReportScreen extends StatelessWidget {
         ),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(
@@ -35,50 +36,54 @@ class ReportScreen extends StatelessWidget {
               ),
               fit: BoxFit.cover),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(14),
-              child: CustomTextField(
-                hint: "Write your report",
-                keyboardType: TextInputType.text,
-                icon: FontAwesomeIcons.penAlt,
-                textEditingController: reportController,
-                maxLine: 6,
-              ),
-            ),
-            SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: LoginButton(
-                  onTap: () {
-                    if (reportController.text.length == 0)
-                      Fluttertoast.showToast(
-                        msg: 'Please write your report',
-                        textColor: Colors.black,
-                        backgroundColor: Colors.deepOrange,
-                        fontSize: 20,
-                        gravity: ToastGravity.CENTER_RIGHT,
-                      );
-                    else
-                      Fluttertoast.showToast(
-                        msg:
-                            'Thanks for reporting for us.We will get back to you soon on email. ',
-                        textColor: Colors.black,
-                        backgroundColor: Colors.deepOrange,
-                        fontSize: 20,
-                        gravity: ToastGravity.CENTER_RIGHT,
-                      );
-                    Navigator.pop(context);
-                  },
-                  buttonTitle: 'Submit Report',
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 100),
+              Padding(
+                padding: const EdgeInsets.all(14),
+                child: CustomTextField(
+                  hint: "Write your report",
+                  keyboardType: TextInputType.text,
+                  icon: FontAwesomeIcons.penAlt,
+                  textEditingController: reportController,
+                  maxLine: 6,
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 80),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(
+                  alignment: Alignment.topCenter,
+                  child: LoginButton(
+                    onTap: () {
+                      if (reportController.text.length == 0) {
+                        Fluttertoast.showToast(
+                          msg: 'Please write your report',
+                          textColor: Colors.black,
+                          backgroundColor: Colors.deepOrange,
+                          fontSize: 20,
+                          gravity: ToastGravity.CENTER_RIGHT,
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg:
+                              'Thanks for reporting for us.We will get back to you soon on email. ',
+                          textColor: Colors.black,
+                          backgroundColor: Colors.deepOrange,
+                          fontSize: 20,
+                          gravity: ToastGravity.CENTER_RIGHT,
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                    buttonTitle: 'Submit Report',
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

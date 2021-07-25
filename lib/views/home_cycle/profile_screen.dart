@@ -2,8 +2,10 @@ import 'package:aview2/components/items/radio_button.dart';
 import 'package:aview2/components/items/reviews_profile_item.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   @override
@@ -18,9 +20,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
   TextEditingController bioTEC = TextEditingController(text: '');
 
   @override
+  void initState() {
+    Provider.of<ReviewerProvider>(context, listen: false).retrieveUserData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
     var responsive = MediaQuery.of(context).size;
+    final userInfo = Provider.of<ReviewerProvider>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -36,10 +45,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         centerTitle: true,
         actions: [
           InkWell(
-            onTap: () async {
+            onTap: () {
               Navigator.pushNamed(context, EditProfileScreenRoute);
-              // await Provider.of<ReviewerProvider>(context, listen: false)
-              //     .retrieveUserData('0bsCX1kRU26pNJDQKub9');
             },
             child: Padding(
               padding: EdgeInsets.all(15),
@@ -89,11 +96,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'Radwa ElHassany',
+                            'userInfo.firstName',
                             style: textTheme.headline5,
                           ),
                           Text(
-                            'RadwaHassany@gmail.com',
+                            'userInfo.email',
                             style: textTheme.headline5,
                           ),
                           Row(

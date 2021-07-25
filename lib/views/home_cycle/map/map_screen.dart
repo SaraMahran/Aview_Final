@@ -23,10 +23,15 @@ class _MapsScreenState extends State<MapsScreen> {
   void initState() {
     MapService.addCustomMarker(
         29.994209, 31.160527, 'assets/images/test/kfc_logo.png', '1');
-    MapService.addCustomMarker(30.007015, 31.194833,
-        'assets/images/test/chicken_fila_logo.jpeg', '2');
-    MapService.addCustomMarker(30.207015, 31.194833,
-        'assets/images/test/chicken_fila_logo.jpeg', '3');
+    MapService.addCustomMarker(
+        30.007015, 31.194833, 'assets/images/test/chicken_fila_logo.jpeg', '2');
+    MapService.addCustomMarker(
+        30.207015, 31.194833, 'assets/images/test/kfc_logo.png', '3');
+
+    MapService.addCustomMarker(
+        30.026586, 31.201605, 'assets/images/test/chicken_fila_logo.jpeg', '4');
+    MapService.addCustomMarker(
+        30.024843, 31.209789, 'assets/images/test/kfc_logo.png', '5');
 
     MapService.getCurrentLocation(
       mapController: mapController,

@@ -59,7 +59,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         text: docs['text'],
                         time: docs['time'] as Timestamp,
                         isMe:
-                            docs['sender'] == 'ahmed@yahoo.com' ? true : false,
+                            docs['sender'] == 'sara' ? true : false,
                       );
                     },
                     itemCount: snapshot.data!.docs.length,
@@ -87,7 +87,7 @@ class _ChatScreenState extends State<ChatScreen> {
                             .add({
                           'text': messageTextController.text,
                           //    'sender': FirebaseAuth.instance.currentUser!.email,
-                          'sender': 'ahmed@yahoo.com',
+                          'sender': 'sara',
                           "time": DateTime.now()
                         });
                         messageTextController.clear();

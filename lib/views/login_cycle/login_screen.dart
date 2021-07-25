@@ -10,12 +10,14 @@ import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/views/home_cycle/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:http/http.dart' as http;
 import 'package:aview2/utils/string_validation.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -40,6 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
+    final firebaseAuthService =
+        FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
     return Material(
       child: Scaffold(
         body: Container(
@@ -117,17 +121,18 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () async {
                       if (globalKey.currentState!.validate()) {
                         globalKey.currentState!.save();
-                        final firebaseAuthService = FirebaseAuthService(
-                          firebaseAuth: FirebaseAuth.instance,
+                        final x = await firebaseAuthService.SignIn(
+                          email: emailController.text,
+                          password: passwordController.text,
                         );
-
-                        await firebaseAuthService.SignIn(
-                            email: emailController.text,
-                            password: passwordController.text);
-                        // await Provider.of<ReviewerProvider>(context,
-                        //         listen: false)
-                        //     .retrieveUserData('ydFcfRjjsocfMZCfgoQg');
-                        Navigator.pushNamed(context, HomeScreenRoute);
+                        // Navigator.pushNamed(context, HomeScreenRoute);
+                        if (x == 'Sign In Successfully') {
+                          Navigator.pushNamed(context, HomeScreenRoute);
+                        } else {
+                          print('x = $x');
+                          Fluttertoast.showToast(
+                              msg: 'No Email Matched SignUp Firstly');
+                        }
                       }
                     },
                   ),

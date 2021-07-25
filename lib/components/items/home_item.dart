@@ -42,9 +42,10 @@ class HomeItem extends StatelessWidget {
                   child: Center(
                     child: Text(
                       title,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.white,
-                          fontSize: 23,
+                          fontSize: 16,
                           fontFamily: 'Pattaya'),
                     ),
                   ),

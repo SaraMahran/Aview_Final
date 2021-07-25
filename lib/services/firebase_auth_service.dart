@@ -4,7 +4,9 @@ class FirebaseAuthService {
   final FirebaseAuth? firebaseAuth;
 
   FirebaseAuthService({this.firebaseAuth});
+
   Stream<User?> get onAuthStateChanges => firebaseAuth!.authStateChanges();
+
   Future<void> SignOut() async {
     await firebaseAuth!.signOut();
   }
@@ -13,9 +15,13 @@ class FirebaseAuthService {
       {required String email, required String password}) async {
     try {
       await firebaseAuth!
-          .signInWithEmailAndPassword(email: email, password: password);
-      return "Signed In Successfully ";
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        print('email = ${value.user!.email}');
+      });
+      return "Signed In Successfully";
     } on FirebaseAuthException catch (e) {
+      print('error login ${e.message}');
       return e.message;
     }
   }

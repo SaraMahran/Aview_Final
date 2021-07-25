@@ -1,4 +1,5 @@
 import 'package:aview2/components/custom_rating_bar.dart';
+import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/helper/helper_style.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -119,11 +120,6 @@ class _PlaceScreenState extends State<PlaceScreen> {
                 title: 'Add Review',
               ),
               CustomContainerCategoryDetails(
-                onTap: () {},
-                img: 'assets/images/picture.png',
-                title: 'Add Photo',
-              ),
-              CustomContainerCategoryDetails(
                 onTap: () {
                   showDialog(
                     context: context,
@@ -133,12 +129,20 @@ class _PlaceScreenState extends State<PlaceScreen> {
                         child: Container(
                           height: 150,
                           decoration: kCustomContainerDecoration,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'hello',
-                              style: TextStyle(color: Colors.black, fontSize: 20),
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Text(
+                                'Fav List ',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                              ),
+                              LoginButton(
+                                  buttonTitle: 'Add to list',
+                                  onTap: () {
+                                    Navigator.pop(context);
+                                  }),
+                            ],
                           ),
                         ),
                       );
@@ -161,25 +165,33 @@ class _PlaceScreenState extends State<PlaceScreen> {
             padding: EdgeInsets.all(12),
             child: Text('Reviews', style: themeText.headline1),
           ),
-          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('places')
-                .doc('UBBJvrNgeU1coJaw6Ish')
+                .doc('RCTrmWmbBEiF8Zlk0ZLX')
+                .collection('reviews')
                 .snapshots(),
             builder: (_, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.deepOrange,
+                  ),
+                );
+              }
               return SizedBox(
                 height: responsive.height * .22,
                 child: ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
-                  itemCount: snapshot.data!.data()!['reviewsList'].length,
+                  itemCount: snapshot.data!.docs.length,
                   itemBuilder: (_, index) {
-                    final data = snapshot.data!.data()!['reviewsList'][index];
+                    final data = snapshot.data!.docs[index];
                     return ReviewsOfPlaceItem(
-                      reviewerName: data['userName'],
+                      reviewerName: data['name'],
                       img: categoryProvider.getPlaceImg,
-                      reviewDescription: data['review'],
-                      reviewDate: data['date'],
+                      reviewDescription: data['description'],
+                      reviewDate: '26/7/2021',
                       rate: data['rate'],
                     );
                   },
@@ -217,7 +229,6 @@ class ReviewsOfPlaceItem extends StatelessWidget {
       width: responsive.width * .55,
       margin: EdgeInsets.all(8),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
@@ -234,10 +245,10 @@ class ReviewsOfPlaceItem extends StatelessWidget {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(reviewerName, style: themeText.headline2),
-                  Text(reviewDate, style: themeText.headline2),
+                  Text(reviewDate,
+                      style: themeText.headline3!.copyWith(fontSize: 12)),
                   CustomRatingBar(rate: rate),
                 ],
               ),
@@ -251,7 +262,7 @@ class ReviewsOfPlaceItem extends StatelessWidget {
               child: Text(
                 reviewDescription,
                 style: themeText.headline3!.copyWith(
-                  fontSize: 17,
+                  fontSize: 12,
                 ),
               ),
             ),
@@ -291,7 +302,7 @@ class CustomContainerCategoryDetails extends StatelessWidget {
                 img,
                 scale: 7,
               ),
-              Text(title, style: themeText.headline3),
+              Text(title, style: themeText.headline3!.copyWith(fontSize: 12)),
             ],
           ),
         ),

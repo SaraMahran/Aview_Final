@@ -105,6 +105,7 @@ class SliderItemState extends State<SliderItem> with TickerProviderStateMixin {
             padding: const EdgeInsets.fromLTRB(50, 20, 50, 30),
             child: Text(
               widget.description ?? '',
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: 'Crimson',
                   fontWeight: FontWeight.bold,

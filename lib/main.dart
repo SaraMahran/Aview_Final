@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'ChelaOne',
                 color: Colors.purple[900]),
             headline3: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
             headline4: TextStyle(
               fontSize: 14.0,
               fontFamily: 'Hind',
