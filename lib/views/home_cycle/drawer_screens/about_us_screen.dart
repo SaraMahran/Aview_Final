@@ -1,3 +1,7 @@
+import 'package:aview2/components/cutom_shadow.dart';
+import 'package:aview2/components/widgets/about_us_header.dart';
+import 'package:aview2/components/widgets/custom_shape_login_header.dart';
+import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,6 +28,7 @@ class AboutUsScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          AboutUsHeader(),
           Center(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 2),
@@ -33,37 +38,35 @@ class AboutUsScreen extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.deepOrange,
-                borderRadius: BorderRadius.circular(20)),
-            //height: 50,
-            //width: 50,
-            alignment: Alignment.center,
-
-            child: Column(
-              children: [
-                Text(
-                  ' In the digital era, we are living in; people use social media to search for reviews before making the tiniest purchasing decisions.',
-                  style: TextStyle(
-                    fontFamily: 'Crimson',
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+          //AboutUsHeader(),
+          Column(
+            children: [
+              Text(
+                ' In the digital era, we are living in; people use social media to search for reviews before making the tiniest purchasing decisions.',
+                style: TextStyle(
+                  fontFamily: 'Crimson',
+                  color: Colors.deepOrange,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  'This created an urge for a platform that offers reviews on various types of places and businesses.',
-                  style: TextStyle(
-                    fontFamily: 'Crimson',
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              Text(
+                'This created an urge for a platform that offers reviews on various types of places and businesses.',
+                style: TextStyle(
+                  fontFamily: 'Crimson',
+                  color: Colors.deepOrange,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+
+          // Column(
+          //   children: [
+          //
+          //   ],
+          // ),
         ],
       ),
     );

@@ -37,6 +37,7 @@ dependencies:
   form_field_validator: ^1.1.0
   shared_preferences: ^2.0.6
   tflite: ^1.1.2
+  share: ^2.0.4
 #  map
   google_maps_flutter: ^2.0.6
   geocoding: ^2.0.0

@@ -197,6 +197,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
           ),
           SizedBox(height: 14),
+          Text('Favorite Reviewers: ', style: textTheme.bodyText1),
           SizedBox(
             height: responsive.height * .17,
             child: ListView.builder(
@@ -260,7 +261,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
           ),
-          Text('Lists: ', style: textTheme.bodyText1),
           Text('Optional Info:', style: textTheme.headline1),
           SizedBox(height: 10),
           Row(
