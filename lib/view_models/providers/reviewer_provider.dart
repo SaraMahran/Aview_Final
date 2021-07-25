@@ -18,7 +18,27 @@ class ReviewerProvider with ChangeNotifier {
 
   String get getUserInfoUuid => userInfoUuid;
 
+  String get getFirstName => firstName;
+
+  String get getLastName => lastName;
+
+  String get getEmail => email;
+
+  String get getPassword => password;
+
+  String get getImage => image;
+
   set setUserInfoUuid(String userInfoUuid) => this.userInfoUuid = userInfoUuid;
+
+  set setFirstName(String firstName) => this.firstName = firstName;
+
+  set setLastName(String lastName) => this.lastName = lastName;
+
+  set setEmail(String email) => this.email = email;
+
+  set setPassword(String password) => this.password = password;
+
+  set setImage(String image) => this.image = image;
 
   Future<void> retrieveUserData() async {
     final prefs = await SharedPreferences.getInstance();

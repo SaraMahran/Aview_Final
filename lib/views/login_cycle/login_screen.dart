@@ -119,21 +119,42 @@ class _LoginScreenState extends State<LoginScreen> {
                   builder: (context) => LoginButton(
                     buttonTitle: 'Login',
                     onTap: () async {
-                      if (globalKey.currentState!.validate()) {
-                        globalKey.currentState!.save();
-                        final x = await firebaseAuthService.SignIn(
+                      try {
+                        final user = await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
                           email: emailController.text,
                           password: passwordController.text,
                         );
-                        Navigator.pushNamed(context, HomeScreenRoute);
-                        if (x == 'Sign In Successfully') {
-                          // Navigator.pushNamed(context, HomeScreenRoute);
+                        // ignore: unnecessary_null_comparison
+                        if (user != null) {
+                          print('login done Welcome');
+                          Navigator.pushNamed(context, HomeScreenRoute);
+                          Fluttertoast.showToast(
+                              msg: 'Welcome ${emailController.text}');
                         } else {
-                          print('x = $x');
+                          print('login failed');
                           Fluttertoast.showToast(
                               msg: 'No Email Matched SignUp Firstly');
                         }
+                      } catch (e) {
+                        print('error login = $e');
                       }
+
+                      // if (globalKey.currentState!.validate()) {
+                      //   globalKey.currentState!.save();
+                      //   final x = await firebaseAuthService.SignIn(
+                      //     email: emailController.text,
+                      //     password: passwordController.text,
+                      //   );
+                      //   Navigator.pushNamed(context, HomeScreenRoute);
+                      //   if (x == 'Sign In Successfully') {
+                      //     // Navigator.pushNamed(context, HomeScreenRoute);
+                      //   } else {
+                      //     print('x = $x');
+                      //     Fluttertoast.showToast(
+                      //         msg: 'No Email Matched SignUp Firstly');
+                      //   }
+                      // }
                     },
                   ),
                 ),
