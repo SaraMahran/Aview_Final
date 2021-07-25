@@ -125,9 +125,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           email: emailController.text,
                           password: passwordController.text,
                         );
-                        // Navigator.pushNamed(context, HomeScreenRoute);
+                        Navigator.pushNamed(context, HomeScreenRoute);
                         if (x == 'Sign In Successfully') {
-                          Navigator.pushNamed(context, HomeScreenRoute);
+                          // Navigator.pushNamed(context, HomeScreenRoute);
                         } else {
                           print('x = $x');
                           Fluttertoast.showToast(

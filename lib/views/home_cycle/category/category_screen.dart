@@ -5,6 +5,7 @@ import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/home_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -21,9 +22,7 @@ class CategoryScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {
-                Navigator.pushNamed(context, AddPlaceScreenRoute);
-              },
+              onTap: () => Navigator.pushNamed(context, AddPlaceScreenRoute),
               child: Icon(
                 Icons.add,
                 color: Colors.deepOrange,
@@ -64,17 +63,18 @@ class CategoryScreen extends StatelessWidget {
                   final docs = snapshot.data!.docs[index];
                   final categoryProvider =
                       Provider.of<CategoryProvider>(context, listen: false);
-                  final id = snapshot.data!.docs.map((document) => document.id);
                   return CategoryItem(
                     onTap: () {
                       categoryProvider.setPlaceName(docs['name']);
                       categoryProvider.setPlaceImg(docs['image']);
                       categoryProvider.setPhone(docs['phone']);
-                      categoryProvider.setDocumentId(id.toString());
+                      categoryProvider
+                          .setDocumentId(snapshot.data!.docs[index].id);
                       categoryProvider
                           .setPlaceRate(categoryScreenList[index].rate);
                       categoryProvider.setPlaceOptionList(
                           categoryScreenList[index].optionsTitleList);
+                      print('id = ${snapshot.data!.docs[index].id}');
                       Navigator.pushNamed(context, PlaceScreenRoute);
                     },
                     img: docs['image'],

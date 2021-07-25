@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import 'category_screen.dart';
 
 class AddReviewScreen extends StatelessWidget {
   TextEditingController reviewController = TextEditingController();
@@ -43,7 +47,7 @@ class AddReviewScreen extends StatelessWidget {
             children: [
               SizedBox(height: 90),
               RatingBar.builder(
-                initialRating: 3,
+                initialRating: 0,
                 minRating: 1,
                 direction: Axis.horizontal,
                 allowHalfRating: true,
@@ -77,15 +81,21 @@ class AddReviewScreen extends StatelessWidget {
                       if (reviewController.text.length == 0 || rate == 0) {
                         Fluttertoast.showToast(msg: 'complete review fields');
                       } else {
+                        DateTime now = DateTime.now();
+                        String date = DateFormat('yyyy/MM/dd – kk:mm').format(now);
                         Map<String, dynamic> data = {
                           'description': reviewController.text,
                           'rate': rate,
                           'name': 'sara',
-                          'date': DateTime.now()
+                          'date': date
                         };
                         FirebaseFirestore.instance
                             .collection('places')
-                            .doc('RCTrmWmbBEiF8Zlk0ZLX')
+                            .doc(
+                              Provider.of<CategoryProvider>(context,
+                                      listen: false)
+                                  .getDocumentId,
+                            )
                             .collection('reviews')
                             .add(data);
                         Fluttertoast.showToast(

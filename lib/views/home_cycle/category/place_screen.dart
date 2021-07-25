@@ -133,7 +133,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               Text(
-                                'Fav List ',
+                                'Fav List',
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 20),
                               ),
@@ -168,7 +168,7 @@ class _PlaceScreenState extends State<PlaceScreen> {
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('places')
-                .doc('RCTrmWmbBEiF8Zlk0ZLX')
+                .doc(categoryProvider.getDocumentId)
                 .collection('reviews')
                 .snapshots(),
             builder: (_, snapshot) {
@@ -188,11 +188,11 @@ class _PlaceScreenState extends State<PlaceScreen> {
                   itemBuilder: (_, index) {
                     final data = snapshot.data!.docs[index];
                     return ReviewsOfPlaceItem(
-                      reviewerName: data['name'],
-                      img: categoryProvider.getPlaceImg,
                       reviewDescription: data['description'],
-                      reviewDate: '26/7/2021',
-                      rate: data['rate'],
+                      reviewerName: data['name'],
+                      reviewDate: data['date'],
+                      rate: data['rate'] as double,
+                      img: categoryProvider.getPlaceImg,
                     );
                   },
                 ),
