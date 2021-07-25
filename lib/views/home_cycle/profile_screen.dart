@@ -96,7 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            'userInfo.firstName',
+                            userInfo.firstName,
                             style: textTheme.headline5,
                           ),
                           Text(
@@ -204,25 +204,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: 2,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Image.asset(
-                            index == 0
-                                ? 'assets/images/woman_reviewer.jpeg'
-                                : 'assets/images/man_reviewer.jpeg',
-                            height: 80,
-                            fit: BoxFit.fill,
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return
+                      //     },
+                      //   ),
+                      // );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset(
+                              index == 0
+                                  ? 'assets/images/woman_reviewer.jpeg'
+                                  : 'assets/images/man_reviewer.jpeg',
+                              height: 80,
+                              fit: BoxFit.fill,
+                            ),
                           ),
-                        ),
-                        Text(
-                          index == 0 ? 'Radwa ElHassany' : 'Ahmed Nasser',
-                          style: Theme.of(context).textTheme.headline3,
-                        ),
-                      ],
+                          Text(
+                            index == 0 ? 'Radwa ElHassany' : 'Ahmed Nasser',
+                            style: Theme.of(context).textTheme.headline3,
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }),
@@ -230,21 +242,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Text('Lists: ', style: textTheme.bodyText1),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'My Fav Places',
-                  style: Theme.of(context).textTheme.headline3,
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: Text(
-                    'Show All List >>>',
+            child: InkWell(
+              onTap: () =>
+                  Navigator.pushNamed(context, TrendingPlacesScreenRoute),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'My Fav Places',
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                  Text(
+                    'Show List >>>',
                     style: Theme.of(context).textTheme.headline4,
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Text('Lists: ', style: textTheme.bodyText1),

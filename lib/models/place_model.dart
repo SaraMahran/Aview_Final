@@ -4,6 +4,7 @@ class PlaceModel {
   var noOfReviewers;
   var placeID;
   var placeName;
+  var image;
 
   PlaceModel({
     required this.category,
@@ -11,6 +12,7 @@ class PlaceModel {
     required this.noOfReviewers,
     required this.placeID,
     required this.placeName,
+    required this.image,
   });
 
   factory PlaceModel.fromJsom(Map<String, dynamic> data) {
@@ -20,6 +22,7 @@ class PlaceModel {
       noOfReviewers: data['noOfReviewers'],
       placeID: data['placeID'],
       placeName: data['placeName'],
+      image: data['image'],
     );
   }
 
@@ -28,6 +31,7 @@ class PlaceModel {
         'location': location,
         'noOfReviewers': noOfReviewers,
         'placeID': placeID,
-        'placeName': placeName
+        'placeName': placeName,
+        'image': image
       };
 }

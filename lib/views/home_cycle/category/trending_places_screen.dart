@@ -59,6 +59,12 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
                                 style: textStyle),
                           ],
                         ),
+                        Image.network(
+                          data.image ??
+                              'https://i.postimg.cc/sg1pfwDD/chicken-fila.jpg',
+                          width: 20,
+                          height: 20,
+                        )
                       ],
                     ),
                   );

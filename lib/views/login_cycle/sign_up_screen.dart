@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:aview2/components/widgets/buttons/sign_up_button.dart';
 import 'package:aview2/components/widgets/custom_appBar.dart';
 import 'package:aview2/helper/helper_method.dart';
@@ -8,10 +10,12 @@ import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/sign_up_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:aview2/components/widgets/responsive_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -32,6 +36,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseAuthService firebaseAuthService =
       FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
+  File? file;
+  late String imageUrl;
+  int x = 0;
+
+  Future<void> pickImg() async {
+    final pickedImg = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    if (pickedImg != null) {
+      setState(() {
+        file = File(pickedImg.path);
+      });
+      Reference ref =
+          FirebaseStorage.instance.ref().child("user_info${file!.path}");
+      await ref.putFile(File(pickedImg.path));
+      String imageUrl = await ref.getDownloadURL();
+      this.imageUrl = imageUrl;
+      print('imageUrl = $imageUrl');
+      setState(() {});
+    } else {
+      print('failed load');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,11 +92,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     key: globalKey,
                     child: Column(
                       children: <Widget>[
+                        GestureDetector(
+                          onTap: () => pickImg(),
+                          child: Container(
+                            child: file != null
+                                ? Image.file(
+                                    file!,
+                                    width: 120,
+                                    height: 80,
+                                  )
+                                : CircleAvatar(
+                                    radius: 60,
+                                    child: Icon(Icons.add_a_photo,size: 70),
+                                  ),
+                          ),
+                        ),
+                        SizedBox(height: 30),
                         Container(
-                          // margin: EdgeInsets.only(
-                          //     left: _width! / 12.0,
-                          //     right: _width! / 12.0,
-                          //     top: _height! / 20.0),
                           child: Column(
                             children: <Widget>[
                               CustomTextField(
@@ -135,7 +174,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     return "Password must be longer than 8 characters";
                                   } else if (input.isNotValidPassword()) {
                                     //print('Invalid Password');
-                                    return 'Invalid Password';
+                                    return null;
                                   }
                                 },
                                 hint: "Password",
@@ -159,16 +198,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       msg: 'This is not valid');
                               try {
                                 await firebaseAuthService.SignUp(
+                                  context: context,
                                   email: emailController.text,
                                   password: passwordController.text,
-                                );
-                                await signUpProvider.addUser(
-                                  context: context,
                                   firstName: firstNameController.text,
                                   lastName: lastNameController.text,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  image: "Sara'sImage",
+                                  image: imageUrl,
                                 );
                                 Navigator.pushNamed(context, HomeScreenRoute);
                               } catch (e) {

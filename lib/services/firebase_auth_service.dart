@@ -1,4 +1,7 @@
+import 'package:aview2/view_models/providers/sign_up_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class FirebaseAuthService {
   final FirebaseAuth? firebaseAuth;
@@ -29,7 +32,12 @@ class FirebaseAuthService {
   Future<String> SignUp({
     required String email,
     required String password,
+    required String lastName,
+    required String firstName,
+    required String image,
+    required BuildContext context,
   }) async {
+    final signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
     try {
       await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -37,6 +45,15 @@ class FirebaseAuthService {
         password: password,
       )
           .then((value) {
+        signUpProvider.addUser(
+          context: context,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+          image: image,
+        );
+
         print('userName = ${value.additionalUserInfo!.username.toString()}');
       });
       return 'Signed Up Successfully';
