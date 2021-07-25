@@ -1,6 +1,7 @@
 import 'package:aview2/components/documentation_image_picker_widget.dart';
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,10 +10,11 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
   final TextEditingController licenceNumberTEC =
           TextEditingController(text: ''),
       nationalIdPhotoTEC = TextEditingController(text: ''),
-      placePhotoTEC = TextEditingController(text: ''),
+      placePhotoController = TextEditingController(text: ''),
       fullName = TextEditingController(text: ''),
       email = TextEditingController(text: ''),
       password = TextEditingController(text: '');
+  final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
             child: ListView(
               children: [
                 Form(
+                  key: globalKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -59,9 +62,14 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                         child: (CustomTextField(
                           keyboardType: TextInputType.text,
                           obscureText: true,
+                          textEditingController: fullName,
                           icon: FontAwesomeIcons.userAlt,
                           hint: "Full Name",
-                          textEditingController: fullName,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Full name is required";
+                            }
+                          },
                         )),
                       ),
                       Padding(
@@ -72,6 +80,11 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                           icon: FontAwesomeIcons.userAlt,
                           hint: "Email",
                           textEditingController: email,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Email is required";
+                            }
+                          },
                         )),
                       ),
                       Padding(
@@ -81,72 +94,44 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
                           obscureText: true,
                           icon: FontAwesomeIcons.userLock,
                           hint: "Password",
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Password is required";
+                            }
+                          },
                           textEditingController: password,
                         )),
                       ),
                       DocumentationImagePickerWidget(
                         textField: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            textEditingController: licenceNumberTEC,
-                            icon: FontAwesomeIcons.paperclip,
-                            hint: 'Place Licence',
-                            keyboardType: TextInputType.number,
-                            // icon: Icons.email,
+                          child: Text(
+                            'Place License',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
                       ),
                       DocumentationImagePickerWidget(
                         textField: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            textEditingController: nationalIdPhotoTEC,
-                            icon: FontAwesomeIcons.paperclip,
-                            hint: 'National Id Photo',
-                            keyboardType: TextInputType.number,
+                          child: Text(
+                            'National Id Photo',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
                       ),
                       DocumentationImagePickerWidget(
                         textField: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: CustomTextField(
-                            textEditingController: placePhotoTEC,
-                            icon: FontAwesomeIcons.paperclip,
-                            hint: 'Place Photo ',
-                            keyboardType: TextInputType.datetime,
+                          child: Text(
+                            'Place Photo',
+                            textAlign: TextAlign.left,
+                            style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
                       ),
-                      // Padding(
-                      //   padding: const EdgeInsets.all(10),
-                      //   child: Text(
-                      //     'Bank Account Details',
-                      //     style: theme.textTheme.headline2!.copyWith(
-                      //       color: Colors.deepPurple,
-                      //     ),
-                      //   ),
-                      // ),
-                      // DocumentationImagePickerWidget(
-                      //   textField: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: CustomTextField(
-                      //       textEditingController: bankNameTEC,
-                      //       hint: 'Bank Account Number',
-                      //       keyboardType: TextInputType.name,
-                      //     ),
-                      //   ),
-                      // ),
-                      // DocumentationImagePickerWidget(
-                      //   textField: Padding(
-                      //     padding: const EdgeInsets.all(8.0),
-                      //     child: CustomTextField(
-                      //       textEditingController: bankAccountNumberTEC,
-                      //       hint: 'Bank Account Number',
-                      //       keyboardType: TextInputType.number,
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),
@@ -159,14 +144,11 @@ class SignUpPlaceOwnerScreen extends StatelessWidget {
               alignment: Alignment.topCenter,
               child: LoginButton(
                 onTap: () {
-                  Fluttertoast.showToast(
-                    msg:
-                        'Thanks for signing up\n We will send you a verification email after checking your information.',
-                    textColor: Colors.black,
-                    backgroundColor: Colors.deepOrange,
-                    fontSize: 20,
-                    gravity: ToastGravity.CENTER_RIGHT,
-                  );
+                  globalKey.currentState!.validate()
+                      ? Fluttertoast.showToast(
+                          msg:
+                              'Thanks for signing up\n We will send you a verification email after checking your information.')
+                      : Fluttertoast.showToast(msg: 'Complete Fields');
                 },
                 buttonTitle: 'Sign Up',
               ),

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:aview2/components/items/home_item.dart';
 import 'package:aview2/models/home_model.dart';
+import 'package:share/share.dart';
 
 class HomeScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> drawerKey = GlobalKey(); // Create a key
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    String msg = 'hello iam ahmed';
     return Scaffold(
       key: drawerKey,
       floatingActionButton: FloatingActionButton(
@@ -94,14 +96,17 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 10, 20),
               child: ListTile(
-                onTap: () => print('Share tapped'),
+                onTap: () => share(context, msg),
                 leading: Icon(
                   Icons.share,
                   color: Colors.deepOrange,
                   size: 30,
                 ),
                 title: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    share(context, msg);
+                    print("Shared pressed");
+                  },
                   child: Text(
                     'Share',
                     style: textTheme.subtitle1,
@@ -183,4 +188,12 @@ class HomeScreen extends StatelessWidget {
           }),
     );
   }
+}
+
+void share(BuildContext context, String msg) {
+  final box = context.findRenderObject() as RenderBox?;
+  Share.share(
+    msg,
+    sharePositionOrigin: box!.localToGlobal(Offset.zero) & box.size,
+  );
 }
