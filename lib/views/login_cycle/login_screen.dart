@@ -8,6 +8,7 @@ import 'package:aview2/utils/routing_constants.dart';
 import 'package:aview2/view_models/providers/google_sign_in_provider.dart';
 import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/views/home_cycle/home_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -42,8 +43,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
     _pixelRatio = MediaQuery.of(context).devicePixelRatio;
-    final firebaseAuthService =
-        FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
+    final userInfoProvider =
+        Provider.of<ReviewerProvider>(context, listen: false);
     return Material(
       child: Scaffold(
         body: Container(
@@ -119,42 +120,47 @@ class _LoginScreenState extends State<LoginScreen> {
                   builder: (context) => LoginButton(
                     buttonTitle: 'Login',
                     onTap: () async {
-                      try {
-                        final user = await FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                          email: emailController.text,
-                          password: passwordController.text,
-                        );
-                        // ignore: unnecessary_null_comparison
-                        if (user != null) {
-                          print('login done Welcome');
-                          Navigator.pushNamed(context, HomeScreenRoute);
-                          Fluttertoast.showToast(
-                              msg: 'Welcome ${emailController.text}');
-                        } else {
-                          print('login failed');
-                          Fluttertoast.showToast(
-                              msg: 'No Email Matched SignUp Firstly');
-                        }
-                      } catch (e) {
-                        print('error login = $e');
-                      }
+                      if (globalKey.currentState!.validate()) {
+                        globalKey.currentState!.save();
+                        try {
+                          final user = await FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                            email: emailController.text,
+                            password: passwordController.text,
+                          );
+                          // ignore: unnecessary_null_comparison
+                          if (user != null) {
+                            print('login done Welcome');
 
-                      // if (globalKey.currentState!.validate()) {
-                      //   globalKey.currentState!.save();
-                      //   final x = await firebaseAuthService.SignIn(
-                      //     email: emailController.text,
-                      //     password: passwordController.text,
-                      //   );
-                      //   Navigator.pushNamed(context, HomeScreenRoute);
-                      //   if (x == 'Sign In Successfully') {
-                      //     // Navigator.pushNamed(context, HomeScreenRoute);
-                      //   } else {
-                      //     print('x = $x');
-                      //     Fluttertoast.showToast(
-                      //         msg: 'No Email Matched SignUp Firstly');
-                      //   }
-                      // }
+                            final userInfoSnapShot = await FirebaseFirestore
+                                .instance
+                                .collection('UserInfo')
+                                .get();
+                            userInfoSnapShot.docs.forEach((element) {
+                              if (emailController.text ==
+                                  element.data()['email']) {
+                                userInfoProvider.setEmail =
+                                    element.data()['email'];
+                                userInfoProvider.firstName =
+                                    element.data()['firstName'];
+                                userInfoProvider.setLastName =
+                                    element.data()['latName'];
+                                userInfoProvider.image =
+                                    element.data()['image'];
+                                userInfoProvider.userInfoUuid = element.id;
+                              }
+                            });
+                            Fluttertoast.showToast(msg: 'Welcome ${emailController.text}');
+                            Navigator.pushNamed(context, HomeScreenRoute);
+                          } else {
+                            print('login failed');
+                            Fluttertoast.showToast(
+                                msg: 'No Email Matched SignUp Firstly');
+                          }
+                        } catch (e) {
+                          print('error login = $e');
+                        }
+                      }
                     },
                   ),
                 ),

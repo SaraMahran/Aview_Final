@@ -1,5 +1,6 @@
 import 'package:aview2/components/widgets/buttons/login_button.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
+import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -16,6 +17,7 @@ class AddReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<ReviewerProvider>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
@@ -82,11 +84,13 @@ class AddReviewScreen extends StatelessWidget {
                         Fluttertoast.showToast(msg: 'complete review fields');
                       } else {
                         DateTime now = DateTime.now();
-                        String date = DateFormat('yyyy/MM/dd – kk:mm').format(now);
+                        String date =
+                            DateFormat('yyyy/MM/dd – kk:mm').format(now);
                         Map<String, dynamic> data = {
                           'description': reviewController.text,
                           'rate': rate,
-                          'name': 'sara',
+                          'name':
+                              userInfo.getFirstName + '' + userInfo.getLastName,
                           'date': date
                         };
                         FirebaseFirestore.instance

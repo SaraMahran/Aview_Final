@@ -98,11 +98,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            userInfo.firstName,
+                            userInfo.getFirstName+' '+userInfo.getLastName,
                             style: textTheme.headline5,
                           ),
                           Text(
-                            'userInfo.email',
+                            userInfo.getEmail,
                             style: textTheme.headline5,
                           ),
                           Row(
@@ -157,8 +157,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: AssetImage('assets/images/woman.png'),
-                              fit: BoxFit.contain),
+                              image: NetworkImage(userInfo.getImage),
+                              fit: BoxFit.fill),
                         ),
                       ),
                     ),

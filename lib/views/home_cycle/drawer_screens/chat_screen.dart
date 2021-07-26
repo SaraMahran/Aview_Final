@@ -1,8 +1,9 @@
 import 'package:aview2/helper/helper_style.dart';
+import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 final _firestore = FirebaseFirestore.instance;
 
@@ -33,6 +34,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<ReviewerProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('️Chat'),
@@ -55,12 +57,14 @@ class _ChatScreenState extends State<ChatScreen> {
                     controller: secondScrollController,
                     itemBuilder: (context, index) {
                       final docs = snapshot.data!.docs[index];
-
                       return MessageBubble(
                         sender: docs['sender'],
                         text: docs['text'],
-                        time: docs['time'],
-                        isMe: docs['sender'] == 'reem' ? true : false,
+                        time: docs['time'] as Timestamp,
+                        isMe:
+                            docs['sender'] == userInfo.getFirstName +
+                              ' ' +
+                              userInfo.getLastName ? true : false,
                       );
                     },
                     itemCount: snapshot.data!.docs.length,
@@ -82,17 +86,16 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      DateTime now = DateTime.now();
-                      String date = DateFormat('kk:mm').format(now);
-                      print('date = $date');
                       if (messageTextController.text.length > 0) {
                         await FirebaseFirestore.instance
                             .collection('chat')
                             .add({
                           'text': messageTextController.text,
                           //    'sender': FirebaseAuth.instance.currentUser!.email,
-                          'sender': 'reem',
-                          "time": date
+                          'sender': userInfo.getFirstName +
+                              ' ' +
+                              userInfo.getLastName,
+                          "time": DateTime.now()
                         });
                         messageTextController.clear();
                         secondScrollController.animateTo(
@@ -124,7 +127,7 @@ class MessageBubble extends StatelessWidget {
   final String text;
   final String sender;
   final bool isMe;
-  final String time; // add this
+  final Timestamp time; // add this
 
   const MessageBubble({
     required this.text,
@@ -166,7 +169,7 @@ class MessageBubble extends StatelessWidget {
             ),
           ),
           Text(
-            time,
+            ' ${DateTime.fromMillisecondsSinceEpoch(time.seconds * 10000)}',
             style: TextStyle(color: Colors.black54, fontSize: 12),
           ),
         ],

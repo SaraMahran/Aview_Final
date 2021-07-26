@@ -11,7 +11,7 @@ class TrendingPlacesScreen extends StatefulWidget {
 class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
   @override
   void initState() {
-    Provider.of<PlaceProvider>(context, listen: false).retrievePlaces();
+    Provider.of<PlaceProvider>(context, listen: false).retrievePlaces('Restaurant');
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _TrendingPlacesScreenState extends State<TrendingPlacesScreen> {
       ),
       body: Container(
         child: FutureBuilder(
-          future: placesProvider.retrievePlaces(),
+          future: placesProvider.retrievePlaces('Restaurant'),
           builder: (context, snapshot) {
             if (placesProvider.getPlaceList.isNotEmpty) {
               return ListView.builder(

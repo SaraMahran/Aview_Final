@@ -10,7 +10,7 @@ class PlaceProvider with ChangeNotifier {
 
   List<PlaceModel> get getCafeList => _list;
 
-  Future<void> retrievePlaces() async {
+  Future<void> retrievePlaces(String type) async {
     final result = await FirebaseFirestore.instance.collection('Place').get();
     _list.clear();
     _listCafe.clear();
@@ -18,12 +18,13 @@ class PlaceProvider with ChangeNotifier {
       final jsonData = element.data();
       final place = PlaceModel.fromJsom(jsonData);
       final category = jsonData['category'];
-      if (category == 'Restaurant') {
+      if (category == type) {
         _list.add(place);
         print('category = $category');
-      } else if (category == 'Cafe') {
-        _listCafe.add(place);
       }
+      // if (category == 'Cafe') {
+      //   _listCafe.add(place);
+      // }
 
       // print('placeName = ${place.placeName}');
     });
