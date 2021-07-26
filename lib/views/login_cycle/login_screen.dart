@@ -139,14 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             userInfoSnapShot.docs.forEach((element) {
                               if (emailController.text ==
                                   element.data()['email']) {
-                                userInfoProvider.setEmail =
-                                    element.data()['email'];
-                                userInfoProvider.firstName =
-                                    element.data()['firstName'];
-                                userInfoProvider.setLastName =
-                                    element.data()['latName'];
-                                userInfoProvider.image =
-                                    element.data()['image'];
+                                userInfoProvider.setEmail = element.data()['email'];
+                                userInfoProvider.firstName = element.data()['firstName'];
+                                userInfoProvider.setLastName = element.data()['latName'];
+                                userInfoProvider.image = element.data()['image'];
                                 userInfoProvider.userInfoUuid = element.id;
                               }
                             });

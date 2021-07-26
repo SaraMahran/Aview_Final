@@ -8,6 +8,7 @@ import 'package:aview2/components/widgets/login_and_signup_header.dart';
 import 'package:aview2/components/widgets/textFormField.dart';
 import 'package:aview2/services/firebase_auth_service.dart';
 import 'package:aview2/utils/routing_constants.dart';
+import 'package:aview2/view_models/providers/reviewer_provider.dart';
 import 'package:aview2/view_models/providers/sign_up_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -64,7 +65,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     _height = MediaQuery.of(context).size.height;
     _width = MediaQuery.of(context).size.width;
-    final signUpProvider = Provider.of<SignUpProvider>(context, listen: false);
+    final userInfo = Provider.of<ReviewerProvider>(context, listen: false);
     final firebaseAuthService =
         FirebaseAuthService(firebaseAuth: FirebaseAuth.instance);
 
@@ -103,7 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   )
                                 : CircleAvatar(
                                     radius: 60,
-                                    child: Icon(Icons.add_a_photo,size: 70),
+                                    child: Icon(Icons.add_a_photo, size: 70),
                                   ),
                           ),
                         ),
@@ -192,22 +193,30 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         SignUpButton(
                             buttonTitle: 'SignUp',
                             onTap: () async {
-                              globalKey.currentState!.validate()
-                                  ? Fluttertoast.showToast(msg: 'This is valid')
-                                  : Fluttertoast.showToast(
-                                      msg: 'This is not valid');
-                              try {
-                                await firebaseAuthService.SignUp(
-                                  context: context,
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  firstName: firstNameController.text,
-                                  lastName: lastNameController.text,
-                                  image: imageUrl,
-                                );
-                                Navigator.pushNamed(context, HomeScreenRoute);
-                              } catch (e) {
-                                print(e.toString());
+                              if (globalKey.currentState!.validate()) {
+                                globalKey.currentState!.save();
+                                try {
+                                  await firebaseAuthService.SignUp(
+                                    context: context,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    firstName: firstNameController.text,
+                                    lastName: lastNameController.text,
+                                    image: imageUrl,
+                                  );
+                                  userInfo.setEmail = emailController.text;
+                                  userInfo.firstName = firstNameController.text;
+                                  userInfo.setLastName =
+                                      lastNameController.text;
+                                  userInfo.image = imageUrl;
+                                  Fluttertoast.showToast(msg: 'This is valid');
+                                  Navigator.pushNamed(context, HomeScreenRoute);
+                                } catch (e) {
+                                  print(e.toString());
+                                }
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg: 'This is not valid');
                               }
                             }
                             //},
