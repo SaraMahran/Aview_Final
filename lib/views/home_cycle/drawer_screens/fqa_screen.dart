@@ -1,5 +1,4 @@
 import 'package:aview2/utils/routing_constants.dart';
-import 'package:expandable/expandable.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
