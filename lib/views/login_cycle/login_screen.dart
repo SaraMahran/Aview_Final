@@ -138,14 +138,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             userInfoSnapShot.docs.forEach((element) {
                               if (emailController.text ==
                                   element.data()['email']) {
-                                userInfoProvider.setEmail = element.data()['email'];
-                                userInfoProvider.firstName = element.data()['firstName'];
-                                userInfoProvider.setLastName = element.data()['latName'];
-                                userInfoProvider.image = element.data()['image'];
+                                userInfoProvider.setEmail =
+                                    element.data()['email'];
+                                userInfoProvider.firstName =
+                                    element.data()['firstName'];
+                                userInfoProvider.setLastName =
+                                    element.data()['latName'];
+                                userInfoProvider.image =
+                                    element.data()['image'];
                                 userInfoProvider.userInfoUuid = element.id;
                               }
                             });
-                            Fluttertoast.showToast(msg: 'Welcome ${emailController.text}');
+                            Fluttertoast.showToast(
+                                msg: 'Welcome ${emailController.text}');
                             Navigator.pushNamed(context, HomeScreenRoute);
                           } else {
                             print('login failed');
@@ -200,21 +205,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                         onTap: () async {
                           try {
-                            //GoogleSignInAccount? _user;
-                            final googleSignIn = GoogleSignIn();
-                            final googleUser = await googleSignIn.signIn();
+                            final googleUser = await GoogleSignIn().signIn();
                             if (googleUser != null) {
-                              final googleAuth =
-                                  await googleUser.authentication;
+                              final googleAuth =await googleUser.authentication;
                               if (googleAuth.idToken != null) {
-                                await FirebaseAuth.instance
+                                final userData = await FirebaseAuth.instance
                                     .signInWithCredential(
-                                        GoogleAuthProvider.credential(
-                                            accessToken: googleAuth.accessToken,
-                                            idToken: googleAuth.idToken));
-                                final user = FirebaseAuth.instance.currentUser;
-                                print(user);
-                                print("Done");
+                                  GoogleAuthProvider.credential(
+                                      accessToken: googleAuth.accessToken,
+                                      idToken: googleAuth.idToken),
+                                );
+                                print('phone = ${userData.user!.phoneNumber}');
                               }
                             }
                           } catch (e) {
